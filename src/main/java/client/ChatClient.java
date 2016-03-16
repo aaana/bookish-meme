@@ -1,4 +1,4 @@
-package server;
+package client;
 
 /**
  * Created by tanjingru on 3/17/16.
@@ -6,9 +6,7 @@ package server;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import org.omg.CORBA.PUBLIC_MEMBER;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
