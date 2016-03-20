@@ -4,6 +4,7 @@ package message;
  * Created by tanjingru on 3/20/16.
  */
 public class Message {
+
     private int needsToHandle;
     private int type;
     private Object content;
@@ -23,6 +24,14 @@ public class Message {
     public void setType(int type) {
         this.type = type;
     }
+    public int getNeedsToHandle() {
+        return needsToHandle;
+    }
+
+    public void setNeedsToHandle(int needsToHandle) {
+        this.needsToHandle = needsToHandle;
+    }
+
 
     public Message(Object content, int type) {
 
