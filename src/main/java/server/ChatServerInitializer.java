@@ -12,6 +12,7 @@ import io.netty.handler.codec.string.StringEncoder;
  * Created by tanjingru on 3/17/16.
  */
 public class ChatServerInitializer extends ChannelInitializer<SocketChannel> {
+    
     @Override
     protected void initChannel(SocketChannel socketChannel) throws Exception {
         ChannelPipeline pipeline = socketChannel.pipeline();
