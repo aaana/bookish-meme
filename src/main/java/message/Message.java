@@ -6,6 +6,8 @@ package message;
 public class Message {
 
     private int needsToHandle;
+    // 0 => login 1 => chatting
+
     private int type;
     private Object content;
 
