@@ -5,33 +5,35 @@ import io.netty.channel.ChannelInboundMessageHandlerAdapter;
 import message.Message;
 
 import java.util.HashMap;
-
+import com.google.common.util.concurrent.RateLimiter;
 /**
  * Created by 马二爷 on 2016/3/20.
  */
 public class Limiter extends ChannelInboundMessageHandlerAdapter<Message> {
-    private HashMap<Integer,Integer> map=new HashMap<Integer,Integer>();
-    private static final Integer maxMsgNumber=100;
-
+    private int receivedNumber=0;
+    private static final Integer maxMsgNumber=100;// configurable
+    private static final Integer maxMsgNumberPerSec=5;//configurable
+    final RateLimiter rateLimiter=RateLimiter.create(maxMsgNumberPerSec);
     @Override
     public void messageReceived(ChannelHandlerContext ctx, Message msg) throws Exception {
-        int id=ctx.channel().id();
-        if(map.containsKey(id))
+        if(rateLimiter.tryAcquire())
         {
-            if(map.get(id)<maxMsgNumber) {
-                map.put(id, map.get(id) + 1);
+            if(receivedNumber+1<maxMsgNumber) {
+                receivedNumber++;
                 msg.setNeedsToHandle(0);
             }
             else{
-                //relogin
+                //too many
                 msg.setNeedsToHandle(1);
             }
         }
         else
         {
-            map.put(id,1);
-            msg.setNeedsToHandle(0);
+            //too frequently
+            msg.setNeedsToHandle(2);
         }
+        ctx.nextInboundMessageBuffer().add(msg);
+        ctx.fireInboundBufferUpdated();
 
     }
 }
