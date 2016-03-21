@@ -18,11 +18,15 @@ public class ConfDeserializer implements JsonDeserializer<Conf> {
         final String host = hostElement.getAsString();
 
         final int port = jsonObject.get("PORT").getAsInt();
+        final int maxMsgNumber = jsonObject.get("MaxMsgNumber").getAsInt();
+        final int maxMsgNumberPerSec = jsonObject.get("MaxMsgNumberPerSec").getAsInt();
 
         //
         final Conf conf = new Conf();
         conf.setHost(host);
         conf.setPort(port);
+        conf.setMaxMsgNumber(maxMsgNumber);
+        conf.setMaxMsgNumberPerSec(maxMsgNumberPerSec);
         return conf;
     }
 }

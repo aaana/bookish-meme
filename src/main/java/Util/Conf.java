@@ -5,6 +5,9 @@ package Util;
  */
 public class Conf {
     private String host;
+    private int port;
+    private int maxMsgNumber;
+    private int maxMsgNumberPerSec;
 
     public int getPort() {
         return port;
@@ -22,5 +25,19 @@ public class Conf {
         this.host = host;
     }
 
-    private int port;
+    public int getMaxMsgNumber() {
+        return maxMsgNumber;
+    }
+
+    public void setMaxMsgNumber(int maxMsgNumber) {
+        this.maxMsgNumber = maxMsgNumber;
+    }
+
+    public int getMaxMsgNumberPerSec() {
+        return maxMsgNumberPerSec;
+    }
+
+    public void setMaxMsgNumberPerSec(int maxMsgNumberPerSec) {
+        this.maxMsgNumberPerSec = maxMsgNumberPerSec;
+    }
 }
