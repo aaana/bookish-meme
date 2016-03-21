@@ -1,6 +1,6 @@
 {
   "HOST":"localhost",
-  "PORT":80
-  "MaxMsgNumber":100
+  "PORT":80,
+  "MaxMsgNumber":100,
   "MaxMsgNumberPerSec":5
 }
