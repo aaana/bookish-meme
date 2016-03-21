@@ -18,10 +18,12 @@ public class AuthorityHandler extends ChannelInboundMessageHandlerAdapter<Messag
             String account = loginContent.getAccount();
             String passward = loginContent.getPassword();
 
-            //login fails
-//            if(){
-//                message.setNeedsToHandle(1);
-//            }
+            LoginServer loginServer = new LoginServer();
+            boolean success = loginServer.login(account,passward);
+//            login fails
+            if(!success){
+                message.setNeedsToHandle(1);
+            }
 
         }
         channelHandlerContext.nextInboundMessageBuffer().add(message);
