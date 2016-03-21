@@ -28,7 +28,7 @@ public class LoginServer {
         if (connection == null || connection.isClosed()) {
             try {
                 Class.forName("org.sqlite.JDBC");
-                connection = DriverManager.getConnection("jdbc:sqlite:D://test.db");
+                connection = DriverManager.getConnection("jdbc:sqlite:test.db");
 
                 threadLocal.set(connection);
                 Statement stat = connection.createStatement();
