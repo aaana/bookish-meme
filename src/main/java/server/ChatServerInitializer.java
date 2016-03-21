@@ -20,6 +20,7 @@ public class ChatServerInitializer extends ChannelInitializer<SocketChannel> {
         pipeline.addLast("decoder", new StringDecoder());
         pipeline.addLast("encoder", new StringEncoder());
         pipeline.addLast("json_to_ob",new JsonToObjectHandler());
+        pipeline.addLast("authority",new AuthorityHandler());
         pipeline.addLast("Limiter",new Limiter());
       //  pipeline.addLast("test", new TestHandler());
         pipeline.addLast("handler", new ChatServerHandler());
