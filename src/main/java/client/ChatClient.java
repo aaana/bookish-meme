@@ -45,7 +45,7 @@ public class ChatClient {
             while (true){
                 String msg=in.readLine();
                 ChatContent content=new ChatContent(msg);
-                Message message=new Message(content,1);
+                Message message=new Message(1,content,0);
                 String jsonPayload=gson.toJson(message);
                 //channel.write(message);
                  channel.write(jsonPayload+"\n\r");
