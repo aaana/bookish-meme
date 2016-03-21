@@ -6,13 +6,14 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundMessageHandlerAdapter;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
+import message.Message;
 
 import java.util.function.IntConsumer;
 
 /**
  * Created by tanjingru on 3/17/16.
  */
-public class ChatServerHandler extends ChannelInboundMessageHandlerAdapter<String> {
+public class ChatServerHandler extends ChannelInboundMessageHandlerAdapter<Message> {
 
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
@@ -33,11 +34,12 @@ public class ChatServerHandler extends ChannelInboundMessageHandlerAdapter<Strin
     }
 
     @Override
-    public void messageReceived(ChannelHandlerContext channelHandlerContext, String message) throws Exception {
+    public void messageReceived(ChannelHandlerContext channelHandlerContext, Message message) throws Exception {
         Channel incoming  = channelHandlerContext.channel();
         for (Channel channel : Manager.channels){
             if ( channel != incoming){
-                channel.write("[" + incoming.remoteAddress() + "]" + message + "\n");
+                channel.write("[" + incoming.remoteAddress() + "]" + message.getContent().toString()
+                                +"needsToHandle:"+message.getNeedsToHandle()+ "\n");
             }
         }
     }

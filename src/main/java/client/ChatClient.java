@@ -3,10 +3,13 @@ package client;
 /**
  * Created by tanjingru on 3/17/16.
  */
+import com.google.gson.Gson;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import message.ChatContent;
+import message.Message;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -38,8 +41,15 @@ public class ChatClient {
             ChannelFuture f = b.connect(host, port).sync(); // (5)
             Channel channel = f.channel();
             BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+            Gson gson=new Gson();
             while (true){
-                channel.write(in.readLine() + "\n\r");
+                String msg=in.readLine();
+                ChatContent content=new ChatContent(msg);
+                Message message=new Message(content,1);
+                String jsonPayload=gson.toJson(message);
+                //channel.write(message);
+                 channel.write(jsonPayload+"\n\r");
+                //channel.write(in.readLine() + "\n\r");
             }
             // Wait until the connection is closed.
         }finally {
