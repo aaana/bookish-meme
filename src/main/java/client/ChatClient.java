@@ -3,6 +3,8 @@ package client;
 /**
  * Created by tanjingru on 3/17/16.
  */
+import Util.Conf;
+import Util.ConfigReader;
 import com.google.gson.Gson;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
@@ -16,7 +18,11 @@ import java.io.InputStreamReader;
 
 public class ChatClient {
     public static void main(String[] args) throws Exception{
-        new ChatClient("localhost", 8080).run();
+        ConfigReader configReader = new ConfigReader("conf.json");
+        Conf conf = configReader.readConf();
+        String host = conf.getHost();
+        int port = conf.getPort();
+        new ChatClient(host, port).run();
     }
 
     private final String host;
