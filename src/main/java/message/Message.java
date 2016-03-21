@@ -9,6 +9,12 @@ public class Message {
     private int type;
     private Object content;
 
+    public Message(int type, Object content, int needsToHandle) {
+        this.type = type;
+        this.content = content;
+        this.needsToHandle = needsToHandle;
+    }
+
     public Object getContent() {
         return content;
     }
@@ -17,13 +23,6 @@ public class Message {
         this.content = content;
     }
 
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
     public int getNeedsToHandle() {
         return needsToHandle;
     }
@@ -32,10 +31,11 @@ public class Message {
         this.needsToHandle = needsToHandle;
     }
 
+    public int getType() {
+        return type;
+    }
 
-    public Message(Object content, int type) {
-
-        this.content = content;
+    public void setType(int type) {
         this.type = type;
     }
 }
