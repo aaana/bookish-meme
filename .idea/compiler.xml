@@ -26,5 +26,8 @@
         <module name="bookish-meme" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="bookish-meme" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>
