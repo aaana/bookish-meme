@@ -4,7 +4,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundMessageHandlerAdapter;
 import message.LoginContent;
 import message.Message;
-import protocol.ACKType;
+import message.MessageStatus;
 import protocol.MessageType;
 
 /**
@@ -23,7 +23,7 @@ public class AuthorityHandler extends ChannelInboundMessageHandlerAdapter<Messag
             boolean success = loginServer.login(account,password);
 //            login fails
             if(!success) {
-                message.setAckType(ACKType.LOGINFAIL);
+                message.setMessageStatus(MessageStatus.LOGINFAIL);
             }
             System.out.println("from auth: success is " + success);
         }
