@@ -1,5 +1,8 @@
 package message;
 
+import protocol.ACKType;
+import protocol.MessageType;
+
 /**
  * Created by tanjingru on 3/20/16.
  */
@@ -8,16 +11,24 @@ package message;
 
 public class Message {
 
-    private int needsToHandle;
+    private ACKType ackType;
     // 0 => login 1 => chatting
 
-    private int type;
+    private MessageType type;
     private Object content;
 
-    public Message(int type, Object content, int needsToHandle) {
-        this.type = type;
+    public Message(ACKType ackType, Object content, MessageType type) {
+        this.ackType = ackType;
         this.content = content;
-        this.needsToHandle = needsToHandle;
+        this.type = type;
+    }
+
+    public ACKType getAckType() {
+        return ackType;
+    }
+
+    public void setAckType(ACKType ackType) {
+        this.ackType = ackType;
     }
 
     public Object getContent() {
@@ -28,19 +39,11 @@ public class Message {
         this.content = content;
     }
 
-    public int getNeedsToHandle() {
-        return needsToHandle;
-    }
-
-    public void setNeedsToHandle(int needsToHandle) {
-        this.needsToHandle = needsToHandle;
-    }
-
-    public int getType() {
+    public MessageType getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(MessageType type) {
         this.type = type;
     }
 }
