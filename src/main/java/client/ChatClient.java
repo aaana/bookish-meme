@@ -13,6 +13,8 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import message.ChatContent;
 import message.LoginContent;
 import message.Message;
+import message.MessageStatus;
+import protocol.MessageType;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -66,7 +68,7 @@ public class ChatClient {
         connectedChannel = connectServer();
 
         LoginContent loginContent = new LoginContent(account, password);
-        Message loginMessage = new Message(0, loginContent, 0);
+        Message loginMessage = new Message(loginContent, MessageStatus.NEEDHANDLED, MessageType.AUTHORITY);
         Gson gson=new Gson();
         String jsonPayload= gson.toJson(loginMessage);
         System.out.println(jsonPayload);
@@ -78,9 +80,9 @@ public class ChatClient {
         while (true){
             try {
                 String msg=in.readLine();
-                ChatContent content=new ChatContent(msg);
-                Message message=new Message(1,content,0);
-                jsonPayload=gson.toJson(message);
+                ChatContent content = new ChatContent(msg);
+                Message chattingMessage = new Message(content, MessageStatus.NEEDHANDLED, MessageType.CHATTING);
+                jsonPayload=gson.toJson(chattingMessage);
                 //channel.write(message);
                 connectedChannel.write(jsonPayload+"\n\r");
                 //channel.write(in.readLine() + "\n\r");
@@ -110,7 +112,7 @@ public class ChatClient {
             while (true){
                 String msg=in.readLine();
                 ChatContent content=new ChatContent(msg);
-                Message message=new Message(1,content,0);
+                Message message=new Message(content, MessageStatus.NEEDHANDLED, MessageType.CHATTING);
                 String jsonPayload=gson.toJson(message);
                 //channel.write(message);
                  channel.write(jsonPayload+"\n\r");
