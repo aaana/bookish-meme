@@ -17,7 +17,7 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
     @Override
     public void messageReceived(ChannelHandlerContext channelHandlerContext, Message message) throws Exception {
 
-        System.out.println("from responser, type" + message.getType() + "status:" + message.getNeedsToHandle());
+        System.out.println("from responser, type" + message.getType() + "status:" + message.getMessageStatus() );
 
         Channel incomingChannel  = channelHandlerContext.channel();
 
@@ -25,7 +25,7 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
         MessageStatus messageStatus = message.getMessageStatus();
 
         //fail to login
-        if (messageType == MessageType.AUTHORITY && messageStatus != MessageStatus.NEEDHANDLED ){
+        if (messageType == MessageType.AUTHORITY && messageStatus == MessageStatus.LOGINFAIL ){
             incomingChannel.write("0"+ "\n");
             return;
         }
@@ -38,7 +38,7 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
 
 
         // need to forward the message to everyone connected
-        if (messageType == 1 && isMessageNeedsToHandle == 0 )
+        if (messageType == MessageType.CHATTING && messageStatus == MessageStatus.NEEDHANDLED )
         {
             for (Channel channel : Manager.channels){
                 if ( channel != incomingChannel){
@@ -52,12 +52,12 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
         }
 
 
-        if(messageType == 1 && isMessageNeedsToHandle == 1){
+        if(messageType == MessageType.CHATTING && messageStatus == MessageStatus.OVERRANGE){
             incomingChannel.write("3" + "\n");
             return;
         }
 
-        if(messageType == 1 && isMessageNeedsToHandle == 2){
+        if(messageType == MessageType.CHATTING && messageStatus == MessageStatus.TOOFREQUENT){
             incomingChannel.write("4" + "\n");
             return;
         }
