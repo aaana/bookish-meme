@@ -5,6 +5,8 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundMessageHandlerAdapter;
 import message.Message;
+import message.MessageStatus;
+import protocol.MessageType;
 
 /**
  * Created by tanjingru on 3/21/16.
@@ -19,17 +21,17 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
 
         Channel incomingChannel  = channelHandlerContext.channel();
 
-        int messageType = message.getType();
-        int isMessageNeedsToHandle = message.getNeedsToHandle();
+        MessageType messageType = message.getType();
+        MessageStatus messageStatus = message.getMessageStatus();
 
         //fail to login
-        if (messageType == 0 && isMessageNeedsToHandle != 0 ){
+        if (messageType == MessageType.AUTHORITY && messageStatus != MessageStatus.NEEDHANDLED ){
             incomingChannel.write("0"+ "\n");
             return;
         }
 
         // success to login
-        if (messageType == 0 && isMessageNeedsToHandle == 0){
+        if (messageType == MessageType.AUTHORITY && messageStatus == MessageStatus.NEEDHANDLED){
             incomingChannel.write("1" + "\n");
             return;
         }
