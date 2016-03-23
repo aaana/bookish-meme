@@ -9,6 +9,7 @@ import io.netty.util.CharsetUtil;
 import message.ChatContent;
 import message.LoginContent;
 import message.Message;
+import protocol.MessageType;
 
 /**
  * Created by 马二爷 on 2016/3/20.
@@ -21,13 +22,13 @@ public class JsonToObjectHandler extends ChannelInboundMessageHandlerAdapter<Str
         Message message = gson.fromJson(msg,Message.class);
         System.out.print("from json:");
         System.out.println(message.getContent());
-        int type=message.getType();
-        if(type==0)
+        MessageType type=message.getType();
+        if(type==MessageType.AUTHORITY)
         {
             LoginContent lg=gson.fromJson(message.getContent().toString(),LoginContent.class);
             message.setContent(lg);
         }
-        else {
+        else if (type==MessageType.CHATTING){
             ChatContent ct=gson.fromJson(message.getContent().toString(),ChatContent.class);
             message.setContent(ct);
         }
