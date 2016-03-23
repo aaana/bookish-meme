@@ -11,24 +11,16 @@ import protocol.MessageType;
 
 public class Message {
 
-    private ACKType ackType;
+    private MessageStatus messageStatus;
     // 0 => login 1 => chatting
 
     private MessageType type;
     private Object content;
 
-    public Message(ACKType ackType, Object content, MessageType type) {
-        this.ackType = ackType;
+    public Message(Object content, MessageStatus messageStatus, MessageType type) {
         this.content = content;
+        this.messageStatus = messageStatus;
         this.type = type;
-    }
-
-    public ACKType getAckType() {
-        return ackType;
-    }
-
-    public void setAckType(ACKType ackType) {
-        this.ackType = ackType;
     }
 
     public Object getContent() {
@@ -37,6 +29,14 @@ public class Message {
 
     public void setContent(Object content) {
         this.content = content;
+    }
+
+    public MessageStatus getMessageStatus() {
+        return messageStatus;
+    }
+
+    public void setMessageStatus(MessageStatus messageStatus) {
+        this.messageStatus = messageStatus;
     }
 
     public MessageType getType() {
