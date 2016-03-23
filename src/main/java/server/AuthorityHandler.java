@@ -4,6 +4,8 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundMessageHandlerAdapter;
 import message.LoginContent;
 import message.Message;
+import protocol.ACKType;
+import protocol.MessageType;
 
 /**
  * Created by huanganna on 16/3/21.
@@ -11,9 +13,9 @@ import message.Message;
 public class AuthorityHandler extends ChannelInboundMessageHandlerAdapter<Message> {
     @Override
     public void messageReceived(ChannelHandlerContext channelHandlerContext, Message message) throws Exception {
-        int messageType = message.getType();
+        MessageType messageType = message.getType();
         //login message
-        if(messageType == 0){
+        if(messageType == MessageType.AUTHORITY){
             LoginContent loginContent = (LoginContent)(message.getContent());
             String account = loginContent.getAccount();
             String password = loginContent.getPassword();
@@ -21,7 +23,7 @@ public class AuthorityHandler extends ChannelInboundMessageHandlerAdapter<Messag
             boolean success = loginServer.login(account,password);
 //            login fails
             if(!success) {
-                message.setNeedsToHandle(1);
+                message.setAckType(ACKType.LOGINFAIL);
             }
             System.out.println("from auth: success is " + success);
         }
