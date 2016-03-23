@@ -5,6 +5,8 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundMessageHandlerAdapter;
 import message.Message;
+import message.MessageStatus;
+import protocol.MessageType;
 
 /**
  * Created by tanjingru on 3/21/16.
@@ -22,30 +24,24 @@ public class Logger extends ChannelInboundMessageHandlerAdapter<Message> {
     public void messageReceived(ChannelHandlerContext channelHandlerContext, Message message) throws Exception {
         Channel incomingChannel  = channelHandlerContext.channel();
 
-        int messageType = message.getType();
-        int isMessageNeedsToHandle = message.getNeedsToHandle();
+        MessageType messageType = message.getType();
+        MessageStatus messageStatus = message.getMessageStatus();
 
         //fail to login
-        if (messageType == 0 && isMessageNeedsToHandle != 0 ){
+        if (messageType == MessageType.AUTHORITY && messageStatus == MessageStatus.LOGINFAIL){
             invalidLoginNumber += 1;
         }
 
         // success to login
-        if (messageType == 0 && isMessageNeedsToHandle == 0){
+        if (messageType == MessageType.AUTHORITY && messageStatus == MessageStatus.NEEDHANDLED){
             validLoginNumber += 1;
         }
 
 
-        // need to forward the message to everyone connected
-        if (messageType == 1 && isMessageNeedsToHandle == 0 )
-        {
-            forwardMessageNumber += 1;
-        }
-
-        if( messageType == 1){
+        if( messageType == MessageType.CHATTING){
             receivedMessageNumber += 1;
 
-            if (isMessageNeedsToHandle == 0) forwardMessageNumber += 1;
+            if (messageStatus == MessageStatus.NEEDHANDLED) forwardMessageNumber += 1;
             else ignoredMessageNumber += 1;
 
         }
