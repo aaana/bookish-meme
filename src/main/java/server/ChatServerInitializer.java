@@ -16,13 +16,15 @@ public class ChatServerInitializer extends ChannelInitializer<SocketChannel> {
     @Override
     protected void initChannel(SocketChannel socketChannel) throws Exception {
         ChannelPipeline pipeline = socketChannel.pipeline();
-        pipeline.addLast("framer", new DelimiterBasedFrameDecoder(8192, Delimiters.lineDelimiter()));
-        pipeline.addLast("decoder", new StringDecoder());
-        pipeline.addLast("encoder", new StringEncoder());
-        pipeline.addLast("json_to_ob",new JsonToObjectHandler());
-        pipeline.addLast("authority",new AuthorityHandler());
-        pipeline.addLast("Limiter",new Limiter());
-      //  pipeline.addLast("test", new TestHandler());
-        pipeline.addLast("handler", new ChatServerHandler());
+
+        pipeline.addLast("framer", new DelimiterBasedFrameDecoder(8192, Delimiters.lineDelimiter()))
+                .addLast("decoder", new StringDecoder())
+                .addLast("encoder", new StringEncoder())
+                .addLast("json_to_ob",new JsonToObjectHandler())
+                .addLast("authority",new AuthorityHandler())
+                .addLast("channelManager", new ChannelManagerHandler())
+                .addLast("Limiter", new Limiter())
+                .addLast("log", new Logger())
+                .addLast("response", new Responser());
     }
 }

@@ -14,7 +14,7 @@ public class AuthorityHandler extends ChannelInboundMessageHandlerAdapter<Messag
         int messageType = message.getType();
         //login message
         if(messageType == 0){
-            LoginContent loginContent = (LoginContent)message.getContent();
+            LoginContent loginContent = (LoginContent)(message.getContent());
             String account = loginContent.getAccount();
             String password = loginContent.getPassword();
             LoginServer loginServer = new LoginServer();
@@ -23,7 +23,7 @@ public class AuthorityHandler extends ChannelInboundMessageHandlerAdapter<Messag
             if(!success) {
                 message.setNeedsToHandle(1);
             }
-
+            System.out.println("from auth: success is " + success);
         }
         channelHandlerContext.nextInboundMessageBuffer().add(message);
         channelHandlerContext.fireInboundBufferUpdated();

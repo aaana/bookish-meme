@@ -15,6 +15,8 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
     @Override
     public void messageReceived(ChannelHandlerContext channelHandlerContext, Message message) throws Exception {
 
+        System.out.println("from responser, type" + message.getType() + "status:" + message.getNeedsToHandle());
+
         Channel incomingChannel  = channelHandlerContext.channel();
 
         int messageType = message.getType();
@@ -22,13 +24,13 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
 
         //fail to login
         if (messageType == 0 && isMessageNeedsToHandle != 0 ){
-            incomingChannel.write("0");
+            incomingChannel.write("0"+ "\n");
             return;
         }
 
         // success to login
         if (messageType == 0 && isMessageNeedsToHandle == 0){
-            incomingChannel.write("1");
+            incomingChannel.write("1" + "\n");
             return;
         }
 
@@ -39,22 +41,22 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
             for (Channel channel : Manager.channels){
                 if ( channel != incomingChannel){
                     channel.write("[" + incomingChannel.remoteAddress() + "]" + message.getContent().toString()
-                            +"needsToHandle:"+message.getNeedsToHandle()+ "\n");
+                            + "\n");
                 }
             }
 
-            incomingChannel.write("2");
+            incomingChannel.write("2" + "\n");
             return;
         }
 
 
         if(messageType == 1 && isMessageNeedsToHandle == 1){
-            incomingChannel.write("3");
+            incomingChannel.write("3" + "\n");
             return;
         }
 
         if(messageType == 1 && isMessageNeedsToHandle == 2){
-            incomingChannel.write("4");
+            incomingChannel.write("4" + "\n");
             return;
         }
     }

@@ -39,7 +39,7 @@ public class ChatServerHandler extends ChannelInboundMessageHandlerAdapter<Messa
         for (Channel channel : Manager.channels){
             if ( channel != incoming){
                 channel.write("[" + incoming.remoteAddress() + "]" + message.getContent().toString()
-                                +"needsToHandle:"+message.getNeedsToHandle()+ "\n");
+                        +"\n");
             }
         }
     }
