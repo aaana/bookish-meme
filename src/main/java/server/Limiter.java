@@ -7,6 +7,9 @@ import io.netty.channel.ChannelInboundMessageHandlerAdapter;
 import message.Message;
 
 import com.google.common.util.concurrent.RateLimiter;
+import message.MessageStatus;
+import protocol.MessageType;
+
 /**
  * Created by 马二爷 on 2016/3/20.
  */
@@ -24,23 +27,22 @@ public class Limiter extends ChannelInboundMessageHandlerAdapter<Message> {
     }
     @Override
     public void messageReceived(ChannelHandlerContext ctx, Message msg) throws Exception {
-        System.out.println("from limiter, type" + msg.getType() + "status:" + msg.getNeedsToHandle());
-        if(msg.getType() == 1){
+        if(msg.getType() == MessageType.CHATTING){
             if(rateLimiter.tryAcquire())
             {
                 if(receivedNumber+1<maxMsgNumber) {
                     receivedNumber++;
-                    msg.setNeedsToHandle(0);
+                    msg.setMessageStatus(MessageStatus.NEEDHANDLED);
                 }
                 else{
                     //too many
-                    msg.setNeedsToHandle(1);
+                    msg.setMessageStatus(MessageStatus.OVERRANGE);
                 }
             }
             else
             {
                 //too frequently
-                msg.setNeedsToHandle(2);
+                msg.setMessageStatus(MessageStatus.TOOFREQUENT);
             }
         }
         ctx.nextInboundMessageBuffer().add(msg);
