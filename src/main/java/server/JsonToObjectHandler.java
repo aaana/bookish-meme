@@ -1,10 +1,13 @@
 package server;
 
 import com.google.gson.Gson;
+import com.google.gson.internal.StringMap;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundMessageHandlerAdapter;
 import io.netty.util.CharsetUtil;
+import message.ChatContent;
+import message.LoginContent;
 import message.Message;
 
 /**
@@ -15,7 +18,20 @@ public class JsonToObjectHandler extends ChannelInboundMessageHandlerAdapter<Str
     @Override
     public void messageReceived(ChannelHandlerContext ctx, String msg) throws Exception {
         Gson gson=new Gson();
-        Message message=gson.fromJson(msg,Message.class);
+        Message message = gson.fromJson(msg,Message.class);
+        System.out.print("from json:");
+        System.out.println(message.getContent());
+        int type=message.getType();
+        if(type==0)
+        {
+            LoginContent lg=gson.fromJson(message.getContent().toString(),LoginContent.class);
+            message.setContent(lg);
+        }
+        else {
+            ChatContent ct=gson.fromJson(message.getContent().toString(),ChatContent.class);
+            message.setContent(ct);
+        }
+
         ctx.nextInboundMessageBuffer().add(message);
         ctx.fireInboundBufferUpdated();
     }

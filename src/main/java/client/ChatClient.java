@@ -24,7 +24,8 @@ public class ChatClient {
         Conf conf = configReader.readConf();
         String host = conf.getHost();
         int port = conf.getPort();
-        new ChatClient(host, port).run();
+        ChatClient chatClient = new ChatClient(host, port);
+        chatClient.Login("101", "123456");
     }
 
     private final String host;
@@ -63,11 +64,30 @@ public class ChatClient {
 
     public void Login(String account, String password) throws InterruptedException{
         connectedChannel = connectServer();
+
         LoginContent loginContent = new LoginContent(account, password);
         Message loginMessage = new Message(0, loginContent, 0);
         Gson gson=new Gson();
         String jsonPayload= gson.toJson(loginMessage);
-        connectedChannel.write(jsonPayload);
+        System.out.println(jsonPayload);
+
+        connectedChannel.write(jsonPayload + "\n\r");
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+
+        while (true){
+            try {
+                String msg=in.readLine();
+                ChatContent content=new ChatContent(msg);
+                Message message=new Message(1,content,0);
+                jsonPayload=gson.toJson(message);
+                //channel.write(message);
+                connectedChannel.write(jsonPayload+"\n\r");
+                //channel.write(in.readLine() + "\n\r");
+            } catch (Exception e){
+                ;
+            }
+        }
     }
 
 

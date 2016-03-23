@@ -24,21 +24,24 @@ public class Limiter extends ChannelInboundMessageHandlerAdapter<Message> {
     }
     @Override
     public void messageReceived(ChannelHandlerContext ctx, Message msg) throws Exception {
-        if(rateLimiter.tryAcquire())
-        {
-            if(receivedNumber+1<maxMsgNumber) {
-                receivedNumber++;
-                msg.setNeedsToHandle(0);
+        System.out.println("from limiter, type" + msg.getType() + "status:" + msg.getNeedsToHandle());
+        if(msg.getType() == 1){
+            if(rateLimiter.tryAcquire())
+            {
+                if(receivedNumber+1<maxMsgNumber) {
+                    receivedNumber++;
+                    msg.setNeedsToHandle(0);
+                }
+                else{
+                    //too many
+                    msg.setNeedsToHandle(1);
+                }
             }
-            else{
-                //too many
-                msg.setNeedsToHandle(1);
+            else
+            {
+                //too frequently
+                msg.setNeedsToHandle(2);
             }
-        }
-        else
-        {
-            //too frequently
-            msg.setNeedsToHandle(2);
         }
         ctx.nextInboundMessageBuffer().add(msg);
         ctx.fireInboundBufferUpdated();

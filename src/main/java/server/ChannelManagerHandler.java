@@ -14,6 +14,7 @@ public class ChannelManagerHandler extends ChannelInboundMessageHandlerAdapter<M
     @Override
     public void messageReceived(ChannelHandlerContext channelHandlerContext, Message message) throws Exception {
         if( message.getType() == 0 && message.getNeedsToHandle() == 0){
+            System.out.println("from chmanager" + message.getType() + message.getNeedsToHandle());
             Channel incoming  = channelHandlerContext.channel();
             for ( Channel channel : Manager.channels){
                 channel.write("[SERVER] - " + incoming.remoteAddress() + "has joined\n");
