@@ -2,6 +2,7 @@ package message;
 
 
 public class ChatContent {
+
     private String message;
 
     public String getMessage() {
