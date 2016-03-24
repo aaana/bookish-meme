@@ -16,6 +16,7 @@ import protocol.MessageType;
  */
 public class JsonToObjectHandler extends ChannelInboundMessageHandlerAdapter<String> {
 
+
     @Override
     public void messageReceived(ChannelHandlerContext ctx, String msg) throws Exception {
 
