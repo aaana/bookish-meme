@@ -14,6 +14,7 @@ import protocol.MessageType;
 
 public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
 
+
     @Override
     public void messageReceived(ChannelHandlerContext channelHandlerContext, Message message) throws Exception {
 
@@ -53,6 +54,7 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
 
 
         if(messageType == MessageType.CHATTING && messageStatus == MessageStatus.OVERRANGE){
+            Manager.channels.remove(incomingChannel);
             incomingChannel.write("3" + "\n");
             return;
         }

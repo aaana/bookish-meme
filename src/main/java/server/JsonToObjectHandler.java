@@ -18,11 +18,13 @@ public class JsonToObjectHandler extends ChannelInboundMessageHandlerAdapter<Str
 
     @Override
     public void messageReceived(ChannelHandlerContext ctx, String msg) throws Exception {
+
         Gson gson=new Gson();
         Message message = gson.fromJson(msg,Message.class);
         System.out.print("from json:");
         System.out.println(message.getContent());
         MessageType type=message.getType();
+
         if(type==MessageType.AUTHORITY)
         {
             LoginContent lg=gson.fromJson(message.getContent().toString(),LoginContent.class);
@@ -35,5 +37,6 @@ public class JsonToObjectHandler extends ChannelInboundMessageHandlerAdapter<Str
 
         ctx.nextInboundMessageBuffer().add(message);
         ctx.fireInboundBufferUpdated();
+
     }
 }
