@@ -12,7 +12,7 @@ import protocol.MessageType;
  * Created by tanjingru on 3/21/16.
  */
 
-public class Logger extends ChannelInboundMessageHandlerAdapter<Message> {
+public class LoggerHandler extends ChannelInboundMessageHandlerAdapter<Message> {
 
     static public int validLoginNumber = 0;
     static public int invalidLoginNumber = 0;
