@@ -5,6 +5,7 @@ package client;
  */
 import Util.Conf;
 import Util.ConfigReader;
+import com.google.common.eventbus.EventBus;
 import com.google.gson.Gson;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
@@ -26,6 +27,7 @@ public class ChatClient {
         Conf conf = configReader.readConf();
         String host = conf.getHost();
         int port = conf.getPort();
+
         ChatClient chatClient = new ChatClient(host, port);
         chatClient.Login("101", "123456");
     }
@@ -92,6 +94,11 @@ public class ChatClient {
         }
     }
 
+    public void sendMessage(ChatContent chatContent){
+        Gson gson=new Gson();
+        String jsonPayload= gson.toJson(chatContent);
+        connectedChannel.write(jsonPayload + "\n\r");
+    }
 
 
     public void run() throws Exception{
