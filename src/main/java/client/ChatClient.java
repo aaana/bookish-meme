@@ -15,6 +15,7 @@ import message.ChatContent;
 import message.LoginContent;
 import message.Message;
 import message.MessageStatus;
+import org.apache.log4j.PropertyConfigurator;
 import protocol.MessageType;
 
 import java.io.BufferedReader;
@@ -23,6 +24,8 @@ import java.io.InputStreamReader;
 public class ChatClient {
 
     public static void main(String[] args) throws Exception{
+        PropertyConfigurator.configure("config/log4j-client.property");
+        
         ConfigReader configReader = new ConfigReader("conf.json");
         Conf conf = configReader.readConf();
         String host = conf.getHost();

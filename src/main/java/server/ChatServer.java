@@ -17,7 +17,7 @@ public class ChatServer{
 
     public static void main(String[] args) throws InterruptedException{
 
-        PropertyConfigurator.configure("config/log4j.property");
+        PropertyConfigurator.configure("config/log4j-server.property");
 
         // 开始定时任务
         Timer timer = new Timer();
