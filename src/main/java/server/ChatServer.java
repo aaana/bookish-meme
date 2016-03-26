@@ -6,14 +6,28 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoop;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import org.apache.log4j.PropertyConfigurator;
+
+import java.util.Timer;
 
 /**
  * Created by tanjingru on 3/17/16.
  */
 public class ChatServer{
+
     public static void main(String[] args) throws InterruptedException{
+
+        PropertyConfigurator.configure("config/log4j.property");
+
+        // 开始定时任务
+        Timer timer = new Timer();
+        timer.schedule(new LoggerTask(), 60 * 1000,  60 * 1000);
+
+        //打开服务器
         new ChatServer(8080).run();
+
     }
+
     private final int port;
     public ChatServer(int port){
         this.port = port;
@@ -38,4 +52,5 @@ public class ChatServer{
             workerGroup.shutdownGracefully();
         }
     }
+
 }

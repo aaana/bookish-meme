@@ -23,7 +23,7 @@ public class ChatServerInitializer extends ChannelInitializer<SocketChannel> {
                 .addLast("json_to_ob",new JsonToObjectHandler())
                 .addLast("authority",new AuthorityHandler())
                 .addLast("channelManager", new ChannelManagerHandler())
-                .addLast("Limiter", new Limiter())
+                .addLast("Limiter", new LimiterHandler())
                 .addLast("log", new LoggerHandler())
                 .addLast("response", new Responser());
     }

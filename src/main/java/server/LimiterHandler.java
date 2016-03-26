@@ -13,12 +13,12 @@ import protocol.MessageType;
 /**
  * Created by 马二爷 on 2016/3/20.
  */
-public class Limiter extends ChannelInboundMessageHandlerAdapter<Message> {
+public class LimiterHandler extends ChannelInboundMessageHandlerAdapter<Message> {
     private int receivedNumber=0;
     private int maxMsgNumber;// configurable
     private int maxMsgNumberPerSec;//configurable
     private final RateLimiter rateLimiter;
-    public Limiter() throws Exception {
+    public LimiterHandler() throws Exception {
         ConfigReader reader = new ConfigReader("conf.json");
         Conf conf = reader.readConf();
         maxMsgNumber=conf.getMaxMsgNumber();
