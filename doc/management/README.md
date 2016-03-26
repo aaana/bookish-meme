@@ -25,7 +25,7 @@
 
 ### 开发环境搭建
 	1. 需要使用java
-	2. 同意IDE，使用Intellj IDEA
+	2. 统一IDE，使用Intellj IDEA
 	3. 包管理工具使用Maven
 	4. 使用Git来完成协同工作
 
@@ -58,9 +58,9 @@
 	- [数据流分析](#数据流分析)
 	- [协议的统一](#协议的统一)
 	- [任务分配2](#任务分配2)
-	- 
+	
 ### 项目架构分析
-	架构图
+![architecture](https://raw.githubusercontent.com/tztztztztz/bookish-meme/master/doc/architecture.png)
 ### 数据流分析
 	数据流图
 ### 协议的统一
