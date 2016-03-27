@@ -5,7 +5,6 @@ package client;
  */
 import Util.Conf;
 import Util.ConfigReader;
-import com.google.common.eventbus.EventBus;
 import com.google.gson.Gson;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
@@ -15,20 +14,29 @@ import message.ChatContent;
 import message.LoginContent;
 import message.Message;
 import message.MessageStatus;
+import org.apache.log4j.PropertyConfigurator;
 import protocol.MessageType;
+
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Timer;
 
 public class ChatClient {
 
     public static void main(String[] args) throws Exception{
-        ConfigReader configReader = new ConfigReader();
-        Conf conf = configReader.readConf("conf.json");
+        PropertyConfigurator.configure("config/log4j-client.property");
+        Timer timer = new Timer();
+        timer.schedule(new ClientLoggerTask(), 60 * 1000,  60 * 1000);
+
+        ConfigReader configReader = new ConfigReader("conf.json");
+        Conf conf = configReader.readConf();
         String host = conf.getHost();
         int port = conf.getPort();
 
         ChatClient chatClient = new ChatClient(host, port);
+
+
         chatClient.Login("101", "123456");
     }
 
@@ -98,6 +106,7 @@ public class ChatClient {
         Gson gson=new Gson();
         String jsonPayload= gson.toJson(chatContent);
         connectedChannel.write(jsonPayload + "\n\r");
+        ClientLoggerHandler.sendMsgNumber++;
     }
 
 

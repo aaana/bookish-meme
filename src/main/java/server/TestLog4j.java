@@ -10,7 +10,7 @@ import org.apache.log4j.PropertyConfigurator;
 
 public class TestLog4j {
     public static void main(String[] args) {
-        PropertyConfigurator.configure("config/log4j.property");
+        PropertyConfigurator.configure("config/log4j-server.property");
         Logger logger = Logger.getLogger(TestLog4j.class);
         logger.debug("debug");
         logger.error("error");
