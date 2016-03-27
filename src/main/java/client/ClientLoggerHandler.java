@@ -19,11 +19,11 @@ public class ClientLoggerHandler extends ChannelInboundMessageHandlerAdapter<ACK
     public void messageReceived(ChannelHandlerContext ctx, ACK ack) throws Exception {
         ACKType type=ack.getType();
 
-        if(type==ACKType.LOGINSUCCESS)
+        if(type == ACKType.LOGINSUCCESS)
             loginSuccess++;
-        if(type==ACKType.LOGINFAIL)
+        if(type == ACKType.LOGINFAIL)
             loginFail++;
-        if(type==ACKType.OTHERSMESSAGE)
+        if(type == ACKType.OTHERSMESSAGE)
             receiveMsgNumber++;
 
         ctx.nextInboundMessageBuffer().add(ack);

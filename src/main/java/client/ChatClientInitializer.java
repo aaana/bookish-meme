@@ -20,6 +20,7 @@ public class ChatClientInitializer extends ChannelInitializer<SocketChannel> {
                 .addLast("decoder", new StringDecoder())
                 .addLast("encoder", new StringEncoder())
                 .addLast("jsonToObj", new JsonHandler())
+                .addLast("logger", new ClientLoggerHandler())
                 .addLast("handler", new ChatClientHandler());
     }
 }
