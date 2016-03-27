@@ -1,8 +1,8 @@
 # 项目管理文档
 ## 项目人员
 
-- 黄安娜 1352875 [黄安娜](https://github.com/aaana)
-- 谭靖儒 1352892 [谭靖儒](https://github.com/tztztztztz)
+- 黄安娜 1352875 [aaana](https://github.com/aaana)
+- 谭靖儒 1352892 [tztztztztz](https://github.com/tztztztztz)
 
 ## 第一次讨论
 - 时间: 3月16日 19:00
