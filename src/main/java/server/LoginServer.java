@@ -9,16 +9,6 @@ import java.sql.Statement;
  * Created by Administrator on 2016/3/19.
  */
 public class LoginServer {
-//    public static void main(String[] args){
-//        String name = "100",password="123456";
-//        LoginServer loginServer = new LoginServer();
-//        try {
-//            System.out.println(loginServer.login(name,password));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-
     private ThreadLocal<Connection> threadLocal = new ThreadLocal<Connection>();
 
     public boolean login(String name,String password) throws Exception {

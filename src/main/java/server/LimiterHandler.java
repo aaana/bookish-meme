@@ -19,8 +19,8 @@ public class LimiterHandler extends ChannelInboundMessageHandlerAdapter<Message>
     private int maxMsgNumberPerSec;//configurable
     private final RateLimiter rateLimiter;
     public LimiterHandler() throws Exception {
-        ConfigReader reader = new ConfigReader("conf.json");
-        Conf conf = reader.readConf();
+        ConfigReader reader = new ConfigReader();
+        Conf conf = reader.readConf("conf.json");
         maxMsgNumber=conf.getMaxMsgNumber();
         maxMsgNumberPerSec=conf.getMaxMsgNumberPerSec();
         rateLimiter=RateLimiter.create(maxMsgNumberPerSec);

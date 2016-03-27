@@ -9,6 +9,16 @@ public class Conf {
     private int maxMsgNumber;
     private int maxMsgNumberPerSec;
 
+//    public Conf(String host, int port, int maxMsgNumber, int maxMsgNumberPerSec) {
+//        this.host = host;
+//        this.port = port;
+//        this.maxMsgNumber = maxMsgNumber;
+//        this.maxMsgNumberPerSec = maxMsgNumberPerSec;
+//    }
+
+    public Conf() {
+    }
+
     public int getPort() {
         return port;
     }

@@ -3,7 +3,7 @@
     "HOST":"localhost",
     "PORT":8080,
     "MaxMsgNumber":100,
-    "MaxMsgNumberPerSec":2
+    "MaxMsgNumberPerSec":5
   }
 
 }
