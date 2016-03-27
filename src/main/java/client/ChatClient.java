@@ -29,8 +29,8 @@ public class ChatClient {
         Timer timer = new Timer();
         timer.schedule(new ClientLoggerTask(), 60 * 1000,  60 * 1000);
 
-        ConfigReader configReader = new ConfigReader("conf.json");
-        Conf conf = configReader.readConf();
+        ConfigReader configReader = new ConfigReader();
+        Conf conf = configReader.readConf("config/conf.json");
         String host = conf.getHost();
         int port = conf.getPort();
 
@@ -75,6 +75,7 @@ public class ChatClient {
     }
 
     public void Login(String account, String password) throws InterruptedException{
+
         connectedChannel = connectServer();
 
         LoginContent loginContent = new LoginContent(account, password);
