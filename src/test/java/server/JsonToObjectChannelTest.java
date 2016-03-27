@@ -5,6 +5,7 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.embedded.EmbeddedMessageChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import message.ChatContent;
+import message.LoginContent;
 import message.Message;
 import message.MessageStatus;
 import org.junit.Before;
@@ -36,4 +37,19 @@ public class JsonToObjectChannelTest {
         // Perform checks on your object
         assertEquals("hello", ((ChatContent)myMessage.getContent()).getMessage());
     }
+
+    @Test
+    public void authorityMessageTest(){
+
+        Message authorityMessage = new Message(new LoginContent("101","12345"),MessageStatus.NEEDHANDLED,MessageType.AUTHORITY);
+        Gson gson = new Gson();
+        String jsonStr = gson.toJson(authorityMessage);
+        channel.writeInbound(jsonStr + "\n");
+
+        Message myMessage = (Message)channel.readInbound();
+        assertEquals("101",((LoginContent)(myMessage.getContent())).getAccount());
+        assertEquals("12345",((LoginContent)(myMessage.getContent())).getPassword());
+
+    }
+
 }
