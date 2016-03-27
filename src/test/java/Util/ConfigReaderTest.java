@@ -25,7 +25,7 @@ public class ConfigReaderTest {
 
     @Test
     public void testReadConf() throws Exception {
-        Conf conf = reader.readConf("conf.json");
+        Conf conf = reader.readConf("config/conf.json");
         host = conf.getHost();
         port = conf.getPort();
         maxMsgNumber = conf.getMaxMsgNumber();
