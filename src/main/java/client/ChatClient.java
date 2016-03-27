@@ -29,8 +29,8 @@ public class ChatClient {
         Timer timer = new Timer();
         timer.schedule(new ClientLoggerTask(), 60 * 1000,  60 * 1000);
 
-        ConfigReader configReader = new ConfigReader("conf.json");
-        Conf conf = configReader.readConf();
+        ConfigReader configReader = new ConfigReader();
+        Conf conf = configReader.readConf("conf.json");
         String host = conf.getHost();
         int port = conf.getPort();
 
