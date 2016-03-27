@@ -23,8 +23,8 @@ import java.io.InputStreamReader;
 public class ChatClient {
 
     public static void main(String[] args) throws Exception{
-        ConfigReader configReader = new ConfigReader("conf.json");
-        Conf conf = configReader.readConf();
+        ConfigReader configReader = new ConfigReader();
+        Conf conf = configReader.readConf("conf.json");
         String host = conf.getHost();
         int port = conf.getPort();
 

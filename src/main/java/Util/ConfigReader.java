@@ -10,13 +10,17 @@ import java.io.FileInputStream;
  * Created by huanganna on 16/3/20.
  */
 public class ConfigReader {
-    private String confAddr;
+//    private String confAddr;
 
-    public ConfigReader(String confAddr) {
-        this.confAddr = confAddr;
+//    public ConfigReader(String confAddr) {
+//        this.confAddr = confAddr;
+//    }
+
+
+    public ConfigReader() {
     }
 
-    public Conf readConf() throws Exception{
+    public Conf readConf(String confAddr) throws Exception{
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(Conf.class, new ConfDeserializer());
         Gson gson = gsonBuilder.create();
