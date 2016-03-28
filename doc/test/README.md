@@ -7,25 +7,46 @@
 - 马致远 `集成测试`
 
 
-## 测试内容
+##测试内容
 
-————
-**以下为模板，请勿直接修改**
+- [配置模块](#配置模块)
+- [登陆验证模块](#登陆验证模块)
+- [管道管理模块](#管道管理模块)
 
-- [某某模块/handler1](#某某模块/handler2)
-- [某某模块/handler1](#某某模块/handler2)
+### 配置模块
 
-### 某某模块/handler1
-#### 测试用例 
-	直接使用文字描述即可，不需要贴出代码
+#### 测试用例
+`ConfigReaderTest.java`
 
-- xxx
-- xxx
-- xxx
+>- 用例描述:	读取配置文件	
+>- 输入数据:	"config/conf.json"
+>- 预期结果:   	host=="localhost",port==8080,maxMsgNumber==100,maxMsgNumberPerSec==5
+>- 实际结果:	host=="localhost",port==8080,maxMsgNumber==100,maxMsgNumberPerSec==5
+>- 测试结果:	通过
+>- 测试时间:	2016.3.27
+>- bug描述	无   
 
-### 某某模块/handler2
-#### 测试用例 
 
-- xxx
-- xxx
-- xxx
+### 登陆验证模块
+#### 测试用例
+
+`AuthorityHandlerTest.java`
+
+| 编号 | 用例描述 | 输入数据 | 预期结果 | 实际结果 |  测试结果 | 测试时间 |
+|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
+| 1 | 正确的登陆消息验证 |正确的登陆message | message的Status为NEEDHANDLED | Message的Status为NEEDHANDLED  | 通过| 2016.3.27 |
+| 2 | 错误的登陆消息验证 | 错误的登陆message | message的Status为LOGINFAIL | message的Status为LOGINFAIL |通过 | 2016.3.27 |
+| 3 | 聊天消息验证 | 聊天message | 未发生改变的message | 未发生改变的message | 通过 | 2016.3.27 |
+
+
+### 管道管理模块
+#### 测试用例
+
+`ChannelManagerHandlerTest.java`
+
+| 用例编号 | 用例描述 | 输入数据 | 预期结果 | 实际结果 |  测试结果 | 测试时间 | bug描述
+|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
+| 1 | 登陆成功则添加channel |验证成功的message | channels的长度+1 | channels的长度+1  | 通过| 2016.3.27 |无
+| 2 | 登陆失败channel个数不变 | 验证失败的message | channels的长度不变 | channels的长度不变 |通过 | 2016.3.27|无
+| 3 | 聊天消息 | 聊天message | channels的长度不变 | channels的长度不变 | 通过 | 2016.3.27 |无
+

@@ -9,7 +9,7 @@
 - [Dependences Installation](#dependences-installation)
 - [Configuration](#configuration)
 - [Usage](#usage)
-- [程序文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/soft)
+- [程序文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/product)
 - [项目管理文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/management)
 - [项目测试文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/test)
 
@@ -20,7 +20,7 @@
 | 学号 | 姓名 | Github |
 | -----|:----:| ----:|
 | 1352892    | 谭靖儒    |     |
-|     | 黄安娜   |     |
+| 1352875    | 黄安娜   | [aaana](https://github.com/aaana)    |
 |     | 晁佳欢    |     |
 |     | 马致远    |     |
 |     | 林昌盛    |     |
