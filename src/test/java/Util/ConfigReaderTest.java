@@ -1,8 +1,12 @@
 package Util;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
@@ -23,6 +27,7 @@ public class ConfigReaderTest {
 
     }
 
+    //正确读入配置文件
     @Test
     public void testReadConf() throws Exception {
         Conf conf = reader.readConf("config/conf.json");
@@ -38,4 +43,6 @@ public class ConfigReaderTest {
         assertEquals(maxMsgNumberPerSec,5);
 
     }
+
+
 }
