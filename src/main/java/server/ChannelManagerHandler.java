@@ -16,11 +16,11 @@ public class ChannelManagerHandler extends ChannelInboundMessageHandlerAdapter<M
     @Override
     public void messageReceived(ChannelHandlerContext channelHandlerContext, Message message) throws Exception {
         if( message.getType() == MessageType.AUTHORITY && message.getMessageStatus() == MessageStatus.NEEDHANDLED){
-            System.out.println("from chmanager" + message.getType() + message.getMessageStatus());
-            Channel incoming  = channelHandlerContext.channel();
+
+           /* Channel incoming  = channelHandlerContext.channel();
             for ( Channel channel : Manager.channels){
                 channel.write("[SERVER] - " + incoming.remoteAddress() + "has joined\n");
-            }
+            }*/
             Manager.channels.add(channelHandlerContext.channel());
 
         }
@@ -30,10 +30,10 @@ public class ChannelManagerHandler extends ChannelInboundMessageHandlerAdapter<M
 
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
-        Channel incoming = ctx.channel();
+        /*Channel incoming = ctx.channel();
         for ( Channel channel : Manager.channels){
             channel.write("[SERVER] - " + incoming.remoteAddress() + "has left\n");
-        }
+        }*/
         Manager.channels.remove(ctx.channel());
     }
 
