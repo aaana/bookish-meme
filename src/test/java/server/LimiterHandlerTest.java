@@ -18,8 +18,8 @@ import static org.junit.Assert.*;
 public class LimiterHandlerTest {
 
     private EmbeddedMessageChannel channel;
-    private int maxMsgNumber;// configurable
-    private int maxMsgNumberPerSec;//configurable
+    private int maxMsgNumber;
+    private int maxMsgNumberPerSec;
 
     @Before
     public void setUp() throws Exception {
@@ -30,39 +30,51 @@ public class LimiterHandlerTest {
         maxMsgNumberPerSec=conf.getMaxMsgNumberPerSec();
     }
 
+
     @Test
-    public void testMessageReceived() throws Exception {
+    public void testTOOFREQUENT() throws Exception {
         Message testMessage = new Message(new ChatContent("hello"), MessageStatus.NEEDHANDLED, MessageType.CHATTING);
 
-        for(int i=0;i<maxMsgNumberPerSec-2;i++){
+        for(int i=0;i<maxMsgNumberPerSec-1;i++){
             channel.writeInbound(testMessage);
-
             Message myMessage = (Message)channel.readInbound();
 
             assertEquals("hello", ((ChatContent)myMessage.getContent()).getMessage());
             assertEquals(MessageStatus.NEEDHANDLED, myMessage.getMessageStatus());
-            assertEquals(MessageType.CHATTING,myMessage.getType());
+            assertEquals(MessageType.CHATTING, myMessage.getType());
 
-            //Thread.sleep(200);
+            Thread.sleep(200);
+        }
+
+        channel.writeInbound(testMessage);
+        for(int i=0;i<2;i++){
+            channel.writeInbound(testMessage);
+            Message myMessage = (Message)channel.readInbound();
+
+            assertEquals("hello", ((ChatContent)myMessage.getContent()).getMessage());
+            assertEquals(MessageStatus.TOOFREQUENT, myMessage.getMessageStatus());
+            assertEquals(MessageType.CHATTING, myMessage.getType());
         }
     }
 
-//    @Test
-//    public void testTooMuchMessage() throws Exception {
-//        Message testMessage = new Message(new ChatContent("hello"), MessageStatus.NEEDHANDLED, MessageType.CHATTING);
-//
-//        for(int i=0;i<maxMsgNumber-1;i++){
-//            channel.writeInbound(testMessage);
-//
-//            Message myMessage = (Message)channel.readInbound();
-//
-//            assertEquals(MessageStatus.NEEDHANDLED, myMessage.getMessageStatus());
-//
-//             Thread.sleep(200);
-//        }
-//        channel.writeInbound(testMessage);
-//        Message myMessage = (Message)channel.readInbound();
-//
-//        assertEquals(MessageStatus.OVERRANGE, myMessage.getMessageStatus());
-//    }
+    @Test
+    public void testOVERRANGE() throws Exception {
+        Message testMessage = new Message(new ChatContent("hello"), MessageStatus.NEEDHANDLED, MessageType.CHATTING);
+
+        for(int i=0;i<maxMsgNumber-1;i++){
+            channel.writeInbound(testMessage);
+
+            Message myMessage = (Message)channel.readInbound();
+
+            assertEquals(MessageStatus.NEEDHANDLED, myMessage.getMessageStatus());
+
+             Thread.sleep(200);
+        }
+        for(int i=0;i<7;i++) {
+            channel.writeInbound(testMessage);
+            Message myMessage = (Message) channel.readInbound();
+            assertEquals(MessageStatus.OVERRANGE, myMessage.getMessageStatus());
+            Thread.sleep(200);
+        }
+    }
 }
