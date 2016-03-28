@@ -9,8 +9,8 @@
 
 ##测试内容
 
-- [配置模块/ConfigReader](#配置模块/ConfigReader)
-- [登陆验证模块/AuthorityHandler](#登陆验证模块/AuthorityHandler)
+- [配置模块-ConfigReader](#配置模块-ConfigReader)
+- [登陆验证模块-AuthorityHandler](#登陆验证模块-AuthorityHandler)
 
 ### 配置模块-ConfigReader
 
