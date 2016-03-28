@@ -7,14 +7,6 @@
 - 马致远 `集成测试`
 
 
-## 测试内容
-
-————
-**以下为模板，请勿直接修改**
-
-- [配置模块-ConfigReader](#配置模块-ConfigReader)
-- [登陆验证模块-AuthorityHandler](#登陆验证模块-AuthorityHandler)
-
 ##测试内容
 
 - [配置模块/ConfigReader](#配置模块/ConfigReader)
