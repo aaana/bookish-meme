@@ -9,7 +9,7 @@
 - [Dependences Installation](#dependences-installation)
 - [Configuration](#configuration)
 - [Usage](#usage)
-- [程序文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/soft)
+- [程序文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/product)
 - [项目管理文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/management)
 - [项目测试文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/test)
 
