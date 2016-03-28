@@ -25,21 +25,20 @@ import java.util.Timer;
 public class ChatClient {
 
     public static void main(String[] args) throws Exception{
-        PropertyConfigurator.configure("config/log4j-client.property");
-        Timer timer = new Timer();
-        timer.schedule(new ClientLoggerTask(), 60 * 1000,  60 * 1000);
-
-        ConfigReader configReader = new ConfigReader();
-        Conf conf = configReader.readConf("config/conf.json");
-        String host = conf.getHost();
-        int port = conf.getPort();
-
-        ChatClient chatClient = new ChatClient(host, port);
-
-
-        chatClient.Login("101", "123456");
+//        PropertyConfigurator.configure("config/log4j-client.property");
+//        Timer timer = new Timer();
+//        timer.schedule(new ClientLoggerTask(), 60 * 1000,  60 * 1000);
+//
+//        ConfigReader configReader = new ConfigReader();
+//        Conf conf = configReader.readConf("config/conf.json");
+//        String host = conf.getHost();
+//        int port = conf.getPort();
+//
+//        ChatClient chatClient = new ChatClient(host, port);
+//
+//
+//        chatClient.Login("101", "123456");
     }
-
     private final String host;
     private final int port;
     private Channel connectedChannel;
@@ -48,6 +47,10 @@ public class ChatClient {
     public ChatClient(String host, int port) {
         this.host = host;
         this.port = port;
+    }
+
+    public void test() {
+        System.out.println("test!");
     }
 
     private Channel connectServer() throws InterruptedException{
