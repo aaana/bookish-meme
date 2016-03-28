@@ -101,7 +101,7 @@
 - 数据库模块测试
 - 测试Server和Client的handler的单元测试
 
-详情见[测试文档](#123)
+详情见[测试文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/test)
 
 ### 集成测试
 对Client与Server之间的交互流程进行直接的测试
