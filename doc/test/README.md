@@ -37,9 +37,9 @@
 
 | 编号 | 用例描述 | 输入数据 | 预期结果 | 实际结果 |  测试结果 | 测试时间 |
 |:----:|:----:|:----:|:----:|:----:|:----:|:----:|
-| 1 | 正确的登陆消息验证 |正确的登陆message | message的Status为NEEDHANDLED | Message的Status为NEEDHANDLED  | 通过| 2016.3.27 |
-| 2 | 错误的登陆消息验证 | 错误的登陆message | message的Status为LOGINFAIL | message的Status为LOGINFAIL |通过 | 2016.3.27 |
-| 3 | 聊天消息验证 | 聊天message | 未发生改变的message | 未发生改变的message | 通过 | 2016.3.27 |
+| 1 | 正确的登陆消息验证 |正确的登陆message（{LoginContent("100","123456"),MessageStatus.NEEDHANDLED,MessageType.AUTHORITY}） | message的Status为NEEDHANDLED （{LoginContent("100","123456"),MessageStatus.NEEDHANDLED,MessageType.AUTHORITY}） | Message的Status为NEEDHANDLED （{LoginContent("100","123456"),MessageStatus.NEEDHANDLED,MessageType.AUTHORITY}） | 通过| 2016.3.27 |
+| 2 | 错误的登陆消息验证 | 错误的登陆message （{LoginContent("123","123456"),MessageStatus.NEEDHANDLED,MessageType.AUTHORITY}）| message的Status为LOGINFAIL（{LoginContent("123","123456"),MessageStatus.LOGINFAIL,MessageType.AUTHORITY}） | message的Status为LOGINFAIL（{LoginContent("123","123456"),MessageStatus.LOGINFAIL,MessageType.AUTHORITY}） |通过 | 2016.3.27 |
+| 3 | 聊天消息验证 | 聊天message（{ChatContent("hello"),MessageStatus.NEEDHANDLED,MessageType.CHATTING}） | 未发生改变的message   （{ChatContent("hello"),MessageStatus.NEEDHANDLED,MessageType.CHATTING}） | 未发生改变的message （{ChatContent("hello"),MessageStatus.NEEDHANDLED,MessageType.CHATTING}）| 通过 | 2016.3.27 |
 
 
 ### 管道管理模块
@@ -49,9 +49,9 @@
 
 | 用例编号 | 用例描述 | 输入数据 | 预期结果 | 实际结果 |  测试结果 | 测试时间 | bug描述
 |:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
-| 1 | 登陆成功则添加channel |验证成功的message | channels的长度+1 | channels的长度+1  | 通过| 2016.3.27 |无
-| 2 | 登陆失败channel个数不变 | 验证失败的message | channels的长度不变 | channels的长度不变 |通过 | 2016.3.27|无
-| 3 | 聊天消息 | 聊天message | channels的长度不变 | channels的长度不变 | 通过 | 2016.3.27 |无
+| 1 | 登陆成功则添加channel |验证成功的message （{LoginContent("100","123456"),MessageStatus.NEEDHANDLED,MessageType.AUTHORITY}）| Manager.channels的长度+1 | Manager.channels的长度+1  | 通过| 2016.3.27 |无
+| 2 | 登陆失败channel个数不变 | 验证失败的message （{LoginContent("123","123456"),MessageStatus.LOGINFAIL,MessageType.AUTHORITY}）| Manager.channels的长度不变 | Manager.channels的长度不变 |通过 | 2016.3.27|无
+| 3 | 聊天消息 | 聊天message（{ChatContent("hello"),MessageStatus.NEEDHANDLED,MessageType.CHATTING}） | Manager.channels的长度不变 | Manager.channels的长度不变 | 通过 | 2016.3.27 |无
 
 
 ### 日志模块
