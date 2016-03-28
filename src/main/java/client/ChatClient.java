@@ -39,6 +39,7 @@ public class ChatClient {
 
         chatClient.Login("101", "123456");
     }
+
     private final String host;
     private final int port;
     private Channel connectedChannel;
@@ -47,10 +48,6 @@ public class ChatClient {
     public ChatClient(String host, int port) {
         this.host = host;
         this.port = port;
-    }
-
-    public void test() {
-        System.out.println("test!");
     }
 
     private Channel connectServer() throws InterruptedException{
