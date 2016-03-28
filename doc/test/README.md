@@ -58,6 +58,7 @@ AuthorityHandlerTest.java
 >-实际结果	Message的Status为NEEDHANDLED
 >-测试结果	通过
 >-测试时间      2016.3.27
+
 ***
 >- 编号 	2
 >-用例描述:	错误的登陆消息验证
@@ -66,7 +67,9 @@ AuthorityHandlerTest.java
 >-实际结果	message的Status为LOGINFAIL
 >-测试结果	通过
 >-测试时间      2016.3.27
+
 ***
+
 >- 编号 	3
 >-用例描述:	聊天消息验证
 >-输入数据:	聊天message
