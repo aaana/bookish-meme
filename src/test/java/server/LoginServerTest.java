@@ -10,8 +10,8 @@ import static org.junit.Assert.*;
  */
 public class LoginServerTest {
     private LoginServer loginServer;
-    private  String[] userName={"100",    "101",  "",       "wefjniknvienvdj';knehgiur43gbjkddafefs"};
-    private String[] password={ "123456", "457",  "123456", ""};
+    private  String[] userName={"100",    "101'",  "",       "wefjniknvienvdj';knehgiur43gbjkddafefs"};
+    private String[] password={ "123456", "123456",  "123456", ""};
     private boolean[] expectedResult={true,false,false,false};
     @Before
     public void setUp() throws Exception {
