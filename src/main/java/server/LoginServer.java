@@ -1,9 +1,6 @@
 package server;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  * Created by Administrator on 2016/3/19.
@@ -21,8 +18,9 @@ public class LoginServer {
                 connection = DriverManager.getConnection("jdbc:sqlite:test.db");
 
                 threadLocal.set(connection);
-                Statement stat = connection.createStatement();
-                ResultSet resultSet = stat.executeQuery("select password from user where name = '"+name+"'");
+                PreparedStatement preparedStatement = connection.prepareStatement("select password from user where name = ?");
+                preparedStatement.setString(1,name);
+                ResultSet resultSet = preparedStatement.executeQuery();
                 if(resultSet.next()&&resultSet.getString(1).equals(password)){
                     result = true;
                 }

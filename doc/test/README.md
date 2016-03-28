@@ -28,4 +28,57 @@
 
 - xxx
 - xxx
+<<<<<<< HEAD
 - xxx
+=======
+- xxx
+- 
+
+##测试内容
+
+- [配置模块/ConfigReader](#配置模块/ConfigReader)
+- [登陆验证模块/AuthorityHandler](#登陆验证模块/AuthorityHandler)
+
+### 配置模块/ConfigReader
+#### 测试用例
+ConfigReaderTest.java
+>- 用例描述:	读取配置文件	
+>- 输入数据:	"config/conf.json"
+>- 预期结果:   	host=="localhost",port==8080,maxMsgNumber==100,maxMsgNumberPerSec==5
+>- 实际结果:	host=="localhost",port==8080,maxMsgNumber==100,maxMsgNumberPerSec==5
+>- 测试结果:	通过
+>- 测试时间:	2016.3.27
+>- bug描述	无   
+
+
+###登陆验证模块/AuthorityHandler
+####测试用例
+AuthorityHandlerTest.java
+>- 编号 	1
+>- 用例描述:	正确的登陆消息验证
+>- 输入数据:	正确的登陆message
+>- 预期结果	message的Status为NEEDHANDLED
+>- 实际结果	Message的Status为NEEDHANDLED
+>- 测试结果	通过
+>- 测试时间      2016.3.27
+
+***
+>- 编号 	2
+>- 用例描述:	错误的登陆消息验证
+>- 输入数据:	错误的登陆message
+>- 预期结果	message的Status为LOGINFAIL
+>- 实际结果	message的Status为LOGINFAIL
+>- 测试结果	通过
+>- 测试时间      2016.3.27
+
+***
+
+>- 编号 	3
+>- 用例描述:	聊天消息验证
+>- 输入数据:	聊天message
+>- 预期结果	未发生改变的message
+>- 实际结果	未发生改变的message
+>- 测试结果	通过
+>- 测试时间      2016.3.27
+
+>>>>>>> 22e3ec2d63b1157b30145606cd721ea8df445dbe

@@ -20,13 +20,18 @@ public class ConfigReader {
     public ConfigReader() {
     }
 
-    public Conf readConf(String confAddr) throws Exception{
+    public Conf readConf(String confAddr){
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(Conf.class, new ConfDeserializer());
         Gson gson = gsonBuilder.create();
+        Conf conf = null;
+        try{
+            FileInputStream configIn = new FileInputStream(confAddr);
+            conf = gson.fromJson(IOUtils.toString(configIn), Conf.class);
+        }
+        catch (Exception e){
 
-        FileInputStream configIn = new FileInputStream(confAddr);
-        Conf conf = gson.fromJson(IOUtils.toString(configIn), Conf.class);
+        }
 
         return conf;
     }
