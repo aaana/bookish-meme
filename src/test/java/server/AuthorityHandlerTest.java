@@ -25,6 +25,7 @@ public class AuthorityHandlerTest {
 
     }
 
+    //authority消息，且authority通过
     @Test
     public void authoritySucceedTest() {
         LoginContent loginContent = new LoginContent("100","123456");
@@ -35,8 +36,13 @@ public class AuthorityHandlerTest {
         assertEquals(MessageStatus.NEEDHANDLED,message.getMessageStatus());
         assertEquals(MessageType.AUTHORITY,message.getType());
 
+        //不会改变登录内容
+        assertEquals("100",((LoginContent)message.getContent()).getAccount());
+        assertEquals("123456",((LoginContent)message.getContent()).getPassword());
+
     }
 
+    //authority消息，且authority未通过
     @Test
     public void authorityFailTest() {
         LoginContent loginContent = new LoginContent("123","123456");
@@ -45,10 +51,15 @@ public class AuthorityHandlerTest {
 
         Message message = (Message)channel.readInbound();
         assertEquals(MessageStatus.LOGINFAIL,message.getMessageStatus());
-        assertEquals(MessageType.AUTHORITY,message.getType());
+        assertEquals(MessageType.AUTHORITY, message.getType());
+
+        //不会改变登录内容
+        assertEquals("123",((LoginContent)message.getContent()).getAccount());
+        assertEquals("123456",((LoginContent)message.getContent()).getPassword());
 
     }
 
+    //chatting消息
     @Test
     public void chattingMessageTest() {
         ChatContent chatContent = new ChatContent("hello");
@@ -58,6 +69,9 @@ public class AuthorityHandlerTest {
         Message message = (Message)channel.readInbound();
         assertEquals(MessageStatus.NEEDHANDLED,message.getMessageStatus());
         assertEquals(MessageType.CHATTING,message.getType());
+
+        //不会改变聊天内容
+        assertEquals("hello",((ChatContent)message.getContent()).getMessage());
 
     }
 }
