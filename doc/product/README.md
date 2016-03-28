@@ -31,6 +31,14 @@
 
 ### 模块
 
+#### json解析模块
+
+在客户端和服务端都有负责将json字符串转换为对象的模块，主要使用了[Gson](https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html)来进行转换。
+
+#### 流量控制模块
+
+根据需求，对客户端发送消息的频率和总数都有限制。对于发送总数的限制，在每个客户端的这一模块中会有一个变量保存已收到的消息数目，在每次收到消息时都会判断是否超过限制。对于每秒发送消息数的限制，这里用到了Google [RateLimiter](http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/util/concurrent/RateLimiter.html)，服务端每次收到某个客户端消息时都判断是否超过了频率限制。
+
 #### 日志模块
 
 主要使用了Log4J 进行日志的记录, 其中客户端和服务器使用了不同的配置文件.
@@ -65,11 +73,29 @@
 
 ## 协议定义
 
+我们对客户端向服务端发送的消息和服务端回复客户端的消息预先进行了一些定义，具体如下：
+
+
+客户端发送的消息有两种类型：
++ AUTHORITY（登录消息）
++ CHATTING（聊天消息）
+
+
+服务端回复给客户端的消息有六种类型：
++ LOGINFAIL(登录失败)
++ LOGINSUCCESS(登录成功)
++ RELOGIN(需要重新登录)
++ TOOFREQUENT（消息发送过于频繁）
++ SENDSUCCESS（发送成功）
++ OTHERMESSAGE（收到其他客户端发送的消息）
+
+这样客户端和服务端在收到消息时就可以根据消息类型做相应的处理。
+
 ## 数据流图
 
 ## 配置管理
 
-
+使用 github repository 进行版本控制，各成员在各自的分支上编写代码，在完成某一功能模块后合并至主分支。
 
 
 
