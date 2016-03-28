@@ -26,7 +26,7 @@
 
 项目直接使用了[Netty](https://github.com/netty/netty)这个基于socket的库来作为基础框架, 使用`事件驱动`以及`异步`和`事件机制`来构建整个项目
 
-详见[Netty工作流](#Netty工作流)
+详见[Netty工作流](#workflow)
 
 
 ### 模块
@@ -50,7 +50,7 @@
 
 #### 流水线模块
 
-基于[Netty工作流](#Netty工作流), 我们需要构建一系列的管道来对接收到的数据来进行的一个流水线式的操作.
+基于[Netty工作流](#workflow), 我们需要构建一系列的管道来对接收到的数据来进行的一个流水线式的操作.
 
 
 #### 架构图
@@ -58,7 +58,7 @@
 ![architecture](https://raw.githubusercontent.com/tztztztztz/bookish-meme/master/doc/architecture.png)
 
 
-#### Netty工作流
+<h4 id="workflow"> Netty工作流 </h4>
 
 ![netty-workflow](https://raw.githubusercontent.com/tztztztztz/bookish-meme/master/doc/img/netty-workflow.png)
 
