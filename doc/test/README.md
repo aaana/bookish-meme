@@ -9,10 +9,10 @@
 
 ##测试内容
 
-- [配置模块-ConfigReader](#配置模块-ConfigReader)
-- [登陆验证模块-AuthorityHandler](#登陆验证模块-AuthorityHandler)
+- [配置模块](#配置模块)
+- [登陆验证模块](#登陆验证模块)
 
-### 配置模块-ConfigReader
+### 配置模块
 
 #### 测试用例
 `ConfigReaderTest.java`
@@ -26,7 +26,7 @@
 >- bug描述	无   
 
 
-### 登陆验证模块-AuthorityHandler
+### 登陆验证模块
 #### 测试用例
 
 `AuthorityHandlerTest.java`
