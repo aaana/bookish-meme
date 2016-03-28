@@ -39,7 +39,7 @@
 | 3 | 聊天消息验证 | 聊天message | 未发生改变的message | 未发生改变的message | 通过 | 2016.3.27 |
 
 
-### 登陆验证模块
+### 管道管理模块
 #### 测试用例
 
 `ChannelManagerHandlerTest.java`
