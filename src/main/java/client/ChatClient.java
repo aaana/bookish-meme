@@ -25,19 +25,19 @@ import java.util.Timer;
 public class ChatClient {
 
     public static void main(String[] args) throws Exception{
-//        PropertyConfigurator.configure("config/log4j-client.property");
-//        Timer timer = new Timer();
-//        timer.schedule(new ClientLoggerTask(), 60 * 1000,  60 * 1000);
-//
-//        ConfigReader configReader = new ConfigReader();
-//        Conf conf = configReader.readConf("config/conf.json");
-//        String host = conf.getHost();
-//        int port = conf.getPort();
-//
-//        ChatClient chatClient = new ChatClient(host, port);
-//
-//
-//        chatClient.Login("101", "123456");
+        PropertyConfigurator.configure("config/log4j-client.property");
+        Timer timer = new Timer();
+        timer.schedule(new ClientLoggerTask(), 60 * 1000,  60 * 1000);
+
+        ConfigReader configReader = new ConfigReader();
+        Conf conf = configReader.readConf("config/conf.json");
+        String host = conf.getHost();
+        int port = conf.getPort();
+
+        ChatClient chatClient = new ChatClient(host, port);
+
+
+        chatClient.Login("101", "123456");
     }
     private final String host;
     private final int port;
@@ -73,7 +73,7 @@ public class ChatClient {
         return connectChannel;
     }
 
-    private void closeConnection(){
+    public void closeConnection(){
         eventGroup.shutdownGracefully();
     }
 
@@ -91,25 +91,34 @@ public class ChatClient {
 
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
-        while (true){
-            try {
-                String msg=in.readLine();
-                ChatContent content = new ChatContent(msg);
-                Message chattingMessage = new Message(content, MessageStatus.NEEDHANDLED, MessageType.CHATTING);
-                jsonPayload=gson.toJson(chattingMessage);
-                //channel.write(message);
-                connectedChannel.write(jsonPayload+"\n\r");
-                //channel.write(in.readLine() + "\n\r");
-            } catch (Exception e){
-                ;
-            }
-        }
+//        while (true){
+//            try {
+//                String msg=in.readLine();
+//                ChatContent content = new ChatContent(msg);
+//                Message chattingMessage = new Message(content, MessageStatus.NEEDHANDLED, MessageType.CHATTING);
+//                jsonPayload=gson.toJson(chattingMessage);
+//                //channel.write(message);
+//                System.out.println("msg: " + msg + "\n");
+//                connectedChannel.write(jsonPayload+"\n\r");
+//                //channel.write(in.readLine() + "\n\r");
+//            } catch (Exception e){
+//                ;
+//            }
+//        }
     }
 
-    public void sendMessage(ChatContent chatContent){
+    public void sendMessage(ChatContent chatContent) throws InterruptedException{
         Gson gson=new Gson();
-        String jsonPayload= gson.toJson(chatContent);
-        connectedChannel.write(jsonPayload + "\n\r");
+//        String jsonPayload= gson.toJson(chatContent);
+//        connectedChannel.write(jsonPayload + "\n\r");
+//        ClientLoggerHandler.sendMsgNumber++;
+
+        Message chattingMessage = new Message(chatContent, MessageStatus.NEEDHANDLED, MessageType.CHATTING);
+        String jsonPayload=gson.toJson(chattingMessage);
+        //channel.write(message);
+        System.out.println("msg: " + chatContent.getMessage() + "\n");
+        connectedChannel.write(jsonPayload+"\n\r");
+
         ClientLoggerHandler.sendMsgNumber++;
     }
 
