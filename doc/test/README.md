@@ -52,29 +52,29 @@ ConfigReaderTest.java
 ####测试用例
 AuthorityHandlerTest.java
 >- 编号 	1
->-用例描述:	正确的登陆消息验证
->-输入数据:	正确的登陆message
->-预期结果	message的Status为NEEDHANDLED
->-实际结果	Message的Status为NEEDHANDLED
->-测试结果	通过
->-测试时间      2016.3.27
+>- 用例描述:	正确的登陆消息验证
+>- 输入数据:	正确的登陆message
+>- 预期结果	message的Status为NEEDHANDLED
+>- 实际结果	Message的Status为NEEDHANDLED
+>- 测试结果	通过
+>- 测试时间      2016.3.27
 
 ***
 >- 编号 	2
->-用例描述:	错误的登陆消息验证
->-输入数据:	错误的登陆message
->-预期结果	message的Status为LOGINFAIL
->-实际结果	message的Status为LOGINFAIL
->-测试结果	通过
->-测试时间      2016.3.27
+>- 用例描述:	错误的登陆消息验证
+>- 输入数据:	错误的登陆message
+>- 预期结果	message的Status为LOGINFAIL
+>- 实际结果	message的Status为LOGINFAIL
+>- 测试结果	通过
+>- 测试时间      2016.3.27
 
 ***
 
 >- 编号 	3
->-用例描述:	聊天消息验证
->-输入数据:	聊天message
->-预期结果	未发生改变的message
->-实际结果	未发生改变的message
->-测试结果	通过
->-测试时间      2016.3.27
+>- 用例描述:	聊天消息验证
+>- 输入数据:	聊天message
+>- 预期结果	未发生改变的message
+>- 实际结果	未发生改变的message
+>- 测试结果	通过
+>- 测试时间      2016.3.27
 
