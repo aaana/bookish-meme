@@ -33,9 +33,9 @@
 
 | 编号 | 用例描述 | 输入数据 | 预期结果 | 实际结果 |  测试结果 | 测试时间 |
 | -----|:----:| ----:|  -----|:----:| ----:|----:|
-| 1| 正确的登陆消息验证|正确的登陆message | message的Status为NEEDHANDLED |Message的Status为NEEDHANDLED  | 通过 | 2016.3.27 |
-| 2| 错误的登陆消息验证| 错误的登陆message| message的Status为LOGINFAIL | message的Status为LOGINFAIL | 通过 | 2016.3.27 |
-| 3| 聊天消息验证| 聊天message | 未发生改变的message | 未发生改变的message | 通过 |  2016.3.27 |
+| 1 | 正确的登陆消息验证 |正确的登陆message | message的Status为NEEDHANDLED | Message的Status为NEEDHANDLED  | 通过 | 2016.3.27 |
+| 2 | 错误的登陆消息验证 | 错误的登陆message | message的Status为LOGINFAIL | message的Status为LOGINFAIL | 通过 | 2016.3.27 |
+| 3 | 聊天消息验证 | 聊天message | 未发生改变的message | 未发生改变的message | 通过 | 2016.3.27 |
 
 
 
