@@ -1,5 +1,8 @@
 # 项目管理文档
-黄安娜 1352875 aaana
+## 项目人员
+
+- 黄安娜 1352875 [aaana](https://github.com/aaana)
+- 谭靖儒 1352892 [tztztztztz](https://github.com/tztztztztz)
 
 ## 第一次讨论
 - 时间: 3月16日 19:00
@@ -63,9 +66,9 @@
 ### 项目架构分析
 ![architecture](https://raw.githubusercontent.com/tztztztztz/bookish-meme/master/doc/architecture.png)
 ### 数据流分析
-	数据流图
+[数据流图](#ddd)
 ### 协议的统一
-	
+[协议](#ddd)
 ### 任务分配2
 	- 黄安娜 > 完成配置模块，并且与数据库完成交互
 	- 晁佳欢 > 数据库模块已经权限模块
@@ -80,4 +83,29 @@
 - 讨论内容
 	- [各个模块之间集成测试](#各个模块之间集成测试)
 
+### 各个模块之间集成测试
 
+简单地将大家这几天各自的做得模块组合在一起进行一些基本功能的测试
+
+## 第四次讨论
+- 时间: 3月27日 20:00
+- 参与人员：谭靖儒 晁佳欢 黄安娜 林昌盛 马致远
+- 地点: apple club
+- 讨论内容
+	- [单元测试](#单元测试)
+	- [集成测试](#集成测试)
+	- [前后端交互](#前后端交互)
+
+### 单元测试
+- 配置模块测试
+- 数据库模块测试
+- 测试Server和Client的handler的单元测试
+
+详情见[测试文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/test)
+
+### 集成测试
+对Client与Server之间的交互流程进行直接的测试
+
+### 前后端交互
+
+主要使用EventBus来解耦

@@ -25,6 +25,7 @@ public class JsonToObjectChannelTest {
         channel = new EmbeddedMessageChannel(new JsonToObjectHandler());
     }
 
+    //Json to ChattingMessage unit test
     @Test
     public void chattingMessageTest() {
 
@@ -36,8 +37,11 @@ public class JsonToObjectChannelTest {
         Message myMessage = (Message)channel.readInbound();
         // Perform checks on your object
         assertEquals("hello", ((ChatContent)myMessage.getContent()).getMessage());
+        assertEquals(MessageStatus.NEEDHANDLED, myMessage.getMessageStatus());
+        assertEquals(MessageType.CHATTING,myMessage.getType());
     }
 
+    //Json to authorityMessage unit test
     @Test
     public void authorityMessageTest(){
 
@@ -48,7 +52,9 @@ public class JsonToObjectChannelTest {
 
         Message myMessage = (Message)channel.readInbound();
         assertEquals("101",((LoginContent)(myMessage.getContent())).getAccount());
-        assertEquals("12345",((LoginContent)(myMessage.getContent())).getPassword());
+        assertEquals("12345", ((LoginContent) (myMessage.getContent())).getPassword());
+        assertEquals(MessageStatus.NEEDHANDLED, myMessage.getMessageStatus());
+        assertEquals(MessageType.AUTHORITY,myMessage.getType());
 
     }
 
