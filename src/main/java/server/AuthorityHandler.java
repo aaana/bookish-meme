@@ -25,7 +25,6 @@ public class AuthorityHandler extends ChannelInboundMessageHandlerAdapter<Messag
             if(!success) {
                 message.setMessageStatus(MessageStatus.LOGINFAIL);
             }
-            System.out.println("from auth: success is " + success);
         }
         //其他情况下不作处理直接流到下一个channel
         channelHandlerContext.nextInboundMessageBuffer().add(message);

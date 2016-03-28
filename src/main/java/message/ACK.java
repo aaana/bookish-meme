@@ -2,6 +2,8 @@ package message;
 
 import protocol.ACKType;
 
+import java.util.Objects;
+
 /**
  * Created by tanjingru on 3/23/16.
  */
@@ -25,6 +27,11 @@ public class ACK {
         this.type = type;
     }
 
-    public ACK() {
+    public ACK(){
+
+    }
+    public ACK(ACKType type,Object Content) {
+        this.type=type;
+        this.Content=Content;
     }
 }
