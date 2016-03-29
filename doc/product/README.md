@@ -54,7 +54,7 @@
 
 #### 配置模块
 
-使用了简单易懂的json来作为配置文件, 记录了服务端的IP和Port
+使用了简单易懂的json来作为配置文件, 记录了服务端的IP和Port，以及每次登陆所允许发送的消息最大次数maxMsgNumber和每秒允许发送的消息最大次数maxMsgNumberPerSec
 
 #### 流水线模块
 
