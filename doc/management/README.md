@@ -99,7 +99,7 @@
 ### 单元测试
 - 配置模块测试
 - 数据库模块测试
-- 测试Server和Client的handler的单元测试
+- 测试Server的handler的单元测试
 
 详情见[测试文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/test)
 
@@ -109,3 +109,33 @@
 ### 前后端交互
 
 主要使用EventBus来解耦
+
+## 第五次讨论
+- 时间: 3月29日 16:00
+- 参与人员：谭靖儒 晁佳欢 黄安娜 林昌盛 马致远
+- 地点: apple club
+- 讨论内容
+	- [重构Message](#重构Message)
+	- [客户端单元测试](#客户端单元测试)
+	- [前后端交互](#前后端交互)
+	- [功能测试](#功能测试)
+	- [应用者复用](#应用者复用)
+
+### 重构Message
+受http协议的启发，重构Message类，便于Json的解析
+
+### 客户端单元测试
+测试Client的handler的单元测试
+
+详情见[测试文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/test)
+
+### 前后端交互
+前后端交互成功
+
+### 功能测试 
+对产品功能进行测试以验证是否满足需求
+
+### 应用者复用
+冗余检查、标识可复用构建
+
+
