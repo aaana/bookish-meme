@@ -356,7 +356,7 @@ public class ClientGUI extends Application {
                 final Alert alert = new Alert(Alert.AlertType.INFORMATION); // 實體化Alert對話框物件，並直接在建構子設定對話框的訊息類型
                 alert.setTitle("出错提示"); //設定對話框視窗的標題列文字
                 alert.setHeaderText("请重新登录"); //設定對話框視窗裡的標頭文字。若設為空字串，則表示無標頭
-                alert.setContentText("您发送的消息已经达到上线,请重新登录。"); //設定對話框的訊息文字
+                alert.setContentText("您发送的消息已经达到上限,请重新登录。"); //設定對話框的訊息文字
                 alert.showAndWait(); //顯示對話框，並等待對話框被關閉時才繼續執行之後的程式
                 updateScene(sceneLogin);
                 backLogin();
