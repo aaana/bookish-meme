@@ -383,8 +383,8 @@ public class ClientGUI extends Application {
 
     public static void main(String[] args) throws Exception {
         PropertyConfigurator.configure("config/log4j-client.property");
-//        Timer timer = new Timer();
-//        timer.schedule(new ClientLoggerTask(), 60 * 1000,  60 * 1000);
+        Timer timer = new Timer();
+        timer.schedule(new ClientLoggerTask(), 60 * 1000,  60 * 1000);
         ConfigReader configReader = new ConfigReader();
         Conf conf = configReader.readConf("config/conf.json");
         launch(args);
