@@ -15,3 +15,4 @@ log4j.appender.B.Append = true
 log4j.appender.B.Threshold = INFO
 log4j.appender.B.layout = org.apache.log4j.PatternLayout
 log4j.appender.B.layout.ConversionPattern = %d %m%n
+

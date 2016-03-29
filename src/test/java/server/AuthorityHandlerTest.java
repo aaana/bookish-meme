@@ -25,6 +25,7 @@ public class AuthorityHandlerTest {
 
     }
 
+
     //authority消息，且authority通过
     @Test
     public void authoritySucceedTest() {
@@ -37,8 +38,8 @@ public class AuthorityHandlerTest {
         assertEquals(MessageType.AUTHORITY,message.getType());
 
         //不会改变登录内容
-        assertEquals("100",((LoginContent)message.getContent()).getAccount());
-        assertEquals("123456",((LoginContent)message.getContent()).getPassword());
+        assertEquals("100",(message.getLoginContent()).getAccount());
+        assertEquals("123456",(message.getLoginContent()).getPassword());
 
     }
 
@@ -54,8 +55,8 @@ public class AuthorityHandlerTest {
         assertEquals(MessageType.AUTHORITY, message.getType());
 
         //不会改变登录内容
-        assertEquals("123",((LoginContent)message.getContent()).getAccount());
-        assertEquals("123456",((LoginContent)message.getContent()).getPassword());
+        assertEquals("123",(message.getLoginContent()).getAccount());
+        assertEquals("123456",(message.getLoginContent()).getPassword());
 
     }
 
@@ -71,7 +72,7 @@ public class AuthorityHandlerTest {
         assertEquals(MessageType.CHATTING,message.getType());
 
         //不会改变聊天内容
-        assertEquals("hello",((ChatContent)message.getContent()).getMessage());
+        assertEquals("hello",(message.getChatContent()).getMessage());
 
     }
 }

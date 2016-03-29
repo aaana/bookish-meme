@@ -50,7 +50,7 @@ public class LoggerHandlerTest {
 
             //测试状态类型是否被修改
             Message myMessage = (Message)channel.readInbound();
-            assertEquals("hello", ((ChatContent)myMessage.getContent()).getMessage());
+            assertEquals("hello", (myMessage.getChatContent()).getMessage());
             assertEquals(testMessage[i].getMessageStatus(),myMessage.getMessageStatus());
             assertEquals(testMessage[i].getType(),myMessage.getType());
         }
