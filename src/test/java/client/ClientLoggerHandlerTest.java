@@ -22,22 +22,21 @@ public class ClientLoggerHandlerTest {
     private int[][] expectedResult={{1,0,0,0},
             {1,1,0,0},
             {1,1,1,0},
-            {1,1,},
-            {1,1,3,2}};
+            {1,1,1,0},
+            {1,1,1,0},
+            {1,1,1,0}};
     private ACK[] testACK = new ACK[6];
     @Before
     public void setUp() throws Exception {
         channel = new EmbeddedMessageChannel(new ClientLoggerHandler());
 
         //测试用例，依次发送
-        testACK[0] = new ACK(ACKType.LOGINFAIL,new LoginContent("100","123"));
-        testACK[1] = new ACK(ACKType.LOGINSUCCESS,new LoginContent("100","123456"));
-        testACK[2] = new ACK(ACKType.OTHERSMESSAGE,new ChatContent("hello"));
-        testACK[3] = new ACK(ACKType.SENDSUCCESS,new ChatContent("hello"));
-        testACK[4] = new ACK(ACKType.TOOFRENQUENT,new ChatContent("hello"));
-        testACK[5] = new ACK(ACKType.REDOLOGIN,new ChatContent("hello"));
-
-
+        testACK[0] = new ACK(new ChatContent("hello"),ACKType.LOGINFAIL);
+        testACK[1] = new ACK(new ChatContent("hello"),ACKType.LOGINSUCCESS);
+        testACK[2] = new ACK(new ChatContent("hello"),ACKType.OTHERSMESSAGE);
+        testACK[3] = new ACK(new ChatContent("hello"),ACKType.SENDSUCCESS);
+        testACK[4] = new ACK(new ChatContent("hello"),ACKType.TOOFRENQUENT);
+        testACK[5] = new ACK(new ChatContent("hello"),ACKType.REDOLOGIN);
     }
 
     @Test
