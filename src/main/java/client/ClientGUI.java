@@ -8,6 +8,7 @@ import javafx.concurrent.Service;
 import javafx.stage.WindowEvent;
 import message.ChatContent;
 
+import javafx.scene.control.Alert;
 import Util.Conf;
 import Util.ConfigReader;
 import javafx.application.Application;
