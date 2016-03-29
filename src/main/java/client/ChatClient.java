@@ -28,15 +28,7 @@ public class ChatClient {
         PropertyConfigurator.configure("config/log4j-client.property");
         Timer timer = new Timer();
         timer.schedule(new ClientLoggerTask(), 60 * 1000,  60 * 1000);
-
-        ConfigReader configReader = new ConfigReader();
-        Conf conf = configReader.readConf("config/conf.json");
-        String host = conf.getHost();
-        int port = conf.getPort();
-
-        ChatClient chatClient = new ChatClient(host, port);
-
-
+        ChatClient chatClient = new ChatClient();
         chatClient.Login("101", "123456");
     }
 
@@ -45,7 +37,11 @@ public class ChatClient {
     private Channel connectedChannel;
     private EventLoopGroup eventGroup = null;
 
-    public ChatClient(String host, int port) {
+    public ChatClient() {
+        ConfigReader configReader = new ConfigReader();
+        Conf conf = configReader.readConf("config/conf.json");
+        String host = conf.getHost();
+        int port = conf.getPort();
         this.host = host;
         this.port = port;
     }

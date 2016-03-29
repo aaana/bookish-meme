@@ -96,9 +96,10 @@ public class ClientGUI extends Application {
         PublicEvent.eventBus.register(this);
 
         //文件路径prefix
+
         final String prePath = "file:" + System.getProperty("user.dir") + "/src/gui";
 
-        this.client = new ChatClient("localhost", 8080);
+        this.client = new ChatClient();
 
         root = new Pane();
         root.setId("root");
