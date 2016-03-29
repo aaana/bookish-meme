@@ -272,7 +272,6 @@ public class ClientGUI extends Application {
             protected Void call() throws Exception {
                 int i;
                 for (i=0; i<100; i++){
-                    client.test();
                     Thread.sleep(50);
                     updateProgress(i ++, 100);
                     updateMessage("Loading..." + (i + 1) + "%");
