@@ -12,6 +12,7 @@
 - [程序文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/product)
 - [项目管理文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/management)
 - [项目测试文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/test)
+- [复用文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/reuse)
 
 ## Introduction
 
