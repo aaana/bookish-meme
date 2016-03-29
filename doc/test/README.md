@@ -107,12 +107,12 @@
 ### client/Json解析模块
 #### 测试用例
 
-'JsonHandlerTest.java'
+`JsonHandlerTest.java`
 
 | 用例编号 | 用例描述 | 输入数据 | 预期结果 | 实际结果 |  测试结果 | 测试时间 | bug描述
-|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
-|1|Json解析为类型为SENDSUCCESS的ACK||类型为SENDSUCCESS的ACK序列化的Json字符串|类型为SENDSUCCESS的ACK|类型为SENDSUCCESS的ACK|通过|2016.3.29|无|
-|2|Json解析为类型为OTHERSMESSAGE的ACK||类型为OTHERSMESSAGE的ACK序列化的Json字符串|类型为OTHERSMESSAGE的ACK|类型为OTHERSMESSAGE的ACK|通过|2016.3.29|无|
-|3|Json解析为类型为TOOFREQUENT的ACK||类型为TOOFREQUENT的ACK序列化的Json字符串|类型为TOOFREQUENT的ACK|类型为TOOFREQUENT的ACK|通过|2016.3.29|无|
-|4|Json解析为类型为REDOLOGIN的ACK||类型为REDOLOGIN的ACK序列化的Json字符串|类型为REDOLOGIN的ACK|类型为REDOLOGIN的ACK|通过|2016.3.29|无|
-|5|Json解析为类型为LOGINFAIL的ACK||类型为LOGINFAIL的ACK序列化的Json字符串|类型为LOGINFAIL的ACK|类型为LOGINFAIL的ACK|通过|2016.3.29|无|
+|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
+|1|Json解析为类型为SENDSUCCESS的ACK|类型为SENDSUCCESS的ACK序列化的Json字符串|类型为SENDSUCCESS的ACK|类型为SENDSUCCESS的ACK|通过|2016.3.29|无|
+|2|Json解析为类型为OTHERSMESSAGE的ACK|类型为OTHERSMESSAGE的ACK序列化的Json字符串|类型为OTHERSMESSAGE的ACK|类型为OTHERSMESSAGE的ACK|通过|2016.3.29|无|
+|3|Json解析为类型为TOOFREQUENT的ACK|类型为TOOFREQUENT的ACK序列化的Json字符串|类型为TOOFREQUENT的ACK|类型为TOOFREQUENT的ACK|通过|2016.3.29|无|
+|4|Json解析为类型为REDOLOGIN的ACK|类型为REDOLOGIN的ACK序列化的Json字符串|类型为REDOLOGIN的ACK|类型为REDOLOGIN的ACK|通过|2016.3.29|无|
+|5|Json解析为类型为LOGINFAIL的ACK|类型为LOGINFAIL的ACK序列化的Json字符串|类型为LOGINFAIL的ACK|类型为LOGINFAIL的ACK|通过|2016.3.29|无|
