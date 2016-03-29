@@ -40,8 +40,8 @@ public class ChannelManagerHandlerTest {
 
         Message message = (Message)channel.readInbound();
         //不会改变登录内容
-        assertEquals("100", ((LoginContent) message.getContent()).getAccount());
-        assertEquals("123456",((LoginContent)message.getContent()).getPassword());
+        assertEquals("100", ( message.getLoginContent()).getAccount());
+        assertEquals("123456",(message.getLoginContent()).getPassword());
 
 
     }

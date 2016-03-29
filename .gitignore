@@ -1,5 +1,8 @@
 # IDE
 
+# log
+logs/
+
 # Maven
 target
 

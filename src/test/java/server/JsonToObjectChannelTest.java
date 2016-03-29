@@ -36,7 +36,7 @@ public class JsonToObjectChannelTest {
 
         Message myMessage = (Message)channel.readInbound();
         // Perform checks on your object
-        assertEquals("hello", ((ChatContent)myMessage.getContent()).getMessage());
+        assertEquals("hello", (myMessage.getChatContent()).getMessage());
         assertEquals(MessageStatus.NEEDHANDLED, myMessage.getMessageStatus());
         assertEquals(MessageType.CHATTING,myMessage.getType());
     }
@@ -51,8 +51,8 @@ public class JsonToObjectChannelTest {
         channel.writeInbound(jsonStr + "\n");
 
         Message myMessage = (Message)channel.readInbound();
-        assertEquals("101",((LoginContent)(myMessage.getContent())).getAccount());
-        assertEquals("12345", ((LoginContent) (myMessage.getContent())).getPassword());
+        assertEquals("101",((myMessage.getLoginContent())).getAccount());
+        assertEquals("12345", ((myMessage.getLoginContent())).getPassword());
         assertEquals(MessageStatus.NEEDHANDLED, myMessage.getMessageStatus());
         assertEquals(MessageType.AUTHORITY,myMessage.getType());
 

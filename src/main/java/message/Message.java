@@ -15,20 +15,42 @@ public class Message {
     // 0 => login 1 => chatting
 
     private MessageType type;
-    private Object content;
 
-    public Message(Object content, MessageStatus messageStatus, MessageType type) {
-        this.content = content;
+    private LoginContent loginContent;
+
+    private ChatContent chatContent;
+
+    public Message(MessageType type, MessageStatus messageStatus) {
+        this.type = type;
+        this.messageStatus = messageStatus;
+    }
+
+    public Message(LoginContent loginContent, MessageStatus messageStatus, MessageType type) {
+        this.loginContent = loginContent;
         this.messageStatus = messageStatus;
         this.type = type;
     }
 
-    public Object getContent() {
-        return content;
+    public Message(ChatContent chatContent, MessageStatus messageStatus, MessageType type) {
+        this.chatContent = chatContent;
+        this.messageStatus = messageStatus;
+        this.type = type;
     }
 
-    public void setContent(Object content) {
-        this.content = content;
+    public ChatContent getChatContent() {
+        return chatContent;
+    }
+
+    public void setChatContent(ChatContent chatContent) {
+        this.chatContent = chatContent;
+    }
+
+    public LoginContent getLoginContent() {
+        return loginContent;
+    }
+
+    public void setLoginContent(LoginContent loginContent) {
+        this.loginContent = loginContent;
     }
 
     public MessageStatus getMessageStatus() {

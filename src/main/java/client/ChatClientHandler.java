@@ -31,7 +31,7 @@ public class ChatClientHandler extends ChannelInboundMessageHandlerAdapter<ACK> 
             PublicEvent.eventBus.post(new LoginSuccessEvent());
 
         if (ackType == ACKType.OTHERSMESSAGE)
-            PublicEvent.eventBus.post(new ReceiveMessageEvent((ChatContent)s.getContent()));
+            PublicEvent.eventBus.post(new ReceiveMessageEvent(s.getChatContent()));
 
         if (ackType == ACKType.REDOLOGIN)
             PublicEvent.eventBus.post(new ReLoginEvent());

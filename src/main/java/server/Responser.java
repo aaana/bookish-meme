@@ -49,7 +49,7 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
                 if ( channel != incomingChannel){
                     ACK toOthersACK = new ACK();
                     toOthersACK.setType(ACKType.OTHERSMESSAGE);
-                    toOthersACK.setContent(message.getContent());
+                    toOthersACK.setChatContent(message.getChatContent());
                     String otherACKJson = gson.toJson(toOthersACK);
                     channel.write(otherACKJson + "\n");
                 }

@@ -39,7 +39,7 @@ public class LimiterHandlerTest {
             channel.writeInbound(testMessage);
             Message myMessage = (Message)channel.readInbound();
 
-            assertEquals("hello", ((ChatContent)myMessage.getContent()).getMessage());
+            assertEquals("hello", (myMessage.getChatContent()).getMessage());
             assertEquals(MessageStatus.NEEDHANDLED, myMessage.getMessageStatus());
             assertEquals(MessageType.CHATTING, myMessage.getType());
 
@@ -51,7 +51,7 @@ public class LimiterHandlerTest {
             channel.writeInbound(testMessage);
             Message myMessage = (Message)channel.readInbound();
 
-            assertEquals("hello", ((ChatContent)myMessage.getContent()).getMessage());
+            assertEquals("hello", (myMessage.getChatContent()).getMessage());
             assertEquals(MessageStatus.TOOFREQUENT, myMessage.getMessageStatus());
             assertEquals(MessageType.CHATTING, myMessage.getType());
         }

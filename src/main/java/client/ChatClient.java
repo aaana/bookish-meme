@@ -79,38 +79,39 @@ public class ChatClient {
         connectedChannel = connectServer();
 
         LoginContent loginContent = new LoginContent(account, password);
-        Message loginMessage = new Message(loginContent, MessageStatus.NEEDHANDLED, MessageType.AUTHORITY);
+        Message loginMessage = new Message(MessageType.AUTHORITY,MessageStatus.NEEDHANDLED);
+        loginMessage.setLoginContent(loginContent);
         Gson gson=new Gson();
         String jsonPayload= gson.toJson(loginMessage);
         System.out.println(jsonPayload);
 
         connectedChannel.write(jsonPayload + "\n\r");
 
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-
-//        while (true){
-//            try {
-//                String msg=in.readLine();
-//                ChatContent content = new ChatContent(msg);
-//                Message chattingMessage = new Message(content, MessageStatus.NEEDHANDLED, MessageType.CHATTING);
-//                jsonPayload=gson.toJson(chattingMessage);
-//                //channel.write(message);
-//                System.out.println("msg: " + msg + "\n");
-//                connectedChannel.write(jsonPayload+"\n\r");
-//                //channel.write(in.readLine() + "\n\r");
-//            } catch (Exception e){
-//                ;
-//            }
-//        }
+//        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+////
+////        while (true){
+////            try {
+////                String msg=in.readLine();
+////                ChatContent content = new ChatContent(msg);
+////                Message chattingMessage = new Message(MessageType.CHATTING,MessageStatus.NEEDHANDLED);
+////                chattingMessage.setChatContent(content);
+////                jsonPayload=gson.toJson(chattingMessage);
+////                //channel.write(message);
+////                System.out.println("msg: " + msg + "\n");
+////                connectedChannel.write(jsonPayload+"\n\r");
+////                //channel.write(in.readLine() + "\n\r");
+////            } catch (Exception e){
+////                ;
+////            }
+////        }
     }
 
     public void sendMessage(ChatContent chatContent) throws InterruptedException{
         Gson gson=new Gson();
-//        String jsonPayload= gson.toJson(chatContent);
-//        connectedChannel.write(jsonPayload + "\n\r");
-//        ClientLoggerHandler.sendMsgNumber++;
 
-        Message chattingMessage = new Message(chatContent, MessageStatus.NEEDHANDLED, MessageType.CHATTING);
+
+        Message chattingMessage = new Message(MessageType.CHATTING,MessageStatus.NEEDHANDLED);
+        chattingMessage.setChatContent(chatContent);
         String jsonPayload=gson.toJson(chattingMessage);
         //channel.write(message);
         System.out.println("msg: " + chatContent.getMessage() + "\n");
@@ -119,34 +120,4 @@ public class ChatClient {
         ClientLoggerHandler.sendMsgNumber++;
     }
 
-
-    public void run() throws Exception{
-            EventLoopGroup group = new NioEventLoopGroup();
-
-        try {
-            Bootstrap b = new Bootstrap(); // (1)
-            b.group(group); // (2)
-            b.channel(NioSocketChannel.class); // (3)
-            b.option(ChannelOption.SO_KEEPALIVE, true); // (4)
-            b.handler(new ChatClientInitializer());
-
-            // Start the client.
-            ChannelFuture f = b.connect(host, port).sync(); // (5)
-            Channel channel = f.channel();
-            BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-            Gson gson=new Gson();
-            while (true){
-                String msg=in.readLine();
-                ChatContent content=new ChatContent(msg);
-                Message message=new Message(content, MessageStatus.NEEDHANDLED, MessageType.CHATTING);
-                String jsonPayload=gson.toJson(message);
-                //channel.write(message);
-                 channel.write(jsonPayload+"\n\r");
-                //channel.write(in.readLine() + "\n\r");
-            }
-            // Wait until the connection is closed.
-        }finally {
-            group.shutdownGracefully();
-        }
-    }
 }

@@ -16,7 +16,7 @@ public class AuthorityHandler extends ChannelInboundMessageHandlerAdapter<Messag
         MessageType messageType = message.getType();
         //login message
         if(messageType == MessageType.AUTHORITY){
-            LoginContent loginContent = (LoginContent)(message.getContent());
+            LoginContent loginContent = message.getLoginContent();
             String account = loginContent.getAccount();
             String password = loginContent.getPassword();
             LoginServer loginServer = new LoginServer();
