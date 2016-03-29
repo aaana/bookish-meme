@@ -48,16 +48,16 @@ public class JsonHandlerTest {
     @Test
     public void othersMessageACKTest(){
         ACK othersMessageACK = new ACK();
-        ChatContent loginContent = new ChatContent("hello");
+        ChatContent chatContent = new ChatContent("hello");
         othersMessageACK.setType(ACKType.OTHERSMESSAGE);
-        othersMessageACK.setContent(loginContent);
+        othersMessageACK.setChatContent(chatContent);
         Gson gson = new Gson();
         String ackJson = gson.toJson(othersMessageACK);
         channel.writeInbound(ackJson + "\n");
 
         ACK ack = (ACK)channel.readInbound();
         assertEquals(ACKType.OTHERSMESSAGE,ack.getType());
-        assertEquals("hello",((ChatContent)(ack.getContent())).getMessage());
+        assertEquals("hello",ack.getChatContent().getMessage());
 
     }
 
