@@ -3,7 +3,7 @@ package server;
 import Util.Conf;
 import Util.ConfigReader;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundMessageHandlerAdapter;
+imconport io.netty.channel.ChannelInboundMessageHandlerAdapter;
 import message.Message;
 
 import com.google.common.util.concurrent.RateLimiter;
@@ -20,7 +20,7 @@ public class LimiterHandler extends ChannelInboundMessageHandlerAdapter<Message>
     private final RateLimiter rateLimiter;
     public LimiterHandler() throws Exception {
         ConfigReader reader = new ConfigReader();
-        Conf conf = reader.readConf("conf.json");
+        Conf conf = reader.readConf("config/conf.json");
         maxMsgNumber=conf.getMaxMsgNumber();
         maxMsgNumberPerSec=conf.getMaxMsgNumberPerSec();
         rateLimiter=RateLimiter.create(maxMsgNumberPerSec);
