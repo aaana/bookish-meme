@@ -25,7 +25,7 @@ public class LimiterHandlerTest {
     public void setUp() throws Exception {
         channel = new EmbeddedMessageChannel(new LimiterHandler());
         ConfigReader reader = new ConfigReader();
-        Conf conf = reader.readConf("conf.json");
+        Conf conf = reader.readConf("config/conf.json");
         maxMsgNumber=conf.getMaxMsgNumber();
         maxMsgNumberPerSec=conf.getMaxMsgNumberPerSec();
     }
