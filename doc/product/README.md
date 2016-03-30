@@ -92,7 +92,8 @@
 这样客户端和服务端在收到消息时就可以根据消息类型做相应的处理。
 
 ## 数据流图
-
+![dataflow1](https://raw.githubusercontent.com/tztztztztz/bookish-meme/master/doc/img/dataflow-1.png)
+![dataflow2](https://raw.githubusercontent.com/tztztztztz/bookish-meme/master/doc/img/dataflow-2.png)
 ## 配置管理
 
 使用 github repository 进行版本控制，各成员在各自的分支上编写代码，在完成某一功能模块后合并至主分支。
