@@ -111,7 +111,7 @@
 ## Usage
 
 1. 直接运行Server
-2. 运行Client
+2. 运行ClientGUI
 3. Login
 4. enjoy it!
 
