@@ -3,7 +3,7 @@ package server;
 import Util.Conf;
 import Util.ConfigReader;
 import io.netty.channel.ChannelHandlerContext;
-imconport io.netty.channel.ChannelInboundMessageHandlerAdapter;
+import io.netty.channel.ChannelInboundMessageHandlerAdapter;
 import message.Message;
 
 import com.google.common.util.concurrent.RateLimiter;

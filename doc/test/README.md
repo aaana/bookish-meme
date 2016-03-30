@@ -17,6 +17,7 @@
 - [server/日志模块](#server/日志模块)
 - [server/数据库访问模块](#server/数据库访问模块)
 - [client/Json解析模块](#client/Json解析模块)
+- [client/日志模块](#client/日志模块)
 - [登录功能](#登录功能)
 - [发送消息功能](#发送消息功能)
 - [日志功能](#日志功能)
@@ -120,6 +121,21 @@
 |3|Json解析为类型为TOOFREQUENT的ACK|类型为TOOFREQUENT的ACK序列化的Json字符串|类型为TOOFREQUENT的ACK|类型为TOOFREQUENT的ACK|通过|2016.3.29|无|
 |4|Json解析为类型为REDOLOGIN的ACK|类型为REDOLOGIN的ACK序列化的Json字符串|类型为REDOLOGIN的ACK|类型为REDOLOGIN的ACK|通过|2016.3.29|无|
 |5|Json解析为类型为LOGINFAIL的ACK|类型为LOGINFAIL的ACK序列化的Json字符串|类型为LOGINFAIL的ACK|类型为LOGINFAIL的ACK|通过|2016.3.29|无|
+
+
+### client/日志模块
+#### 测试用例
+
+ClientLoggerHandlerTest.java`
+
+| 用例编号 | 用例描述 | 输入数据 | 预期结果 | 实际结果 |  测试结果 | 测试时间 | bug描述
+|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
+|1|登录失败|类型为LOGINFAIL的ACK|loginFail+1，其余不变|loginFail+1，其余不变|通过|2016.3.29|无|
+|2|登陆成功|类型为LOGINSUCCESS的ACK|loginSuccess+1，其余不变|loginSuccess+1，其余不变|通过|2016.3.29|无|
+|3|接收消息成功|类型为OTHERSMESSAGE的ACK|receiveMsgNumber+1，其余不变|receiveMsgNumber+1，其余不变|通过|2016.3.29|无|
+|4|成功发送消息|类型为SENDSUCCESS的ACK|无改变|无改变|通过|2016.3.29|无|
+|5|发送消息过频繁|类型为TOOFRENQUENT的ACK|无改变|无改变|通过|2016.3.29|无|
+|6|发送消息过多|类型为REDOLOGIN的ACK|无改变|无改变|通过|2016.3.29|无|
 
 # 功能测试
 ### 登录功能
