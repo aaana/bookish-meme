@@ -30,7 +30,7 @@
 ## Requirements
 
 - IDE IntellJ IDEA
-- Jdk >= 1.7
+- **Jdk >= 1.8.0_45**
 - maven
 
 ## Framework
