@@ -25,6 +25,7 @@
         <processorPath useClasspath="true" />
         <module name="bookish-meme" />
         <module name="ratelimerHandler" />
+        <module name="rateLimiter.handler" />
         <module name="rateLimter" />
       </profile>
     </annotationProcessing>

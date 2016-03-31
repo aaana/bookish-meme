@@ -3,8 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/bookish-meme.iml" filepath="$PROJECT_DIR$/bookish-meme.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ratelimerHandler/rateLimiter.handler.iml" filepath="$PROJECT_DIR$/ratelimerHandler/rateLimiter.handler.iml" />
       <module fileurl="file://$PROJECT_DIR$/rateLimter/rateLimter.iml" filepath="$PROJECT_DIR$/rateLimter/rateLimter.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ratelimerHandler/ratelimerHandler.iml" filepath="$PROJECT_DIR$/ratelimerHandler/ratelimerHandler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ratelimerHandler/ratelimitHandler.iml" filepath="$PROJECT_DIR$/ratelimerHandler/ratelimitHandler.iml" />
     </modules>
   </component>
 </project>

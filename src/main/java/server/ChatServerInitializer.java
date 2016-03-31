@@ -1,8 +1,6 @@
 package server;
 
 import com.google.common.util.concurrent.RateLimiter;
-import filter.MessageFilter;
-import handler.RateLimitHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
@@ -33,33 +31,6 @@ public class ChatServerInitializer extends ChannelInitializer<SocketChannel> {
                 .addLast("Limiter", new LimiterHandler())
                 .addLast("log", new LoggerHandler())
                 .addLast("response", new Responser());
-    }
-
-
-    private RateLimitHandler<Message> createRateLimitHandler(){
-
-        RtLimiter rateLimiter = new SumCountRtLimiter(5);
-
-        MessageFilter<Message> messageFilter = new MessageFilter<Message>() {
-            @Override
-            public Boolean shouldFilter(Message msg) {
-                if(msg.getType() == MessageType.CHATTING) return true;
-                else return false;
-            }
-        };
-
-        return new RateLimitHandler<Message>(messageFilter, rateLimiter) {
-            @Override
-            public void messageAgree(Message msg) {
-                ;
-            }
-
-            @Override
-            public void messageDisagree(Message msg) {
-                msg.setMessageStatus(MessageStatus.OVERRANGE);
-            }
-        };
-
     }
 
 }
