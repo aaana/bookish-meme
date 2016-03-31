@@ -37,7 +37,7 @@
 
 #### 流量控制模块
 
-根据需求，对客户端发送消息的频率和总数都有限制。对于发送总数的限制，在每个客户端的这一模块中会有一个变量保存已收到的消息数目，在每次收到消息时都会判断是否超过限制。对于每秒发送消息数的限制，这里用到了Google [RateLimiter](http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/util/concurrent/RateLimiter.html)，服务端每次收到某个客户端消息时都判断是否超过了频率限制。
+根据需求，对客户端发送消息的频率和总数都有限制。对于发送总数的限制，在每个客户端的这一模块中会有一个变量保存已收到的消息数目，在每次收到消息时都会判断是否超过限制。对于每秒发送消息数的限制，这里用到了Google [limit.limiter.RateLimiter](http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/util/concurrent/limit.limiter.RateLimiter.html)，服务端每次收到某个客户端消息时都判断是否超过了频率限制。
 
 #### 日志模块
 

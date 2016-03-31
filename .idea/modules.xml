@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/bookish-meme.iml" filepath="$PROJECT_DIR$/bookish-meme.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rateLimter/rateLimter.iml" filepath="$PROJECT_DIR$/rateLimter/rateLimter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ratelimerHandler/ratelimerHandler.iml" filepath="$PROJECT_DIR$/ratelimerHandler/ratelimerHandler.iml" />
     </modules>
   </component>
 </project>
