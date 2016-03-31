@@ -26,7 +26,7 @@
 
 #### Initialization
 ```java
-RtLimiter rtLimiter = new SumCountRtLimiter(5);
+RtLimiter rtLimiter = new SumCountRtLimiter(100);
 rtLimiter.tryAcquire()
 ```
 
