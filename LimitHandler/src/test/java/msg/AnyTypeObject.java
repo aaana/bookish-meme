@@ -1,8 +1,9 @@
-package extra;
+package msg;
 
 /**
  * Created by tanjingru on 3/31/16.
  */
+
 public class AnyTypeObject {
     private ObjFlag flag;
     private int type;
@@ -34,3 +35,4 @@ public class AnyTypeObject {
 
     }
 }
+

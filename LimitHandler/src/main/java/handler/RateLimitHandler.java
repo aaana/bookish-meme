@@ -8,8 +8,6 @@ import limit.limiter.RtLimiter;
 /**
  * Created by tanjingru on 3/31/16.
  */
-
-
 public abstract class RateLimitHandler<T> extends ChannelInboundMessageHandlerAdapter<T> {
 
     private RtLimiter rateLimiter;

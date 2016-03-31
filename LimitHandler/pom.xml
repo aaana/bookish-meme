@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>sse.tongji.bookish-meme</groupId>
-    <artifactId>rateLimiter.handler</artifactId>
+    <artifactId>limit-handler</artifactId>
     <version>1.0.0</version>
 
     <dependencies>
@@ -29,6 +29,4 @@
             <version>4.0.0.CR3</version>
         </dependency>
     </dependencies>
-
-
 </project>

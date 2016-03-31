@@ -24,6 +24,7 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="bookish-meme" />
+        <module name="LimitHandler" />
         <module name="ratelimerHandler" />
         <module name="rateLimter" />
       </profile>

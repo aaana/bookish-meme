@@ -1,17 +1,20 @@
-package handler;
+package handlerr;
 
-import extra.AnyTypeObject;
-import extra.ObjFlag;
 import filter.MessageFilter;
+import handler.RateLimitHandler;
 import io.netty.channel.embedded.EmbeddedMessageChannel;
 import limit.limiter.PerSecondCountRtLimiter;
 import limit.limiter.RtLimiter;
 import limit.limiter.SumCountRtLimiter;
-import org.junit.Before;
+import msg.AnyTypeObject;
+import msg.ObjFlag;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
+/**
+ * Created by tanjingru on 3/31/16.
+ */
 public class RateLimitHandlerTest {
 
 

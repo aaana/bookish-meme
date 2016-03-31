@@ -20,7 +20,6 @@
     <orderEntry type="library" name="Maven: com.google.guava:guava:19.0" level="project" />
     <orderEntry type="library" name="Maven: org.xerial:sqlite-jdbc:3.7.2" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
-    <orderEntry type="module" module-name="rateLimiter.handler" />
-    <orderEntry type="module" module-name="rateLimter" />
+    <orderEntry type="library" name="Maven: sse.tongji.bookish-meme:rateLimiter.handler:1.0.0" level="project" />
   </component>
 </module>
