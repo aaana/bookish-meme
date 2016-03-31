@@ -5,7 +5,7 @@
 一个方便对消息进行流量控制的组件
 
 ## Installation
-`mavem`
+`maven`
 
 ```xml
 <dependency>
@@ -35,7 +35,17 @@ rtLimiter.tryAcquire()
 rtLimiter.reset();
 ```
 
+### PerSecondCountRtLimiter
 
+```java
+RtLimiter rtLimiter = new PerSecondCountRtLimiter(5);
+rtLimiter.tryAcquire()
+```
+
+#### reset
+```java
+rtLimiter.reset();
+```
 
 ## 类图
 
