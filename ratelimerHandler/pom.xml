@@ -12,7 +12,7 @@
 
         <dependency>
             <groupId>sse.tongji.bookish-meme</groupId>
-            <artifactId>RateLimter</artifactId>
+            <artifactId>RtLimter</artifactId>
             <version>1.0.0</version>
         </dependency>
 
