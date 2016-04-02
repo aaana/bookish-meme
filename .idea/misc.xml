@@ -10,6 +10,7 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/rateLimter/pom.xml" />
         <option value="$PROJECT_DIR$/LimitHandler/pom.xml" />
+        <option value="$PROJECT_DIR$/cm/pom.xml" />
       </list>
     </option>
   </component>
@@ -24,7 +25,6 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectPlainTextFileTypeManager">
-    <file url="file://$PROJECT_DIR$/ratelimerHandler/rateLimiter.handler.iml" />
     <file url="file://$PROJECT_DIR$/src/gui/sample.fxml" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
