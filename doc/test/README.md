@@ -6,6 +6,22 @@
 - 晁佳欢 `单元测试`
 - 马致远 `功能测试`
 
+## 测试目的
+
+- 对项目进行单元测试，测试各单元代码的正确性，尽可能早地发现并改正bug，保证软件产品的质量。
+- 对项目进行功能测试，验证软件产品满足现阶段需求：
+	- 客户端能够申请登陆服务器, 并且登陆成功之后能够发送信息.（登陆、发送消息功能）
+	- 服务端能够客户端发送的信息做一定的处理, 并且能够对登陆成功的客户端的信息转发给所有已登陆的客户端（转发功能）
+	- 客户端和服务端都能记录活动信息到文件中 （日志功能）
+
+## 测试工具
+
+Junit 4.0
+
+## 测试源文件夹
+
+[src/test/java](https://github.com/tztztztztz/bookish-meme/tree/master/src/test/java)
+
 
 ##测试内容
 
@@ -42,7 +58,7 @@
 | 编号 | 用例描述 | 输入数据 | 预期结果 | 实际结果 |  测试结果 | 测试时间 | bug描述
 |:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
 | 1 | Json解析为类型为chatting的message对象 | 类型为chatting的message序列化的Json字符串 | 类型为chatting的message对象 | 类型为chatting的message对象 | 通过 | 2016.3.27 | 无 |
-| 1 | Json解析为类型为authority的message对象 | 类型为authority的message序列化的Json字符串 | 类型为authority的message对象 | 类型为authority的message对象 | 通过 | 2016.3.27 | 无 |
+| 2 | Json解析为类型为authority的message对象 | 类型为authority的message序列化的Json字符串 | 类型为authority的message对象 | 类型为authority的message对象 | 通过 | 2016.3.27 | 无 |
 
 ### server/登陆验证模块
 #### 测试用例
@@ -75,9 +91,9 @@
 
 | 用例编号 | 用例描述 | 输入数据 | 预期结果 | 实际结果 |  测试结果 | 测试时间 | bug描述
 |:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
-| 2 | 正常发送 | 不超速的发送message| 信息状态变为NEEDHANDLED（不变） | 信息状态变为NEEDHANDLED（不变） |通过 | 2016.3.28|无
-| 1 | 发送过频繁 |超过指定速率发送message| 信息状态变为TOOFREQUENT | 信息状态变为TOOFREQUENT  | 通过| 2016.3.28 |无
-| 2 | 发送过多 | 超过指定额度发送message| 信息状态变为OVERRANGE | 信息状态变为OVERRANGE |通过 | 2016.3.28|无
+| 1 | 正常发送 | 不超速的发送message| 信息状态变为NEEDHANDLED（不变） | 信息状态变为NEEDHANDLED（不变） |通过 | 2016.3.28|无
+| 2 | 发送过频繁 |超过指定速率发送message| 信息状态变为TOOFREQUENT | 信息状态变为TOOFREQUENT  | 通过| 2016.3.28 |无
+| 3 | 发送过多 | 超过指定额度发送message| 信息状态变为OVERRANGE | 信息状态变为OVERRANGE |通过 | 2016.3.28|无
 
 ### server/日志模块
 #### 测试用例
@@ -106,7 +122,7 @@
 | 1 | 成功登录 |正确的用户名和密码| 返回true | 返回true  | 通过| 2016.3.27 |无
 | 2 | 登陆失败 | 带有字符'的用户名| 返回false | 返回false |通过 | 2016.3.28|无
 | 3 | 登陆失败 | 空用户名 | 返回false | 返回false | 通过 | 2016.3.27 |无
-| 3 | 登陆失败 | 用户名过长，密码为空 | 返回false | 返回false | 通过 | 2016.3.27 |无
+| 4 | 登陆失败 | 用户名过长，密码为空 | 返回false | 返回false | 通过 | 2016.3.27 |无
 
 
 ### client/Json解析模块
