@@ -9,13 +9,13 @@
 - [Dependences Installation](#dependences-installation)
 - [Configuration](#configuration)
 - [Usage](#usage)
-- 可复用组件
-	- [RTLimiter](#https://github.com/tztztztztz/bookish-meme/tree/master/rateLimter)
-	- [LimitHandler](#https://github.com/tztztztztz/bookish-meme/tree/master/LimitHandler)
 - [程序文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/product)
 - [项目管理文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/management)
 - [项目测试文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/test)
 - [复用文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/reuse)
+- [可复用组件](#可复用组件)
+  - [RTLimiter](https://github.com/tztztztztz/bookish-meme/tree/master/rateLimter)
+  - [LimitHandler](https://github.com/tztztztztz/bookish-meme/tree/master/LimitHandler)
 
 ## Introduction
 
@@ -117,5 +117,7 @@
 2. 运行ClientGUI
 3. Login
 4. enjoy it!
+
+
 
 
