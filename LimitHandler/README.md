@@ -21,7 +21,7 @@
 
 ```java 
         MessageFilter<AnyTypeObject> messageFilter = new MessageFilter<AnyTypeObject>() {
-            //定义这个对象师傅应该响应
+            //定义这个对象是否应该响应
             @Override
             public Boolean shouldFilter(AnyTypeObject obj) {
                 if(obj should be filte) return true;
