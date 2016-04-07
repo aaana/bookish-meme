@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/LimitHandler/LimitHandler.iml" filepath="$PROJECT_DIR$/LimitHandler/LimitHandler.iml" />
       <module fileurl="file://$PROJECT_DIR$/bookish-meme.iml" filepath="$PROJECT_DIR$/bookish-meme.iml" />
       <module fileurl="file://$PROJECT_DIR$/cm/cm.iml" filepath="$PROJECT_DIR$/cm/cm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pm/pm.iml" filepath="$PROJECT_DIR$/pm/pm.iml" />
       <module fileurl="file://$PROJECT_DIR$/rateLimter/rateLimter.iml" filepath="$PROJECT_DIR$/rateLimter/rateLimter.iml" />
     </modules>
   </component>

@@ -1,0 +1,1 @@
+{thankyou=61, hello=60}

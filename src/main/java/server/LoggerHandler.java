@@ -4,6 +4,7 @@ import channel.Manager;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundMessageHandlerAdapter;
+import log.Log;
 import message.Message;
 import message.MessageStatus;
 import protocol.MessageType;
@@ -19,7 +20,7 @@ public class LoggerHandler extends ChannelInboundMessageHandlerAdapter<Message> 
     static public int receivedMessageNumber = 0;
     static public int ignoredMessageNumber = 0;
     static public int forwardMessageNumber = 0;
-
+    static public Log log=new Log();
     @Override
     public void messageReceived(ChannelHandlerContext channelHandlerContext, Message message) throws Exception {
         Channel incomingChannel  = channelHandlerContext.channel();

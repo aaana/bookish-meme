@@ -26,12 +26,13 @@
         <module name="bookish-meme" />
         <module name="cm" />
         <module name="LimitHandler" />
+        <module name="pm" />
         <module name="ratelimerHandler" />
         <module name="rateLimter" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="bookish-meme" target="1.8" />
+      <module name="bookish-meme" target="1.6" />
       <module name="cm" target="1.8" />
       <module name="LimitHandler" target="1.8" />
       <module name="rateLimter" target="1.8" />
