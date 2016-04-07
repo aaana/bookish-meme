@@ -4,12 +4,12 @@ package conf;
  * Created by huanganna on 16/3/20.
  */
 public class Configuration {
-    private String HOST;
-    private int PORT;
+    private String host;
+    private int port;
     private int maxMsgNumber;
     private int maxMsgNumberPerSec;
 
-//    public Conf(String host, int port, int maxMsgNumber, int maxMsgNumberPerSec) {
+//    public Config(String host, int port, int maxMsgNumber, int maxMsgNumberPerSec) {
 //        this.host = host;
 //        this.port = port;
 //        this.maxMsgNumber = maxMsgNumber;
@@ -19,20 +19,20 @@ public class Configuration {
     public Configuration() {
     }
 
-    public String getHOST() {
-        return HOST;
+    public String getHost() {
+        return host;
     }
 
-    public void setHOST(String HOST) {
-        this.HOST = HOST;
+    public void setHost(String host) {
+        this.host = host;
     }
 
-    public int getPORT() {
-        return PORT;
+    public int getPort() {
+        return port;
     }
 
-    public void setPORT(int PORT) {
-        this.PORT = PORT;
+    public void setPort(int port) {
+        this.port = port;
     }
 
     public int getMaxMsgNumber() {

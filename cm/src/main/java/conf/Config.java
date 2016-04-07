@@ -16,7 +16,7 @@ import java.io.FileNotFoundException;
 /**
  * Created by huanganna on 16/4/7.
  */
-public class Conf {
+public class Config {
     JsonObject jsonObject;
 
     public void readFile(String confAddr) throws Exception{
@@ -31,11 +31,11 @@ public class Conf {
         }
     }
 
-    private Conf(JsonObject jsonObject) {
+    private Config(JsonObject jsonObject) {
         this.jsonObject = jsonObject;
     }
 
-    public Conf() {
+    public Config() {
 
     }
 
@@ -77,12 +77,12 @@ public class Conf {
 
     }
 
-    public Conf getConf(String key) throws Exception{
+    public Config getConf(String key) throws Exception{
         if(!readFileOrNot()){
             throw new NoConfigurationFileException();
         }
         JsonObject jsonObjectNew = jsonObject.getAsJsonObject(key);
-        return new Conf(jsonObjectNew);
+        return new Config(jsonObjectNew);
     }
 
     public <T> T toObj(Class<T> t) throws Exception{

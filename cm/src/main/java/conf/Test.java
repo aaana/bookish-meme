@@ -7,8 +7,8 @@ package conf;
  */
 public class Test {
     public static void main(String[] args) throws Exception{
-        Conf conf = new Conf();
-        conf.readFile("conf.json");
-        System.out.println(conf.getConf("server").toObj(Configuration.class).getPORT());
+        Config config = new Config();
+        config.readFile("conf.json");
+        System.out.println(config.getConf("server").toObj(Configuration.class).getPort());
     }
 }
