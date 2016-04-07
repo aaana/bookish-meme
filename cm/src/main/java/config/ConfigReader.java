@@ -1,28 +1,11 @@
 package config;
 
-import com.google.gson.JsonElement;
-
 /**
- * Created by huanganna on 16/4/2.
+ * Created by huanganna on 16/4/7.
  */
-public class ConfigReader {
+public abstract class ConfigReader {
 
-    private String url;
+    public abstract <T>T readToObj(String confAddr,Class<T> type);
 
-    public ConfigReader(String url) {
-        this.url = url;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    //public JsonElement getValue(String key){
-
-   // }
 
 }
