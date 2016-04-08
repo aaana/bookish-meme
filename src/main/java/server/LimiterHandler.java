@@ -2,6 +2,7 @@ package server;
 
 import Util.Conf;
 import Util.ConfigReader;
+import conf.Config;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundMessageHandlerAdapter;
 import message.Message;
@@ -20,18 +21,23 @@ public class LimiterHandler extends ChannelInboundMessageHandlerAdapter<Message>
     private int maxMsgNumber;// configurable
     private int maxMsgNumberPerSec;//configurable
     private final RateLimiter rateLimiter;
+
+    private Config config;
     public LimiterHandler() throws Exception {
-
-        ConfigReader reader = new ConfigReader();
-        Conf conf = reader.readConf("config/conf.json");
-        maxMsgNumber=conf.getMaxMsgNumber();
-        maxMsgNumberPerSec=conf.getMaxMsgNumberPerSec();
+        config = new Config();
+        config.readFile("config/conf.json");
+        maxMsgNumberPerSec=config.getConf("server").getInt("maxMsgNumberPerSec");
         rateLimiter=RateLimiter.create(maxMsgNumberPerSec);
-
     }
 
     @Override
     public void messageReceived(ChannelHandlerContext ctx, Message msg) throws Exception {
+        config.readFile("config/conf.json");
+        maxMsgNumber=config.getConf("server").getInt("maxMsgNumber");
+        maxMsgNumberPerSec = config.getConf("server").getInt("maxMsgNumberPerSec");
+        if(rateLimiter.getRate()!=maxMsgNumberPerSec)
+             rateLimiter.setRate(maxMsgNumberPerSec);
+
         if(msg.getType() == MessageType.CHATTING){
             if(rateLimiter.tryAcquire())
             {

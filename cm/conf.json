@@ -1,0 +1,18 @@
+{
+  "server":{
+    "host":"localhost",
+    "port":8080,
+    "maxMsgNumber":100,
+    "maxMsgNumberPerSec":5
+  },
+  "i1": 23,
+  "f1": 2.5,
+  "str1": "string1",
+  "obj1":{
+    "i2": 234,
+    "obj2":{
+      "str2": "string2"
+    }
+  }
+
+}

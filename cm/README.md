@@ -37,8 +37,11 @@ Config getConf(String key);
 //get String value of key
 String getString(String key);
 
-//get String value of key
+//get int value of key
 int getInt(String key);
+
+//get float value of key
+int getFloat(String key);
 
 //directly convert to a Java bean
 <T> T toObj(Class<T> t);

@@ -6,6 +6,8 @@ package client;
 import Util.Conf;
 import Util.ConfigReader;
 import com.google.gson.Gson;
+import conf.Config;
+import exception.FileNotExistException;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -38,10 +40,16 @@ public class ChatClient {
     private EventLoopGroup eventGroup = null;
 
     public ChatClient() {
-        ConfigReader configReader = new ConfigReader();
-        Conf conf = configReader.readConf("config/conf.json");
-        String host = conf.getHost();
-        int port = conf.getPort();
+        Config config = new Config();
+        String host="localhost";
+        int port=8080;
+        try {
+            config.readFile("config/conf.json");
+            host = config.getConf("server").getString("host");
+            port = config.getConf("server").getInt("port");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         this.host = host;
         this.port = port;
     }

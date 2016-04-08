@@ -11,6 +11,7 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 
 /**
@@ -19,13 +20,18 @@ import java.io.FileNotFoundException;
 public class Config {
     JsonObject jsonObject;
 
-    public void readFile(String confAddr) throws Exception{
+    public void readFile(String confAddr) throws FileNotExistException{
         JsonParser parser = new JsonParser();
         Gson gson = new Gson();
         FileInputStream configIn;
         try {
             configIn = new FileInputStream(confAddr);
-            jsonObject = parser.parse(IOUtils.toString(configIn)).getAsJsonObject();
+            try{
+                jsonObject = parser.parse(IOUtils.toString(configIn)).getAsJsonObject();
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+
         } catch (FileNotFoundException e) {
             throw new FileNotExistException();
         }
@@ -36,7 +42,6 @@ public class Config {
     }
 
     public Config() {
-
     }
 
     private boolean readFileOrNot(){
@@ -61,6 +66,21 @@ public class Config {
 
     }
 
+    public float getFloat(String key)throws Exception{
+        if(!readFileOrNot()){
+            throw new NoConfigurationFileException();
+        }
+        if(jsonObject.get(key)==null){
+            throw new KeyNotExistException();
+        }
+        try{
+            float result = jsonObject.get(key).getAsFloat();
+            return result;
+        }catch (NumberFormatException e){
+            throw new TypeConvertionException();
+        }
+
+    }
     public String getString(String key)throws Exception{
         if(!readFileOrNot()){
             throw new NoConfigurationFileException();
