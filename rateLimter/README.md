@@ -26,25 +26,25 @@
 
 #### Initialization
 ```java
-TZLicense tZLicense = new PerSecondCountLicense(100);
-tZLicense.tryAcquire()
+TZLicense tzLicense = new PerSecondCountLicense(100);
+tzLicense.tryAcquire()
 ```
 
 #### reset
 ```java
-tZLicense.reset();
+tzLicense.reset();
 ```
 
 ### PerSecondCountRtLimiter
 
 ```java
-TZLicense tZLicense = new PerSecondCountLicense(5);
-tZLicense.tryAcquire()
+TZLicense tzLicense = new PerSecondCountLicense(5);
+tzLicense.tryAcquire()
 ```
 
 #### reset
 ```java
-tZLicense.reset();
+tzLicense.reset();
 ```
 
 ## 类图
