@@ -35,7 +35,7 @@ tzLicense.tryAcquire()
 tzLicense.reset();
 ```
 
-### PerSecondCountRtLimiter
+### PerSecondCountLicense
 
 ```java
 TZLicense tzLicense = new PerSecondCountLicense(5);
