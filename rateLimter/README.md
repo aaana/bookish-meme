@@ -1,4 +1,4 @@
-# RTLimiter
+# TZLicense
 
 ## Introduction 
 
@@ -10,41 +10,41 @@
 ```xml
 <dependency>
     <groupId>sse.tongji.bookish-meme</groupId>
-    <artifactId>RtLimter</artifactId>
-    <version>1.0.0</version>
+    <artifactId>tzlicense</artifactId>
+    <version>1.0.1</version>
 </dependency>
 ```
 
 ## Usage
 
-这里有两种类型的RtLimiter
-- PerSecondCountRtLimiter
-- SumCountRtLimiter
+这里有两种类型的TZLicense
+- PerSecondCountLicense
+- SumCountLicense
 
 
-### SumCountRtLimiter
+### PerSecondCountLicense
 
 #### Initialization
 ```java
-RtLimiter rtLimiter = new SumCountRtLimiter(100);
-rtLimiter.tryAcquire()
+TZLicense tzLicense = new PerSecondCountLicense(100);
+tzLicense.tryAcquire()
 ```
 
 #### reset
 ```java
-rtLimiter.reset();
+tzLicense.reset();
 ```
 
-### PerSecondCountRtLimiter
+### PerSecondCountLicense
 
 ```java
-RtLimiter rtLimiter = new PerSecondCountRtLimiter(5);
-rtLimiter.tryAcquire()
+TZLicense tzLicense = new PerSecondCountLicense(5);
+tzLicense.tryAcquire()
 ```
 
 #### reset
 ```java
-rtLimiter.reset();
+tzLicense.reset();
 ```
 
 ## 类图
