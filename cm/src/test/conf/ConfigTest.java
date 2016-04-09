@@ -22,7 +22,9 @@ public class ConfigTest {
 
         assertEquals(2.5,config.getFloat("f1"),0);
 
-        assertEquals("aa",config.getConf("obj1").getConf("obj2").getStringArray("strArray")[0]);
+        String[] a = config.getConf("obj1").getConf("obj2").getStringArray("strArray");
+        assertEquals("aa", a[0]);
+
     }
 
     //读object以及直接转换成相应的类

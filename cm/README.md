@@ -8,6 +8,7 @@
 - 可变的配置文件位置
 - 可直接配置成Java对象
 - 可以根据键读值
+- 支持链式调用，可以读取嵌套配置
 
 ## Installation
 `maven`
@@ -43,6 +44,9 @@ int getInt(String key);
 //get float value of key
 int getFloat(String key);
 
+//get String array value of key
+String[] getStringArray(String key)
+
 //directly convert to a Java bean
 <T> T toObj(Class<T> t);
 ```
@@ -56,7 +60,8 @@ int getFloat(String key);
     "port":8080,
     "MaxMsgNumber":100,
     "MaxMsgNumberPerSec":5
-  }
+  },
+  "strArray":["aa","bb"]
 }
 ```
 #### Configuration class
@@ -79,5 +84,7 @@ config.readFile("config/conf.json");
 Configuration configuration = config.getConf("server").toObj(Configuration.class);
 //get String value-"host"
 String host = config.getConf("server").getString("host");
+//get String Array
+ String[] result = config.getStringArray("strArray");
 ...其他API调用类似
 ```
