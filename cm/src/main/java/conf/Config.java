@@ -1,8 +1,6 @@
 package conf;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import exception.FileNotExistException;
 import exception.KeyNotExistException;
 import exception.NoConfigurationFileException;
@@ -112,6 +110,26 @@ public class Config {
         Gson gson = new Gson();
         T result = gson.fromJson(jsonObject.toString(), t);
         return result;
+    }
 
+    public String[] getStringArray(String key) throws Exception{
+        if(!readFileOrNot()){
+            throw new NoConfigurationFileException();
+        }
+        if(jsonObject.get(key)==null){
+            throw new KeyNotExistException();
+        }
+        JsonArray jsonArray = jsonObject.get(key).getAsJsonArray();
+        final String[] array = new String[jsonArray.size()];
+        try{
+            for (int i = 0; i < array.length; i++) {
+                final JsonElement jsonElement = jsonArray.get(i);
+                array[i] = jsonElement.getAsString();
+            }
+        }catch (NumberFormatException e){
+            throw new TypeConvertionException();
+        }
+
+        return array;
     }
 }

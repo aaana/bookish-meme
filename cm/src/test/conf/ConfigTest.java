@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 public class ConfigTest {
     Config config = new Config();
 
-    //基本读功能测试（读int,string,float）以及链式调用测试
+    //基本读功能测试（读int,string,float,array）以及链式调用测试
     @Test
     public void testGetInt() throws Exception {
         config.readFile("conf.json");
@@ -21,6 +21,8 @@ public class ConfigTest {
         assertEquals(23,config.getInt("i1"));
 
         assertEquals(2.5,config.getFloat("f1"),0);
+
+        assertEquals("aa",config.getConf("obj1").getConf("obj2").getStringArray("strArray")[0]);
     }
 
     //读object以及直接转换成相应的类
@@ -34,5 +36,7 @@ public class ConfigTest {
         assertEquals(100,configuration.getMaxMsgNumber());
         assertEquals(5,configuration.getMaxMsgNumberPerSec());
     }
+
+
 
 }

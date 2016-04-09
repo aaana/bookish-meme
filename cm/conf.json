@@ -11,7 +11,8 @@
   "obj1":{
     "i2": 234,
     "obj2":{
-      "str2": "string2"
+      "str2": "string2",
+      "strArray":["aa","bb","cc"]
     }
   }
 
