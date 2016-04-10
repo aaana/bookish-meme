@@ -1,17 +1,16 @@
-package limit.limiter;
+package license;
 
 /**
  * Created by tanjingru on 3/31/16.
  */
-import com.google.common.util.concurrent.RateLimiter;
 
-public class SumCountRtLimiter implements RtLimiter {
+public class SumCountLicense implements TZLicense {
 
     private int maxSumCount;
 
     private int receiveNumber;
 
-    public SumCountRtLimiter(int maxSumCount) {
+    public SumCountLicense(int maxSumCount) {
         this.maxSumCount = maxSumCount;
         this.receiveNumber = 0;
     }

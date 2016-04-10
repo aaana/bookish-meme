@@ -1,11 +1,11 @@
-package limit.limiter;
+package license;
 
 /**
  * Created by tanjingru on 3/31/16.
  */
 
 
-public abstract interface RtLimiter {
+public abstract interface TZLicense {
 
     public abstract Boolean tryAcquire();
 

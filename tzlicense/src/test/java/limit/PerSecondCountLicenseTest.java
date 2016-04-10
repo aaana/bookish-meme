@@ -1,17 +1,19 @@
-package limit.limiter;
+package limit;
 
+import license.PerSecondCountLicense;
+import license.TZLicense;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class PerSecondCountRtLimiterTest {
+public class PerSecondCountLicenseTest {
 
-    private RtLimiter rtLimiter;
+    private TZLicense tzLicense;
 
     @Before
     public void setUp() throws Exception {
-        rtLimiter = new PerSecondCountRtLimiter(5);
+        tzLicense = new PerSecondCountLicense(5);
     }
 
     @Test
@@ -19,10 +21,10 @@ public class PerSecondCountRtLimiterTest {
         int acquireTime = 5;
         Boolean[] expectResult = {true, false, false, false, false};
         for(int i = 0 ; i < acquireTime ; i ++) {
-            assertEquals(rtLimiter.tryAcquire(), expectResult[i]);
+            assertEquals(tzLicense.tryAcquire(), expectResult[i]);
         }
         Thread.sleep(1000);
-        assertEquals(rtLimiter.tryAcquire(), true);
+        assertEquals(tzLicense.tryAcquire(), true);
     }
 
     @Test

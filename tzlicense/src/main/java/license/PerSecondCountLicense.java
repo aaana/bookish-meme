@@ -1,17 +1,17 @@
-package limit.limiter;
+package license;
 
 /**
  * Created by tanjingru on 3/31/16.
  */
 import com.google.common.util.concurrent.RateLimiter;
 
-public class PerSecondCountRtLimiter implements RtLimiter {
+public class PerSecondCountLicense implements TZLicense {
 
     private int maxCountPerSec;
 
     private final RateLimiter rateLimiter;
 
-    public PerSecondCountRtLimiter(int maxCountPerSec) {
+    public PerSecondCountLicense(int maxCountPerSec) {
 
         this.maxCountPerSec = maxCountPerSec;
 
