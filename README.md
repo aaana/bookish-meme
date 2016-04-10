@@ -1,5 +1,9 @@
 # bookish-meme
 
+## 可复用组件发布地址
+- [PM]()
+- [CM]()
+- [LICENSE]()
 
 ## Table of Contents
 - [Introduction](#introduction)
