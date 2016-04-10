@@ -3,6 +3,10 @@
 # log
 logs/
 
+# pm
+
+pm/log
+
 # Maven
 target
 
