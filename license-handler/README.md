@@ -1,4 +1,4 @@
-# LimitHandler
+# LicenseHandler
 
 ## Introduction 
 
