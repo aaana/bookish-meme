@@ -75,10 +75,15 @@
 
         <dependency>
             <groupId>sse.tongji.bookish-meme</groupId>
-            <artifactId>rateLimiter.handler</artifactId>
+            <artifactId>tzLicense.handler</artifactId>
             <version>1.0.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>sse.tongji.bookish-meme</groupId>
+            <artifactId>cm</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
 </project>
