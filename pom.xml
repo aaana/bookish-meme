@@ -75,8 +75,8 @@
 
         <dependency>
             <groupId>sse.tongji.bookish-meme</groupId>
-            <artifactId>tzLicense.handler</artifactId>
-            <version>1.0.0</version>
+            <artifactId>tzlicense</artifactId>
+            <version>1.0.1</version>
         </dependency>
 
         <dependency>
