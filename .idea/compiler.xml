@@ -28,10 +28,11 @@
         <module name="LimitHandler" />
         <module name="ratelimerHandler" />
         <module name="rateLimter" />
+        <module name="tzlicense" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="bookish-meme" target="1.8" />
+      <module name="bookish-meme" target="1.6" />
       <module name="cm" target="1.8" />
       <module name="LimitHandler" target="1.8" />
       <module name="rateLimter" target="1.8" />

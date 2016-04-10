@@ -3,18 +3,18 @@ package handler;
 import filter.MessageFilter;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundMessageHandlerAdapter;
-import limit.limiter.RtLimiter;
+import license.license.TZLicense;
 
 /**
  * Created by tanjingru on 3/31/16.
  */
 public abstract class RateLimitHandler<T> extends ChannelInboundMessageHandlerAdapter<T> {
 
-    private RtLimiter rateLimiter;
+    private TZLicense rateLimiter;
 
     private MessageFilter<T> filter;
 
-    public RateLimitHandler(MessageFilter<T> filter, RtLimiter rateLimiter) {
+    public RateLimitHandler(MessageFilter<T> filter, TZLicense rateLimiter) {
 
         this.filter = filter;
         this.rateLimiter = rateLimiter;

@@ -3,9 +3,9 @@ package handlerr;
 import filter.MessageFilter;
 import handler.RateLimitHandler;
 import io.netty.channel.embedded.EmbeddedMessageChannel;
-import limit.limiter.PerSecondCountRtLimiter;
-import limit.limiter.RtLimiter;
-import limit.limiter.SumCountRtLimiter;
+import license.license.PerSecondCountLicense;
+import license.license.TZLicense;
+import license.license.SumCountLicense;
 import msg.AnyTypeObject;
 import msg.ObjFlag;
 import org.junit.Test;
@@ -26,7 +26,7 @@ public class RateLimitHandlerTest {
 
         int maxCount = 5;
 
-        RtLimiter rateLimiter = new SumCountRtLimiter(maxCount);
+        TZLicense rateLimiter = new SumCountLicense(maxCount);
 
         MessageFilter<AnyTypeObject> messageFilter = new MessageFilter<AnyTypeObject>() {
             @Override
@@ -92,7 +92,7 @@ public class RateLimitHandlerTest {
 
         int perCount = 5;
 
-        RtLimiter rateLimiter = new PerSecondCountRtLimiter(perCount);
+        TZLicense rateLimiter = new PerSecondCountLicense(perCount);
 
         MessageFilter<AnyTypeObject> messageFilter = new MessageFilter<AnyTypeObject>() {
             @Override
@@ -152,7 +152,7 @@ public class RateLimitHandlerTest {
 
         int maxCount = 5;
 
-        RtLimiter rateLimiter = new SumCountRtLimiter(maxCount);
+        TZLicense rateLimiter = new SumCountLicense(maxCount);
 
         MessageFilter<AnyTypeObject> messageFilter = new MessageFilter<AnyTypeObject>() {
             @Override
