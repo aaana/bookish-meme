@@ -8,12 +8,11 @@
     <artifactId>license-handler</artifactId>
     <version>1.0.0</version>
     <dependencies>
-    <dependency>
-        <groupId>sse.tongji.bookish-meme</groupId>
-        <artifactId>tzlicense</artifactId>
-        <version>1.0.1</version>
-    </dependency>
-
+        <dependency>
+            <groupId>sse.tongji.bookish-meme</groupId>
+            <artifactId>tzlicense</artifactId>
+            <version>1.0.1</version>
+        </dependency>
     <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>

@@ -3,7 +3,7 @@
 ## 可复用组件发布地址
 - [PM]()
 - [CM]()
-- [LICENSE]()
+- LICENSE <https://github.com/bookish-component/License>
 
 ## Table of Contents
 - [Introduction](#introduction)
