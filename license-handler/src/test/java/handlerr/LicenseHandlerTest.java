@@ -1,13 +1,14 @@
 package handlerr;
 
 import filter.MessageFilter;
-import handler.RateLimitHandler;
+import handler.LicenseHandler;
 import io.netty.channel.embedded.EmbeddedMessageChannel;
-import license.license.PerSecondCountLicense;
-import license.license.TZLicense;
-import license.license.SumCountLicense;
+import license.PerSecondCountLicense;
+import license.SumCountLicense;
+import license.TZLicense;
 import msg.AnyTypeObject;
 import msg.ObjFlag;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -15,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by tanjingru on 3/31/16.
  */
-public class RateLimitHandlerTest {
+public class LicenseHandlerTest {
 
 
 
@@ -36,7 +37,7 @@ public class RateLimitHandlerTest {
             }
         };
 
-        RateLimitHandler<AnyTypeObject> rateLimitHandler = new RateLimitHandler<AnyTypeObject>(messageFilter, rateLimiter) {
+        LicenseHandler<AnyTypeObject> licenseHandler = new LicenseHandler<AnyTypeObject>(messageFilter, rateLimiter) {
             @Override
             public void messageAgree(AnyTypeObject msg) {
                 msg.setFlag(ObjFlag.ACCEPT);
@@ -53,7 +54,7 @@ public class RateLimitHandlerTest {
             }
         };
 
-        EmbeddedMessageChannel limitHandler = new EmbeddedMessageChannel(rateLimitHandler);
+        EmbeddedMessageChannel limitHandler = new EmbeddedMessageChannel(licenseHandler);
 
 
         // 传入十次， 前4次消息被接受，flag变成ACCEPT，后6次消息没被接受，flag变成REJECT
@@ -64,9 +65,9 @@ public class RateLimitHandlerTest {
             limitHandler.writeInbound(anyTypeObject);
             AnyTypeObject readObj = (AnyTypeObject)limitHandler.readInbound();
             if(i < maxCount-1) {
-                assertEquals(readObj.getFlag(), ObjFlag.ACCEPT);
+                Assert.assertEquals(readObj.getFlag(), ObjFlag.ACCEPT);
             }
-            else assertEquals(readObj.getFlag(), ObjFlag.REJECT);
+            else Assert.assertEquals(readObj.getFlag(), ObjFlag.REJECT);
         }
 
         AnyTypeObject readObj;
@@ -74,14 +75,14 @@ public class RateLimitHandlerTest {
         // 重新传入一次，消息应该变为REJECT
         limitHandler.writeInbound(new AnyTypeObject(ObjFlag.NONE,0));
         readObj = (AnyTypeObject)limitHandler.readInbound();
-        assertEquals(readObj.getFlag(), ObjFlag.REJECT);
+        Assert.assertEquals(readObj.getFlag(), ObjFlag.REJECT);
 
         // 重置一次
-        rateLimitHandler.reset();
+        licenseHandler.reset();
 
         limitHandler.writeInbound(new AnyTypeObject(ObjFlag.NONE,0));
         readObj = (AnyTypeObject)limitHandler.readInbound();
-        assertEquals(readObj.getFlag(), ObjFlag.ACCEPT);
+        Assert.assertEquals(readObj.getFlag(), ObjFlag.ACCEPT);
 
     }
 
@@ -102,7 +103,7 @@ public class RateLimitHandlerTest {
             }
         };
 
-        RateLimitHandler<AnyTypeObject> rateLimitHandler = new RateLimitHandler<AnyTypeObject>(messageFilter, rateLimiter) {
+        LicenseHandler<AnyTypeObject> licenseHandler = new LicenseHandler<AnyTypeObject>(messageFilter, rateLimiter) {
             @Override
             public void messageAgree(AnyTypeObject msg) {
                 msg.setFlag(ObjFlag.ACCEPT);
@@ -119,7 +120,7 @@ public class RateLimitHandlerTest {
             }
         };
 
-        EmbeddedMessageChannel limitHandler = new EmbeddedMessageChannel(rateLimitHandler);
+        EmbeddedMessageChannel limitHandler = new EmbeddedMessageChannel(licenseHandler);
 
 
         // 传入十次， 第一次次消息被接受，flag变成accept，后9次消息没被接受，flag变成reject
@@ -129,8 +130,8 @@ public class RateLimitHandlerTest {
             AnyTypeObject anyTypeObject = new AnyTypeObject(ObjFlag.NONE,0);
             limitHandler.writeInbound(anyTypeObject);
             AnyTypeObject readObj = (AnyTypeObject)limitHandler.readInbound();
-            if(i == 0) assertEquals(readObj.getFlag(), ObjFlag.ACCEPT);
-            else assertEquals(readObj.getFlag(), ObjFlag.REJECT);
+            if(i == 0) Assert.assertEquals(readObj.getFlag(), ObjFlag.ACCEPT);
+            else Assert.assertEquals(readObj.getFlag(), ObjFlag.REJECT);
         }
 
         //暂停1s后, 消息应该被接受
@@ -142,7 +143,7 @@ public class RateLimitHandlerTest {
         // 重新传入一次，消息应该变为accept
         limitHandler.writeInbound(new AnyTypeObject(ObjFlag.NONE,0));
         readObj = (AnyTypeObject)limitHandler.readInbound();
-        assertEquals(readObj.getFlag(), ObjFlag.ACCEPT);
+        Assert.assertEquals(readObj.getFlag(), ObjFlag.ACCEPT);
 
     }
 
@@ -162,7 +163,7 @@ public class RateLimitHandlerTest {
             }
         };
 
-        RateLimitHandler<AnyTypeObject> rateLimitHandler = new RateLimitHandler<AnyTypeObject>(messageFilter, rateLimiter) {
+        LicenseHandler<AnyTypeObject> licenseHandler = new LicenseHandler<AnyTypeObject>(messageFilter, rateLimiter) {
             @Override
             public void messageAgree(AnyTypeObject msg) {
                 msg.setFlag(ObjFlag.ACCEPT);
@@ -179,7 +180,7 @@ public class RateLimitHandlerTest {
             }
         };
 
-        EmbeddedMessageChannel limitHandler = new EmbeddedMessageChannel(rateLimitHandler);
+        EmbeddedMessageChannel limitHandler = new EmbeddedMessageChannel(licenseHandler);
 
         //传入4次类型为0的消息，第五次传入类型为1的消息，前四次变为accept，后一次不会被响应，变为ignore
 
@@ -191,13 +192,13 @@ public class RateLimitHandlerTest {
             anyTypeObject = new AnyTypeObject(ObjFlag.NONE,0);
             limitHandler.writeInbound(anyTypeObject);
             readObj = (AnyTypeObject)limitHandler.readInbound();
-            assertEquals(readObj.getFlag(), ObjFlag.ACCEPT);
+            Assert.assertEquals(readObj.getFlag(), ObjFlag.ACCEPT);
         }
 
         anyTypeObject = new AnyTypeObject(ObjFlag.NONE, 1);
         limitHandler.writeInbound(anyTypeObject);
         readObj = (AnyTypeObject)limitHandler.readInbound();
-        assertEquals(readObj.getFlag(), ObjFlag.IGNORE);
+        Assert.assertEquals(readObj.getFlag(), ObjFlag.IGNORE);
 
         // 再次传入消息为0的消息，被reject
 
@@ -205,7 +206,7 @@ public class RateLimitHandlerTest {
         anyTypeObject = new AnyTypeObject(ObjFlag.NONE,0 );
         limitHandler.writeInbound(anyTypeObject);
         readObj = (AnyTypeObject)limitHandler.readInbound();
-        assertEquals(readObj.getFlag(), ObjFlag.REJECT);
+        Assert.assertEquals(readObj.getFlag(), ObjFlag.REJECT);
     }
 
 }

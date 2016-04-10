@@ -3,26 +3,26 @@ package handler;
 import filter.MessageFilter;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundMessageHandlerAdapter;
-import license.license.TZLicense;
+import license.TZLicense;
 
 /**
  * Created by tanjingru on 3/31/16.
  */
-public abstract class RateLimitHandler<T> extends ChannelInboundMessageHandlerAdapter<T> {
+public abstract class LicenseHandler<T> extends ChannelInboundMessageHandlerAdapter<T> {
 
-    private TZLicense rateLimiter;
+    private TZLicense tzLicense;
 
     private MessageFilter<T> filter;
 
-    public RateLimitHandler(MessageFilter<T> filter, TZLicense rateLimiter) {
+    public LicenseHandler(MessageFilter<T> filter, TZLicense tzLicense) {
 
         this.filter = filter;
-        this.rateLimiter = rateLimiter;
+        this.tzLicense = tzLicense;
 
     }
 
     public void reset(){
-        rateLimiter.reset();
+        tzLicense.reset();
     }
 
     @Override
@@ -30,7 +30,7 @@ public abstract class RateLimitHandler<T> extends ChannelInboundMessageHandlerAd
 
         if(filter.shouldFilter(msg)){
 
-            if(rateLimiter.tryAcquire()) messageAgree(msg);
+            if(tzLicense.tryAcquire()) messageAgree(msg);
             else messageDisagree(msg);
 
         }
