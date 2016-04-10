@@ -27,7 +27,7 @@ public class LicenseHandlerTest {
 
         int maxCount = 5;
 
-        TZLicense rateLimiter = new SumCountLicense(maxCount);
+        TZLicense tzLicense = new SumCountLicense(maxCount);
 
         MessageFilter<AnyTypeObject> messageFilter = new MessageFilter<AnyTypeObject>() {
             @Override
@@ -37,7 +37,7 @@ public class LicenseHandlerTest {
             }
         };
 
-        LicenseHandler<AnyTypeObject> licenseHandler = new LicenseHandler<AnyTypeObject>(messageFilter, rateLimiter) {
+        LicenseHandler<AnyTypeObject> licenseHandler = new LicenseHandler<AnyTypeObject>(messageFilter, tzLicense) {
             @Override
             public void messageAgree(AnyTypeObject msg) {
                 msg.setFlag(ObjFlag.ACCEPT);
@@ -93,7 +93,7 @@ public class LicenseHandlerTest {
 
         int perCount = 5;
 
-        TZLicense rateLimiter = new PerSecondCountLicense(perCount);
+        TZLicense tzLicense = new PerSecondCountLicense(perCount);
 
         MessageFilter<AnyTypeObject> messageFilter = new MessageFilter<AnyTypeObject>() {
             @Override
@@ -103,7 +103,7 @@ public class LicenseHandlerTest {
             }
         };
 
-        LicenseHandler<AnyTypeObject> licenseHandler = new LicenseHandler<AnyTypeObject>(messageFilter, rateLimiter) {
+        LicenseHandler<AnyTypeObject> licenseHandler = new LicenseHandler<AnyTypeObject>(messageFilter, tzLicense) {
             @Override
             public void messageAgree(AnyTypeObject msg) {
                 msg.setFlag(ObjFlag.ACCEPT);
