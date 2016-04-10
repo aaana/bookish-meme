@@ -1,9 +1,10 @@
 # bookish-meme
 
 ## 可复用组件发布地址
-- [PM]()
-- [CM]()
+- PM <https://github.com/bookish-component/PM>
+- CM <https://github.com/bookish-component/CM>
 - LICENSE <https://github.com/bookish-component/License>
+
 
 ## Table of Contents
 - [Introduction](#introduction)
