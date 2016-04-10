@@ -21,9 +21,10 @@ public class ConfigReader {
     }
 
     public Conf readConf(String confAddr){
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(Conf.class, new ConfDeserializer());
-        Gson gson = gsonBuilder.create();
+//        GsonBuilder gsonBuilder = new GsonBuilder();
+//        gsonBuilder.registerTypeAdapter(Conf.class, new ConfDeserializer());
+//        Gson gson = gsonBuilder.create();
+        Gson gson = new Gson();
         Conf conf = null;
         try{
             FileInputStream configIn = new FileInputStream(confAddr);
