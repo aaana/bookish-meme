@@ -16,7 +16,7 @@ import java.io.IOException;
  * Created by huanganna on 16/4/7.
  */
 public class Config {
-    JsonObject jsonObject;
+    private JsonObject jsonObject;
 
     public void readFile(String confAddr) throws FileNotExistException{
         JsonParser parser = new JsonParser();
