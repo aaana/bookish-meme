@@ -1,7 +1,7 @@
 # bookish-meme
 
 ## 可复用组件发布地址
-- [PM]()
+- [PM](https://github.com/bookish-component/PM)
 - [CM]()
 - [LICENSE]()
 
