@@ -6,8 +6,6 @@ package client;
 import Util.Conf;
 import Util.ConfigReader;
 import com.google.gson.Gson;
-import conf.Config;
-import exception.FileNotExistException;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -16,11 +14,14 @@ import message.ChatContent;
 import message.LoginContent;
 import message.Message;
 import message.MessageStatus;
+import octoteam.tahiti.config.ConfigManager;
+import octoteam.tahiti.config.loader.JsonAdapter;
 import org.apache.log4j.PropertyConfigurator;
 import protocol.MessageType;
 
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Timer;
 
@@ -40,16 +41,27 @@ public class ChatClient {
     private EventLoopGroup eventGroup = null;
 
     public ChatClient() {
-        Config config = new Config();
+//        Config config = new Config();
+        ConfigManager configManager = new ConfigManager(new JsonAdapter(),"./config/config.json");
         String host="localhost";
         int port=8080;
+        try{
+            Conf conf = configManager.loadToBean(Conf.class);
+            host = conf.getHost();
+            port = conf.getPort();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        /*
         try {
             config.readFile("config/conf.json");
             host = config.getConf("server").getString("host");
             port = config.getConf("server").getInt("port");
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
+
         this.host = host;
         this.port = port;
     }

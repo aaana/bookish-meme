@@ -9,6 +9,8 @@ import message.Message;
 
 import com.google.common.util.concurrent.RateLimiter;
 import message.MessageStatus;
+import octoteam.tahiti.config.ConfigManager;
+import octoteam.tahiti.config.loader.JsonAdapter;
 import protocol.MessageType;
 
 /**
@@ -21,22 +23,33 @@ public class LimiterHandler extends ChannelInboundMessageHandlerAdapter<Message>
     private int maxMsgNumber;// configurable
     private int maxMsgNumberPerSec;//configurable
     private final RateLimiter rateLimiter;
+    private Conf conf;
 
-    private Config config;
+//    private Config config;
+    private ConfigManager configManager;
     public LimiterHandler() throws Exception {
-        config = new Config();
-        config.readFile("config/conf.json");
-        maxMsgNumberPerSec=config.getConf("server").getInt("maxMsgNumberPerSec");
-        rateLimiter=RateLimiter.create(maxMsgNumberPerSec);
+//        config = new Config();
+//        config.readFile("config/conf.json");
+        configManager = new ConfigManager(new JsonAdapter(),"./config/config.json");
+        conf = configManager.loadToBean(Conf.class);
+//        maxMsgNumberPerSec=config.getConf("server").getInt("maxMsgNumberPerSec");
+//        rateLimiter=RateLimiter.create(maxMsgNumberPerSec);
+        maxMsgNumberPerSec = conf.getMaxMsgNumberPerSec();
+        rateLimiter = RateLimiter.create(maxMsgNumberPerSec);
     }
 
     @Override
     public void messageReceived(ChannelHandlerContext ctx, Message msg) throws Exception {
-        config.readFile("config/conf.json");
-        maxMsgNumber=config.getConf("server").getInt("maxMsgNumber");
-        maxMsgNumberPerSec = config.getConf("server").getInt("maxMsgNumberPerSec");
-        if(rateLimiter.getRate()!=maxMsgNumberPerSec)
-             rateLimiter.setRate(maxMsgNumberPerSec);
+//        config.readFile("config/conf.json");
+//        maxMsgNumber=config.getConf("server").getInt("maxMsgNumber");
+//        maxMsgNumberPerSec = config.getConf("server").getInt("maxMsgNumberPerSec");
+        conf = configManager.loadToBean(Conf.class);
+        maxMsgNumber = conf.getMaxMsgNumber();
+        maxMsgNumberPerSec = conf.getMaxMsgNumberPerSec();
+        if(rateLimiter.getRate()!=maxMsgNumberPerSec){
+            rateLimiter.setRate(maxMsgNumberPerSec);
+        }
+
 
         if(msg.getType() == MessageType.CHATTING){
             if(rateLimiter.tryAcquire())
