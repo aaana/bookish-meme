@@ -2,7 +2,7 @@ package server;
 
 import Util.Conf;
 import Util.ConfigReader;
-import conf.Config;
+//import conf.Config;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundMessageHandlerAdapter;
 import message.Message;
@@ -13,17 +13,22 @@ import octoteam.tahiti.config.ConfigManager;
 import octoteam.tahiti.config.loader.JsonAdapter;
 import protocol.MessageType;
 
+import reuse.license.FrequencyRestriction;
+import reuse.license.MaxNumOfMessage;
+
 /**
  * Created by 马二爷 on 2016/3/20.
  */
 public class LimiterHandler extends ChannelInboundMessageHandlerAdapter<Message> {
 
 
-    private int receivedNumber=0;
+   // private int receivedNumber=0;
     private int maxMsgNumber;// configurable
     private int maxMsgNumberPerSec;//configurable
-    private final RateLimiter rateLimiter;
+   // private final RateLimiter rateLimiter;
     private Conf conf;
+    private FrequencyRestriction frequencyRestriction;
+    private MaxNumOfMessage maxMessageLimter;
 
 //    private Config config;
     private ConfigManager configManager;
@@ -35,7 +40,10 @@ public class LimiterHandler extends ChannelInboundMessageHandlerAdapter<Message>
 //        maxMsgNumberPerSec=config.getConf("server").getInt("maxMsgNumberPerSec");
 //        rateLimiter=RateLimiter.create(maxMsgNumberPerSec);
         maxMsgNumberPerSec = conf.getMaxMsgNumberPerSec();
-        rateLimiter = RateLimiter.create(maxMsgNumberPerSec);
+        maxMsgNumber = conf.getMaxMsgNumber();
+       // rateLimiter = RateLimiter.create(maxMsgNumberPerSec);
+        frequencyRestriction=new FrequencyRestriction(maxMsgNumberPerSec);
+        maxMessageLimter=new MaxNumOfMessage(maxMsgNumber);
     }
 
     @Override
@@ -43,19 +51,18 @@ public class LimiterHandler extends ChannelInboundMessageHandlerAdapter<Message>
 //        config.readFile("config/conf.json");
 //        maxMsgNumber=config.getConf("server").getInt("maxMsgNumber");
 //        maxMsgNumberPerSec = config.getConf("server").getInt("maxMsgNumberPerSec");
-        conf = configManager.loadToBean(Conf.class);
+      /*  conf = configManager.loadToBean(Conf.class);
         maxMsgNumber = conf.getMaxMsgNumber();
         maxMsgNumberPerSec = conf.getMaxMsgNumberPerSec();
         if(rateLimiter.getRate()!=maxMsgNumberPerSec){
             rateLimiter.setRate(maxMsgNumberPerSec);
-        }
+        }*/
 
 
         if(msg.getType() == MessageType.CHATTING){
-            if(rateLimiter.tryAcquire())
+            if(frequencyRestriction.Check())
             {
-                if(receivedNumber+1<maxMsgNumber) {
-                    receivedNumber++;
+                if(maxMessageLimter.Check()) {
                     msg.setMessageStatus(MessageStatus.NEEDHANDLED);
                 }
                 else{
