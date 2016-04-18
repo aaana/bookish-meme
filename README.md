@@ -14,7 +14,7 @@
 - [复用文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/reuse)
 
 
-## [可复用组件](#可复用组件)
+## 可复用组件
   - [License](https://github.com/tztztztztz/bookish-meme/tree/master/tzlicense)
   - [LicenseHandler](https://github.com/tztztztztz/bookish-meme/tree/master/license-handler)
   - [cm](https://github.com/tztztztztz/bookish-meme/tree/master/cm)
