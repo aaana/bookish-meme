@@ -12,7 +12,7 @@
 - [项目管理文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/management)
 - [项目测试文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/test)
 - [复用文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/reuse)
-
+- [可复用构件选择及改进建议](https://github.com/tztztztztz/bookish-meme/tree/master/doc/reuseRecommodation)
 
 ## 可复用组件
   - [License](https://github.com/tztztztztz/bookish-meme/tree/master/tzlicense)
