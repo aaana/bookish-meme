@@ -16,14 +16,19 @@ import message.Message;
 import message.MessageStatus;
 import octoteam.tahiti.config.ConfigManager;
 import octoteam.tahiti.config.loader.JsonAdapter;
+import octoteam.tahiti.performance.PerformanceMonitor;
+import octoteam.tahiti.performance.reporter.LogReporter;
+import octoteam.tahiti.performance.reporter.RollingFileReporter;
 import org.apache.log4j.PropertyConfigurator;
 import protocol.MessageType;
+import server.LoggerHandler;
 
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Timer;
+import java.util.concurrent.TimeUnit;
 
 public class ChatClient {
 
@@ -64,6 +69,16 @@ public class ChatClient {
 
         this.host = host;
         this.port = port;
+
+        // pm
+        LogReporter reporter = new RollingFileReporter("client-%d{yyyy-MM-dd_HH-mm}.log");
+        PerformanceMonitor monitor = new PerformanceMonitor(reporter);
+        monitor
+                .addRecorder(ClientLoggerHandler.loginFail)
+                .addRecorder(ClientLoggerHandler.loginSuccess)
+                .addRecorder(ClientLoggerHandler.receiveMsgNumber)
+                .addRecorder(ClientLoggerHandler.sendMsgNumber)
+                .start(1, TimeUnit.MINUTES);
     }
 
     private Channel connectServer() throws InterruptedException{
@@ -124,16 +139,13 @@ public class ChatClient {
 
     public void sendMessage(ChatContent chatContent) throws InterruptedException{
         Gson gson=new Gson();
-
-
         Message chattingMessage = new Message(MessageType.CHATTING,MessageStatus.NEEDHANDLED);
         chattingMessage.setChatContent(chatContent);
         String jsonPayload=gson.toJson(chattingMessage);
         //channel.write(message);
         System.out.println("msg: " + chatContent.getMessage() + "\n");
         connectedChannel.write(jsonPayload+"\n\r");
-
-        ClientLoggerHandler.sendMsgNumber++;
+        ClientLoggerHandler.sendMsgNumber.record();
     }
 
 }

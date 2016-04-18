@@ -7,6 +7,10 @@ import io.netty.channel.ChannelInboundMessageHandlerAdapter;
 import log.Log;
 import message.Message;
 import message.MessageStatus;
+import octoteam.tahiti.performance.PerformanceMonitor;
+import octoteam.tahiti.performance.recorder.CountingRecorder;
+import octoteam.tahiti.performance.reporter.LogReporter;
+import octoteam.tahiti.performance.reporter.RollingFileReporter;
 import protocol.MessageType;
 
 /**
@@ -15,12 +19,18 @@ import protocol.MessageType;
 
 public class LoggerHandler extends ChannelInboundMessageHandlerAdapter<Message> {
 
-    static public int validLoginNumber = 0;
-    static public int invalidLoginNumber = 0;
-    static public int receivedMessageNumber = 0;
-    static public int ignoredMessageNumber = 0;
-    static public int forwardMessageNumber = 0;
-    static public Log log=new Log();
+    static CountingRecorder validLoginNumber = new CountingRecorder("validLoginNumber");
+    static CountingRecorder invalidLoginNumber = new CountingRecorder("invalidLoginNumber");
+    static CountingRecorder receivedMessageNumber = new CountingRecorder("receivedMessageNumber");
+    static CountingRecorder ignoredMessageNumber = new CountingRecorder("ignoredMessageNumber");
+    static CountingRecorder forwardMessageNumber = new CountingRecorder("forwardMessageNumber");
+
+//    static public int validLoginNumber = 0;
+//    static public int invalidLoginNumber = 0;
+//    static public int receivedMessageNumber = 0;
+//    static public int ignoredMessageNumber = 0;
+//    static public int forwardMessageNumber = 0;
+
     @Override
     public void messageReceived(ChannelHandlerContext channelHandlerContext, Message message) throws Exception {
         Channel incomingChannel  = channelHandlerContext.channel();
@@ -30,20 +40,20 @@ public class LoggerHandler extends ChannelInboundMessageHandlerAdapter<Message> 
 
         //fail to login
         if (messageType == MessageType.AUTHORITY && messageStatus == MessageStatus.LOGINFAIL){
-            invalidLoginNumber += 1;
+            invalidLoginNumber.record();
         }
 
         // success to login
         if (messageType == MessageType.AUTHORITY && messageStatus == MessageStatus.NEEDHANDLED){
-            validLoginNumber += 1;
+            validLoginNumber.record();
         }
 
 
         if( messageType == MessageType.CHATTING){
-            receivedMessageNumber += 1;
+            receivedMessageNumber.record();
 
-            if (messageStatus == MessageStatus.NEEDHANDLED) forwardMessageNumber += 1;
-            else ignoredMessageNumber += 1;
+            if (messageStatus == MessageStatus.NEEDHANDLED) forwardMessageNumber.record();
+            else ignoredMessageNumber.record();
 
         }
 
