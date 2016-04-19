@@ -17,14 +17,15 @@
 ## 可复用组件
   - [License](https://github.com/tztztztztz/bookish-meme/tree/master/tzlicense)
   - [LicenseHandler](https://github.com/tztztztztz/bookish-meme/tree/master/license-handler)
-  - [cm](https://github.com/tztztztztz/bookish-meme/tree/master/cm)
+  - [CM](https://github.com/tztztztztz/bookish-meme/tree/master/cm)
+  - [PM](https://github.com/tztztztztz/bookish-meme/tree/master/pm]
 
 
 ## 小组成员
 
 | 学号 | 姓名 | Github |
 | -----|:----:| ----:|
-| 1352892    | 谭靖儒    |     |
+| 1352892    | 谭靖儒    |   tztztztztz  |
 | 1352875    | 黄安娜   | [aaana](https://github.com/aaana)    |
 | 1352965    | 晁佳欢    | wlmxjm1    |
 | 1352923    | 马致远    | maerye    |
@@ -36,7 +37,6 @@
 - IDE IntellJ IDEA
 - **Jdk >= 1.8.0_45**
 - maven
-
 
 
 
