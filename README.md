@@ -18,7 +18,7 @@
   - [License](https://github.com/tztztztztz/bookish-meme/tree/master/tzlicense)
   - [LicenseHandler](https://github.com/tztztztztz/bookish-meme/tree/master/license-handler)
   - [CM](https://github.com/tztztztztz/bookish-meme/tree/master/cm)
-  - [PM](https://github.com/tztztztztz/bookish-meme/tree/master/pm]
+  - [PM](https://github.com/tztztztztz/bookish-meme/tree/master/pm)
 
 
 ## 小组成员
