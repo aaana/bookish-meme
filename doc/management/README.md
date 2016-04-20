@@ -44,6 +44,7 @@
 - [第六次讨论](#第六次讨论)
 - [第七次讨论](#第七次讨论)
 - [第八次讨论](#第八次讨论)
+- [第九次讨论](#第九次讨论)
 
 ### 第一次讨论
 - 时间: 3月16日 19:00
@@ -242,11 +243,54 @@
 - 地点: apple club
 - 讨论内容
 	- [可复用构件发布](#可复用构件发布地址)
+	- [选择可复用构件](#选择可复用构件)
 
 #### 可复用构件发布地址
 - PM <https://github.com/bookish-component/PM>
 - CM <https://github.com/bookish-component/CM>
 - LICENSE <https://github.com/bookish-component/License>
+
+#### 选择可复用构件
+
+- CM: [Team5](https://github.com/SummerWish/Tahiti)
+- PM: [Team5](https://github.com/SummerWish/Tahiti)
+- LICENSE: [Team2](https://github.com/Gavin96/SoftwareReuse)
+
+### 第九次讨论
+- 时间: 4月13日 15:00
+- 参与人员：谭靖儒 晁佳欢 黄安娜 林昌盛 马致远
+- 地点: 济事楼430
+- 讨论内容
+	- [重构应用程序](#重构应用程序)
+	- 构建改进意见(#构件改进意见)
+
+#### 重构应用程序
+- CM构件:黄安娜、晁佳欢
+- PM构件:谭靖儒
+- LICENSE构件:马致远
+
+#### 构建改进意见
+- CM构件:黄安娜、晁佳欢
+- PM构件:谭靖儒
+- LICENSE构件:马致远
+
+### 第十次讨论
+- 时间: 4月20日 15:00
+- 参与人员：谭靖儒 晁佳欢 黄安娜 林昌盛 马致远
+- 地点: 济事楼430
+- 讨论内容
+	- 功能扩展(#功能扩展)
+
+#### 功能扩展
+- Server/Client保存所有收到的消息到文件
+	- 文件格式不限
+	- 文件路径可配置
+
+- 每天所有的输出文件(Server/Client/PM)归档成一个压缩包
+	- 压缩格式不限
+	- 压缩包路径可配置
+
+
 
 ## 项目总结
 - 收获
