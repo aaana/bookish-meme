@@ -40,11 +40,11 @@
 - maven
 
 ## UI设计
-登陆界面
-![import jar](https://raw.githubusercontent.com/tztztztztz/bookish-meme/master/doc/img/login.png)
+- 登陆界面     
+<img src= "https://raw.githubusercontent.com/tztztztztz/bookish-meme/master/doc/img/login.png" height=300>
 
-聊天界面
-![import jar](https://raw.githubusercontent.com/tztztztztz/bookish-meme/master/doc/img/chatting.png)
+- 聊天界面       
+<img src= "https://raw.githubusercontent.com/tztztztztz/bookish-meme/master/doc/img/chatting.png" height=450>
 
 
 
