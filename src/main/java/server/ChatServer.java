@@ -6,9 +6,13 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoop;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import octoteam.tahiti.performance.PerformanceMonitor;
+import octoteam.tahiti.performance.reporter.LogReporter;
+import octoteam.tahiti.performance.reporter.RollingFileReporter;
 import org.apache.log4j.PropertyConfigurator;
 
 import java.util.Timer;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by tanjingru on 3/17/16.
@@ -21,8 +25,8 @@ public class ChatServer{
         PropertyConfigurator.configure("config/log4j-server.property");
 
         // 开始定时任务
-        Timer timer = new Timer();
-        timer.schedule(new LoggerTask(), 60 * 1000,  60 * 1000);
+//        Timer timer = new Timer();
+//        timer.schedule(new LoggerTask(), 60 * 1000,  60 * 1000);
 
         //打开服务器
         new ChatServer(8080).run();
@@ -32,6 +36,15 @@ public class ChatServer{
     private final int port;
     public ChatServer(int port){
         this.port = port;
+        LogReporter reporter = new RollingFileReporter("server-%d{yyyy-MM-dd_HH-mm}.log");
+        PerformanceMonitor monitor = new PerformanceMonitor(reporter);
+        monitor
+                .addRecorder(LoggerHandler.forwardMessageNumber)
+                .addRecorder(LoggerHandler.ignoredMessageNumber)
+                .addRecorder(LoggerHandler.invalidLoginNumber)
+                .addRecorder(LoggerHandler.receivedMessageNumber)
+                .addRecorder(LoggerHandler.validLoginNumber)
+                .start(1, TimeUnit.MINUTES);
     }
 
     public void run() throws InterruptedException{

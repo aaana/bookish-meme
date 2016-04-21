@@ -7,30 +7,26 @@
 - DATABASE <https://github.com/bookish-component/SQLHelper>
 
 
-## Table of Contents
-- [Introduction](#introduction)
-- [Requirements](#requirements)
-- [Framework](#framework)
-- [Get Started](#get-started)
-- [Dependences Installation](#dependences-installation)
-- [Configuration](#configuration)
-- [Usage](#usage)
+## 文档
 - [程序文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/product)
 - [项目管理文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/management)
 - [项目测试文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/test)
 - [复用文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/reuse)
-- [可复用组件](#可复用组件)
+- [可复用构件选择及改进建议](https://github.com/tztztztztz/bookish-meme/blob/master/doc/reuseRecommodation/%E5%8F%AF%E5%A4%8D%E7%94%A8%E6%9E%84%E4%BB%B6%E9%80%89%E6%8B%A9%E5%8F%8A%E6%94%B9%E8%BF%9B%E5%BB%BA%E8%AE%AE.md)
+
+## 可复用组件
   - [License](https://github.com/tztztztztz/bookish-meme/tree/master/tzlicense)
   - [LicenseHandler](https://github.com/tztztztztz/bookish-meme/tree/master/license-handler)
-  - [cm](https://github.com/tztztztztz/bookish-meme/tree/master/cm)
+  - [CM](https://github.com/tztztztztz/bookish-meme/tree/master/cm)
+  - [PM](https://github.com/tztztztztz/bookish-meme/tree/master/pm)
+  - [DataBase](https://github.com/bookish-component/SQLHelper)
 
-## Introduction
 
-### 小组成员
+## 小组成员
 
 | 学号 | 姓名 | Github |
 | -----|:----:| ----:|
-| 1352892    | 谭靖儒    |     |
+| 1352892    | 谭靖儒    |   tztztztztz  |
 | 1352875    | 黄安娜   | [aaana](https://github.com/aaana)    |
 | 1352965    | 晁佳欢    | wlmxjm1    |
 | 1352923    | 马致远    | maerye    |
@@ -43,87 +39,12 @@
 - **Jdk >= 1.8.0_45**
 - maven
 
-## Framework
+## UI设计
+- 登陆界面     
+<img src= "https://raw.githubusercontent.com/tztztztztz/bookish-meme/master/doc/img/login.png" height=300>
 
-  - [Netty](https://github.com/netty/netty)
-    
-## Get Started
-
-
-## Dependences Installation
-### maven
-`pom.xml`
-```xml
-<dependencies>
-    <dependency>
-        <groupId>io.netty</groupId>
-        <artifactId>netty-all</artifactId>
-        <version>4.0.0.CR3</version>
-    </dependency>
-    <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>4.10</version>
-        <scope>test</scope>
-    </dependency>
-    <dependency>
-        <groupId>javassist</groupId>
-        <artifactId>javassist</artifactId>
-        <version>3.12.1.GA</version>
-    </dependency>
-    <dependency>
-        <groupId>commons-io</groupId>
-        <artifactId>commons-io</artifactId>
-        <version>2.2</version>
-    </dependency>
-    <dependency>
-        <groupId>com.google.code.gson</groupId>
-        <artifactId>gson</artifactId>
-        <version>2.2.2</version>
-    </dependency>
-    <dependency>
-        <groupId>com.google.code.gson</groupId>
-        <artifactId>gson</artifactId>
-        <version>2.2.2</version>
-    </dependency>
-    <dependency>
-        <groupId>com.google.guava</groupId>
-        <artifactId>guava</artifactId>
-        <version>19.0</version>
-    </dependency>
-    <dependency>
-        <groupId>org.xerial</groupId>
-        <artifactId>sqlite-jdbc</artifactId>
-        <version>3.7.2</version>
-    </dependency>
-    <dependency>
-        <groupId>log4j</groupId>
-        <artifactId>log4j</artifactId>
-        <version>1.2.17</version>
-    </dependency>
-</dependencies>
-```
-
-## Configuration
-`config/conf.json`
-```json
-{
-  "server":{
-    "HOST":"localhost",
-    "PORT":8080,
-    "MaxMsgNumber":100,
-    "MaxMsgNumberPerSec":5
-  }
-
-}
-```
-
-## Usage
-
-1. 直接运行Server
-2. 运行ClientGUI
-3. Login
-4. enjoy it!
+- 聊天界面       
+<img src= "https://raw.githubusercontent.com/tztztztztz/bookish-meme/master/doc/img/chatting.png" height=450>
 
 
 
