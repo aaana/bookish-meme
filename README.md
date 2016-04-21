@@ -46,6 +46,12 @@
 - 聊天界面       
 <img src= "https://raw.githubusercontent.com/tztztztztz/bookish-meme/master/doc/img/chatting.png" height=450>
 
+<img src= "https://raw.githubusercontent.com/tztztztztz/bookish-meme/master/doc/img/chatpic.png" height=450>
 
+<img src= "https://raw.githubusercontent.com/tztztztztz/bookish-meme/master/doc/img/chatpic2.png" height=450>
+
+- 登陆失败警告
+
+<img src= "https://raw.githubusercontent.com/tztztztztz/bookish-meme/master/doc/img/loginfail.png" height=450>
 
 
