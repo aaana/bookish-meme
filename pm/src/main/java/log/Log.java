@@ -59,7 +59,38 @@ public class Log {
             return false;
         }
     }
+    public static boolean writeFile (String filename,String content)throws Exception
+    {
+        File file =new File(filename);
 
+        if(file.exists())
+        {
+            FileWriter pw=new FileWriter(file,true);
+
+            pw.write(content+"\n");
+
+            pw.close();
+            return true;
+        }
+        else
+        {
+            if(createFile(filename))
+            {
+                FileWriter pw=new FileWriter(file,true);
+                pw.write(content+"\n");
+                pw.close();
+
+                return true;
+            }
+            else
+            {
+                System.out.println("创建文件失败");
+                return false;
+            }
+
+        }
+
+    }
     public void run()
     {
 

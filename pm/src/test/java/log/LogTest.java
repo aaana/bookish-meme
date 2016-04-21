@@ -14,7 +14,7 @@ public class LogTest {
         log=new Log();
 
     }
-    @Test
+   /* @Test
     public void testRun() throws Exception
     {
         log.setDelay(1000);
@@ -27,5 +27,13 @@ public class LogTest {
             Thread.sleep(1000);
         }
         log.stop();
+    }*/
+    @Test
+    public void testWriteFile() throws Exception {
+        Log.writeFile("record","haha");
+        Log.writeFile("record","nihao");
+        Log.writeFile("rsd/jilu.log","houhou");
+        Log.writeFile("rsd/jilu.log","yes");
+        Log.writeFile("rsd/hhd.log","oyea");
     }
 }
