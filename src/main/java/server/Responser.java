@@ -38,6 +38,7 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
         // success to login
         if (messageType == MessageType.AUTHORITY && messageStatus == MessageStatus.NEEDHANDLED){
             ack.setType(ACKType.LOGINSUCCESS);
+            ack.setLoginContent(message.getLoginContent());
         }
 
 

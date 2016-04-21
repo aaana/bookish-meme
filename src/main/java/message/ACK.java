@@ -11,6 +11,7 @@ public class ACK {
 
     ACKType type;
     ChatContent chatContent;
+    LoginContent loginContent;
 
     public ACK(ACKType type) {
         this.type = type;
@@ -30,6 +31,14 @@ public class ACK {
 
     public void setChatContent(ChatContent chatContent) {
         this.chatContent = chatContent;
+    }
+
+    public LoginContent getLoginContent() {
+        return loginContent;
+    }
+
+    public void setLoginContent(LoginContent loginContent) {
+        this.loginContent = loginContent;
     }
 
     public ACKType getType() {

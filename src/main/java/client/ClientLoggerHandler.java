@@ -23,13 +23,17 @@ public class ClientLoggerHandler extends ChannelInboundMessageHandlerAdapter<ACK
     static CountingRecorder loginFail = new CountingRecorder("loginFail");
     static CountingRecorder sendMsgNumber = new CountingRecorder("sendMsgNumber");
     static CountingRecorder receiveMsgNumber = new CountingRecorder("receiveMsgNumber");
+    private String account;
 
     @Override
     public void messageReceived(ChannelHandlerContext ctx, ACK ack) throws Exception {
         ACKType type=ack.getType();
 
-        if(type == ACKType.LOGINSUCCESS)
+        if(type == ACKType.LOGINSUCCESS){
             loginSuccess.record();
+            account = ack.getLoginContent().getAccount();
+        }
+
         if(type == ACKType.LOGINFAIL)
             loginFail.record();
         if(type == ACKType.OTHERSMESSAGE){
@@ -37,7 +41,7 @@ public class ClientLoggerHandler extends ChannelInboundMessageHandlerAdapter<ACK
             Date now = new Date();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//可以方便地修改日期格式
             String snow = dateFormat.format(now);
-            Log.writeFile("./messageRecords/client.txt", snow + ": " + ack.getChatContent().toString());
+            Log.writeFile("./messageRecords/"+account+".txt","["+ snow+ "]" + " " + ack.getChatContent().getAccount()+": " + ack.getChatContent().toString());
         }
 
 

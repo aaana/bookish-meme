@@ -231,6 +231,7 @@ public class ClientGUI extends Application {
                             msgShow.appendText("   我:" + msg.getText() + "\n\n");
                             System.out.println(msg.getText());
                             ChatContent chatContent = new ChatContent(msg.getText());
+                            chatContent.setAccount(client.getAccount());
                             client.sendMessage(chatContent);
                             msg.setText("");
                         }
@@ -299,6 +300,7 @@ public class ClientGUI extends Application {
                 String pwd      = pwBox.getText();
                 try {
                     client.Login(username, pwd);
+                    client.setAccount(username);
                 } catch (InterruptedException e) {
                     System.out.println(e.getMessage());
                 }
@@ -365,7 +367,8 @@ public class ClientGUI extends Application {
     @Subscribe
     public void receiveOtherMessage(ReceiveMessageEvent event){
         ChatContent chatContent = event.getChatContent();
-        msgShow.appendText("   游客:" + chatContent.getMessage() + "\n\n");
+//        msgShow.appendText("   游客:" + chatContent.getMessage() + "\n\n");
+        msgShow.appendText("   "+chatContent.getAccount() + ": "+ chatContent.getMessage() + "\n\n");
     }
 
     @Subscribe

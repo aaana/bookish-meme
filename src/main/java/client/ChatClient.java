@@ -42,8 +42,17 @@ public class ChatClient {
 
     private final String host;
     private final int port;
+    private String account;
     private Channel connectedChannel;
     private EventLoopGroup eventGroup = null;
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
 
     public ChatClient() {
 //        Config config = new Config();
