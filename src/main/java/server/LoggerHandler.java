@@ -13,6 +13,9 @@ import octoteam.tahiti.performance.reporter.LogReporter;
 import octoteam.tahiti.performance.reporter.RollingFileReporter;
 import protocol.MessageType;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by tanjingru on 3/21/16.
  */
@@ -51,6 +54,10 @@ public class LoggerHandler extends ChannelInboundMessageHandlerAdapter<Message> 
 
         if( messageType == MessageType.CHATTING){
             receivedMessageNumber.record();
+            Date now = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//可以方便地修改日期格式
+            String snow = dateFormat.format(now);
+            Log.writeFile("./messageRecords/server.txt",snow+": "+message.getChatContent().toString());
 
             if (messageStatus == MessageStatus.NEEDHANDLED) forwardMessageNumber.record();
             else ignoredMessageNumber.record();
