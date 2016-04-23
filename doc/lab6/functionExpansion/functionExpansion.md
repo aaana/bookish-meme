@@ -6,9 +6,10 @@
 - 文件格式不限
 - 文件路径可配置
 
-解决：
-1. 在原有的PM构件基础上，增加`writeFile(String filename,String content)`接口，实现向文件中写入收到的消息功能
-2.  Server中，日志全都由`LoggerHandler`这个handler来处理，所以只要在收到聊天消息的条件下，将该消息写入文件即可，将server端收到的消息报存在./messageRecords/server.txt中，格式如下：
+解决：    
+
+- 在原有的PM构件基础上，增加`writeFile(String filename,String content)`接口，实现向文件中写入收到的消息功能
+-  Server中，日志全都由`LoggerHandler`这个handler来处理，所以只要在收到聊天消息的条件下，将该消息写入文件即可，将server端收到的消息报存在./messageRecords/server.txt中，格式如下：
 `[yyyy-MM-dd HH:mm:ss] 用户帐号 消息内容`
 ```java
 if( messageType == MessageType.CHATTING){
@@ -24,8 +25,7 @@ if( messageType == MessageType.CHATTING){
         }
 
 ```
-
-3.  Client中，日志全都由`ClientLoggerHandler`这个handler来处理，所以只要在确认消息类型为收到其他用户消息的条件下，将该消息记录下来即可。记录在messageRecords目录下以用户账户号为文件名的`.txt`文件中，格式如下:
+- Client中，日志全都由`ClientLoggerHandler`这个handler来处理，所以只要在确认消息类型为收到其他用户消息的条件下，将该消息记录下来即可。记录在messageRecords目录下以用户账户号为文件名的`.txt`文件中，格式如下:
 `[yyyy-MM-dd HH:mm:ss] 用户帐号 消息内容`
 
 ```java
