@@ -35,6 +35,7 @@ log.setInterval(60000);
 ```java
 log.setParam("key",value)
 ```
+
 ####Run
 
 ```java
@@ -44,3 +45,14 @@ log.run();
 ```java
 log.stop();
 ```
+##Static Method
+写文件操作
+```java
+Log.writeFile("path","content")
+```
+文件压缩
+```java
+Log.compress("destFilePath")
+```
+说明：该方法会将所有调用 Log.writeFile（） 方法生成的文件和性能日志进行压缩。
+使用Log.resetCompress()方法进行重置。（每次使用Log.compress()都会压缩重置后生成的文件）

@@ -35,5 +35,13 @@ public class LogTest {
         Log.writeFile("rsd/jilu.log","houhou");
         Log.writeFile("rsd/jilu.log","yes");
         Log.writeFile("rsd/hhd.log","oyea");
+
+        Log.compress("zip/record2.zip");
     }
+ /*   @Test
+    public void testCompress() throws Exception {
+        Log.recordFileName.add("rsd/jilu.log");
+        Log.recordFileName.add("rsd/hhd.log");
+        Log.compress("zip/record.zip");
+    }*/
 }
