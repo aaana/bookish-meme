@@ -6,13 +6,19 @@
 - LICENSE <https://github.com/bookish-component/License>
 - DATABASE <https://github.com/bookish-component/SQLHelper>
 
+> PM构件有更新，完成以下功能扩展
+> - 提供`writeFile(String filename,String content)`方法，实现向文件中写入收到的消息功能
+> - 提供`Log.compress("destFilePath")`方法，实现压缩文件
+
 
 ## 文档
-- [程序文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/product)
-- [项目管理文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/management)
-- [项目测试文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/test)
-- [复用文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/reuse)
-- [可复用构件选择及改进建议](https://github.com/tztztztztz/bookish-meme/blob/master/doc/reuseRecommodation/%E5%8F%AF%E5%A4%8D%E7%94%A8%E6%9E%84%E4%BB%B6%E9%80%89%E6%8B%A9%E5%8F%8A%E6%94%B9%E8%BF%9B%E5%BB%BA%E8%AE%AE.md)
+- [程序文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/程序文档/程序文档.md)
+- [项目管理文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/项目管理文档/项目管理文档.md)
+- [项目测试文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/测试文档/测试文档.md)
+- [复用文档](https://github.com/tztztztztz/bookish-meme/blob/master/doc/复用文档/复用文档.md)
+- [可复用构件说明文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/可复用构件说明文档)
+- [可复用构件选择及改进建议](https://github.com/tztztztztz/bookish-meme/blob/master/doc/可复用构件选择及改进建议/可复用构件选择及改进建议.md)
+
 
 ## 可复用组件
   - [License](https://github.com/tztztztztz/bookish-meme/tree/master/tzlicense)
@@ -26,11 +32,11 @@
 
 | 学号 | 姓名 | Github |
 | -----|:----:| ----:|
-| 1352892    | 谭靖儒    |   tztztztztz  |
-| 1352875    | 黄安娜   | [aaana](https://github.com/aaana)    |
-| 1352965    | 晁佳欢    | wlmxjm1    |
-| 1352923    | 马致远    | maerye    |
-|     | 林昌盛    |     |
+| 1352892    | 谭靖儒    | [tztztztztz](https://github.com/tztztztztz) |
+| 1352875    | 黄安娜    | [aaana](https://github.com/aaana)           |
+| 1352965    | 晁佳欢    | [wlmxjm1](https://github.com/wlmxjm1)       |
+| 1352923    | 马致远    | [maerye](https://github.com/maerye)         |
+| 1352965    | 林昌盛    | [apelyn](https://github.com/apelyn)         |
 
 
 ## Requirements
