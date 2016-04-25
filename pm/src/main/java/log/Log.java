@@ -18,6 +18,8 @@ public class Log {
     private long interval=60000;
     private Timer timer;
     private String pmdir="log\\";
+    private static Timer compressTimer = new Timer();
+    private static String compressPath = "";
 
     public void setParam(String key, Object x) {
         sParam.put(key,x);
@@ -136,6 +138,8 @@ public class Log {
         timer.cancel();
         System.out.println("log stop..");
     }
+
+
     public static boolean compress (String destFileName)throws Exception
     {
         File file = new File(destFileName);
@@ -151,7 +155,7 @@ public class Log {
         if(file.getParentFile()!=null&&!file.getParentFile().exists()) {
             //如果目标文件所在的目录不存在，则创建父目录
             if(!file.getParentFile().mkdirs()) {
-                System.out.println("创建目标文件所在目录失败！");
+                   System.out.println("创建目标文件所在目录失败！");
                 return false;
             }
         }
@@ -176,8 +180,39 @@ public class Log {
         }
         zipOutputStream.close();
         return true;
-
     }
+
+    public static void setCompressPath(String cPath){
+        compressPath = cPath;
+    }
+
+    public static void startCompressSchedule(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 1); //凌晨1点
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        Date date=calendar.getTime();
+        if (date.before(new Date())) {
+            date = addDay(date, 1);
+        }
+        compressTimer.schedule(new CompressTask(), date,24 * 60 * 60 * 1000);
+    }
+
+    public static void endCompressSchedule(){
+        compressTimer.cancel();
+    }
+
+
+    private static Date addDay(Date date, int num) {
+        Calendar startDT = Calendar.getInstance();
+        startDT.setTime(date);
+        startDT.add(Calendar.DAY_OF_MONTH, num);
+        return startDT.getTime();
+    }
+
+
+
+
     public static void resetCompress()
     {
         recordFileName.clear();

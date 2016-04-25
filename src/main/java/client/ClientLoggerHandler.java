@@ -41,7 +41,7 @@ public class ClientLoggerHandler extends ChannelInboundMessageHandlerAdapter<ACK
             Date now = new Date();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//可以方便地修改日期格式
             String snow = dateFormat.format(now);
-            Log.writeFile("./messageRecords/"+account+".txt","["+ snow+ "]" + " " + ack.getChatContent().getAccount()+": " + ack.getChatContent().toString());
+            Log.writeFile("./messageRecords/"+account+".log","["+ snow+ "]" + " " + ack.getChatContent().getAccount()+": " + ack.getChatContent().toString());
         }
 
 
