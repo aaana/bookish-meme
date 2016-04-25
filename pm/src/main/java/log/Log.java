@@ -17,6 +17,7 @@ public class Log {
     private long delay=60000;
     private long interval=60000;
     private Timer timer;
+    private String pmdir="log\\";
 
     public void setParam(String key, Object x) {
         sParam.put(key,x);
@@ -30,6 +31,16 @@ public class Log {
         this.interval = interval;
     }
 
+    public void setPMDir(String dir){
+        File file=new File(dir);
+        if (dir.endsWith(File.separator))
+        pmdir=dir;
+        else
+        {
+            System.out.println("这不是一个目录！日志将保存在默认目录下。");
+        }
+
+    }
     public static boolean createFile(String destFileName) {
         File file = new File(destFileName);
         if(file.exists()) {
@@ -52,6 +63,9 @@ public class Log {
         try {
             if (file.createNewFile()) {
                 System.out.println("创建单个文件" + destFileName + "成功！");
+
+                recordFileName.add(destFileName);
+
                 return true;
             } else {
                 System.out.println("创建单个文件" + destFileName + "失败！");
@@ -80,7 +94,7 @@ public class Log {
         {
             if(createFile(filename))
             {
-                recordFileName.add(filename);
+
 
                 FileWriter pw=new FileWriter(file,true);
                 pw.write(content+"\n");
@@ -106,9 +120,9 @@ public class Log {
             public void run() {
                 Date now = new Date();
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");//可以方便地修改日期格式
-                String snow = dateFormat.format( now);
+                String snow = dateFormat.format(now);
                 try {
-                    Log.writeFile(snow,sParam.toString());
+                    Log.writeFile(pmdir+snow+".txt",sParam.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

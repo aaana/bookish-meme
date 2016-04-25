@@ -7,7 +7,7 @@ logs/
 
 pm/log
 *.log
-
+*.txt
 # Maven
 target
 

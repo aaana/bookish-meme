@@ -14,21 +14,22 @@ public class LogTest {
         log=new Log();
 
     }
-   /* @Test
+    @Test
     public void testRun() throws Exception
     {
         log.setDelay(1000);
         log.setInterval(10000);
+        log.setPMDir("..\\hello\\how\\");
         log.run();
-        for(int i=0;i<100;i++)
+        for(int i=0;i<10;i++)
         {
             log.setParam("hello",i);
             log.setParam("thankyou",i+1);
             Thread.sleep(1000);
         }
         log.stop();
-    }*/
-    @Test
+    }
+/*    @Test
     public void testWriteFile() throws Exception {
         Log.writeFile("record","haha");
         Log.writeFile("record","nihao");
@@ -37,7 +38,7 @@ public class LogTest {
         Log.writeFile("rsd/hhd.log","oyea");
 
         Log.compress("zip/record2.zip");
-    }
+    }*/
  /*   @Test
     public void testCompress() throws Exception {
         Log.recordFileName.add("rsd/jilu.log");
