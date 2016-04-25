@@ -17,9 +17,9 @@ public class Log {
     private long delay=60000;
     private long interval=60000;
     private Timer timer;
-    private String pmdir="log\\";
+    private String pmdir="log"+File.separator;
     private static Timer compressTimer = new Timer();
-    private static String compressPath = "";
+    public static String compressPath = "";
 
     public void setParam(String key, Object x) {
         sParam.put(key,x);
@@ -196,6 +196,7 @@ public class Log {
             date = addDay(date, 1);
         }
         compressTimer.schedule(new CompressTask(), date,24 * 60 * 60 * 1000);
+
     }
 
     public static void endCompressSchedule(){
