@@ -14,7 +14,7 @@ public class LogTest {
         log=new Log();
 
     }
-    @Test
+/*    @Test
     public void testRun() throws Exception
     {
         log.setDelay(1000);
@@ -28,8 +28,8 @@ public class LogTest {
             Thread.sleep(1000);
         }
         log.stop();
-    }
-/*    @Test
+    }*/
+    @Test
     public void testWriteFile() throws Exception {
         Log.writeFile("record","haha");
         Log.writeFile("record","nihao");
@@ -37,8 +37,8 @@ public class LogTest {
         Log.writeFile("rsd/jilu.log","yes");
         Log.writeFile("rsd/hhd.log","oyea");
 
-        Log.compress("zip/record2.zip");
-    }*/
+        Log.compress("zip/record2");
+    }
  /*   @Test
     public void testCompress() throws Exception {
         Log.recordFileName.add("rsd/jilu.log");

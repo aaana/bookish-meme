@@ -58,8 +58,18 @@ Log.compress("destFilePath")
 使用Log.resetCompress()方法进行重置。（每次使用Log.compress()都会压缩重置后生成的文件）
 #New Features in 1.0.2
 设置性能日志文件目录（默认保存在当前目录的 log 文件夹下）
+注意 : 请以路径分隔符结束。
 ```java
 log.setPMDir("..\\hello\\how\\");(windows)
 log.setPMDir("../hello/how/");(unix)
 ```
-注意 : 请以路径分隔符结束。
+
+
+定时完成压缩任务
+```java
+Log.setCompressPath("message_records")
+//每天凌晨压缩一次
+Log.startCompressSchedule()
+//可以随时结束压缩计划
+Log.endCompressSchedule()
+```
