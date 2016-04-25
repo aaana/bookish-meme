@@ -80,8 +80,10 @@ public class ChatClient {
         this.port = port;
 
         // pm
-        LogReporter reporter = new RollingFileReporter("client-%d{yyyy-MM-dd_HH-mm}.log");
-        PerformanceMonitor monitor = new PerformanceMonitor(reporter);
+        LogReporter realtimeReporter = new RollingFileReporter("present/client-log-%d{yyyy-MM-dd_HH-mm}.log");
+        LogReporter archiveReporter = new RollingFileReporter("archive/client-log-%d{yyyy-MM-dd}.zip");
+
+        PerformanceMonitor monitor = new PerformanceMonitor(realtimeReporter, archiveReporter);
         monitor
                 .addRecorder(ClientLoggerHandler.loginFail)
                 .addRecorder(ClientLoggerHandler.loginSuccess)

@@ -36,8 +36,10 @@ public class ChatServer{
     private final int port;
     public ChatServer(int port){
         this.port = port;
-        LogReporter reporter = new RollingFileReporter("server-%d{yyyy-MM-dd_HH-mm}.log");
-        PerformanceMonitor monitor = new PerformanceMonitor(reporter);
+        LogReporter realtimeReporter = new RollingFileReporter("present/server-log-%d{yyyy-MM-dd_HH-mm}.log");
+        LogReporter archiveReporter = new RollingFileReporter("archive/server-log-%d{yyyy-MM-dd}.zip");
+
+        PerformanceMonitor monitor = new PerformanceMonitor(realtimeReporter, archiveReporter);
         monitor
                 .addRecorder(LoggerHandler.forwardMessageNumber)
                 .addRecorder(LoggerHandler.ignoredMessageNumber)
