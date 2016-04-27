@@ -31,12 +31,12 @@ public class ChannelManagerHandlerTest {
     @Test
     public void loginSucceed(){
 
-        int channelNum = Manager.channels.size();
+        int channelNum = Manager.clientChannels.size();
         LoginContent loginContent = new LoginContent("100","123456");
         Message loginSucceedMessage = new Message(loginContent, MessageStatus.NEEDHANDLED, MessageType.AUTHORITY);
         channel.writeInbound(loginSucceedMessage);
 
-        assertEquals(channelNum + 1, Manager.channels.size());
+        assertEquals(channelNum + 1, Manager.clientChannels.size());
 
         Message message = (Message)channel.readInbound();
         //不会改变登录内容
@@ -50,38 +50,38 @@ public class ChannelManagerHandlerTest {
     @Test
     public void loginFail(){
 
-        int channelNum = Manager.channels.size();
+        int channelNum = Manager.clientChannels.size();
         LoginContent loginContent = new LoginContent("100","123");
         Message loginFailMessage = new Message(loginContent, MessageStatus.LOGINFAIL, MessageType.AUTHORITY);
         channel.writeInbound(loginFailMessage);
 
-        assertEquals(channelNum,Manager.channels.size());
+        assertEquals(channelNum,Manager.clientChannels.size());
     }
 
     //chatting不进行处理,channels长度不变
     @Test
     public void chattingMethod(){
 
-        int channelNum = Manager.channels.size();
+        int channelNum = Manager.clientChannels.size();
         ChatContent chatContent = new ChatContent("Hello");
         Message chattingMessage = new Message(chatContent,MessageStatus.NEEDHANDLED,MessageType.CHATTING);
         channel.writeInbound(chattingMessage);
 
-        assertEquals(channelNum,Manager.channels.size());
+        assertEquals(channelNum,Manager.clientChannels.size());
     }
 
 
     @Test
     public void clientExit(){
 
-        int channelNum = Manager.channels.size();
+        int channelNum = Manager.clientChannels.size();
         LoginContent loginContent = new LoginContent("100","123456");
         Message loginSucceedMessage = new Message(loginContent, MessageStatus.NEEDHANDLED, MessageType.AUTHORITY);
         channel.writeInbound(loginSucceedMessage);
 
         channel.close();
 
-        assertEquals(channelNum, Manager.channels.size());
+        assertEquals(channelNum, Manager.clientChannels.size());
     }
 
 

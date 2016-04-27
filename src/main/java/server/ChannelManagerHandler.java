@@ -1,5 +1,6 @@
 package server;
 
+import channel.ClientChannel;
 import channel.Manager;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
@@ -21,8 +22,12 @@ public class ChannelManagerHandler extends ChannelInboundMessageHandlerAdapter<M
             for ( Channel channel : Manager.channels){
                 channel.write("[SERVER] - " + incoming.remoteAddress() + "has joined\n");
             }*/
-            Manager.channels.add(channelHandlerContext.channel());
+//            Manager.channels.add(channelHandlerContext.channel());
 
+            Channel channel = channelHandlerContext.channel();
+            String account = message.getLoginContent().getAccount();
+            ClientChannel clientChannel = new ClientChannel(channel,account);
+            Manager.clientChannels.add(clientChannel);
         }
         channelHandlerContext.nextInboundMessageBuffer().add(message);
         channelHandlerContext.fireInboundBufferUpdated();
@@ -34,7 +39,15 @@ public class ChannelManagerHandler extends ChannelInboundMessageHandlerAdapter<M
         for ( Channel channel : Manager.channels){
             channel.write("[SERVER] - " + incoming.remoteAddress() + "has left\n");
         }*/
-        Manager.channels.remove(ctx.channel());
+//        Manager.channels.remove(ctx.channel());
+        Channel channel = ctx.channel();
+        for (ClientChannel clientChannel : Manager.clientChannels){
+
+            if(clientChannel.getChannel()==channel){
+                Manager.clientChannels.remove(clientChannel);
+            }
+        }
+
     }
 
 }

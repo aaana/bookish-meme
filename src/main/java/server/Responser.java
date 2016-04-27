@@ -1,5 +1,6 @@
 package server;
 
+import channel.ClientChannel;
 import channel.Manager;
 import com.google.gson.Gson;
 import io.netty.channel.Channel;
@@ -46,13 +47,23 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
         if (messageType == MessageType.CHATTING && messageStatus == MessageStatus.NEEDHANDLED )
         {
 
-            for (Channel channel : Manager.channels){
-                if ( channel != incomingChannel){
+//            for (Channel channel : Manager.channels){
+//                if ( channel != incomingChannel){
+//                    ACK toOthersACK = new ACK();
+//                    toOthersACK.setType(ACKType.OTHERSMESSAGE);
+//                    toOthersACK.setChatContent(message.getChatContent());
+//                    String otherACKJson = gson.toJson(toOthersACK);
+//                    channel.write(otherACKJson + "\n");
+//                }
+//            }
+
+            for (ClientChannel clientChannel : Manager.clientChannels){
+                if(clientChannel.getChannel()!=incomingChannel){
                     ACK toOthersACK = new ACK();
                     toOthersACK.setType(ACKType.OTHERSMESSAGE);
                     toOthersACK.setChatContent(message.getChatContent());
                     String otherACKJson = gson.toJson(toOthersACK);
-                    channel.write(otherACKJson + "\n");
+                    clientChannel.getChannel().write(otherACKJson + "\n");
                 }
             }
 
@@ -61,8 +72,15 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
 
 
         if(messageType == MessageType.CHATTING && messageStatus == MessageStatus.OVERRANGE){
-            Manager.channels.remove(incomingChannel);
+//            Manager.channels.remove(incomingChannel);
+            for (ClientChannel clientChannel : Manager.clientChannels){
+
+                if(clientChannel.getChannel()==incomingChannel){
+                    Manager.clientChannels.remove(clientChannel);
+                }
+            }
             ack.setType(ACKType.REDOLOGIN);
+
         }
 
         if(messageType == MessageType.CHATTING && messageStatus == MessageStatus.TOOFREQUENT){
