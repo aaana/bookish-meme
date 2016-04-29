@@ -25,8 +25,8 @@ public class ChannelManagerHandler extends ChannelInboundMessageHandlerAdapter<M
 //            Manager.channels.add(channelHandlerContext.channel());
 
             Channel channel = channelHandlerContext.channel();
-            String account = message.getLoginContent().getAccount();
-            ClientChannel clientChannel = new ClientChannel(channel,account);
+            int groupId = message.getLoginContent().getGroupId();
+            ClientChannel clientChannel = new ClientChannel(channel,groupId);
             Manager.clientChannels.add(clientChannel);
         }
         channelHandlerContext.nextInboundMessageBuffer().add(message);

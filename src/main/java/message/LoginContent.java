@@ -13,6 +13,7 @@ public class LoginContent {
 
     private String account;
     private String password;
+    private int groupId;
 
     public String getAccount() {
         return account;
@@ -28,6 +29,14 @@ public class LoginContent {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 
     public LoginContent(String account, String password) {

@@ -8,11 +8,11 @@ import io.netty.channel.Channel;
 public class ClientChannel {
 
     private Channel channel;
-    private String account;
+    private int groupId;
 
-    public ClientChannel(Channel channel, String account) {
+    public ClientChannel(Channel channel, int groupId) {
         this.channel = channel;
-        this.account = account;
+        this.groupId = groupId;
     }
 
     public Channel getChannel() {
@@ -23,11 +23,11 @@ public class ClientChannel {
         this.channel = channel;
     }
 
-    public String getAccount() {
-        return account;
+    public int getGroupId() {
+        return groupId;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 }
