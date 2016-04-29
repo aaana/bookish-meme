@@ -8,8 +8,8 @@ import java.sql.*;
 public class LoginServer {
     private ThreadLocal<Connection> threadLocal = new ThreadLocal<Connection>();
 
-    public boolean login(String name,String password) throws Exception {
-        boolean result = false;
+    public int login(String name,String password) throws Exception {
+        int result = -1;
         Connection connection = threadLocal.get();
 
         if (connection == null || connection.isClosed()) {
@@ -18,11 +18,13 @@ public class LoginServer {
                 connection = DriverManager.getConnection("jdbc:sqlite:test.db");
 
                 threadLocal.set(connection);
-                PreparedStatement preparedStatement = connection.prepareStatement("select password from user where name = ?");
+                PreparedStatement preparedStatement = connection.prepareStatement("select * from user where name = ?");
                 preparedStatement.setString(1,name);
                 ResultSet resultSet = preparedStatement.executeQuery();
-                if(resultSet.next()&&resultSet.getString(1).equals(password)){
-                    result = true;
+
+                //登陆成功同时返回groupId
+                if(resultSet.next()&&resultSet.getString(2).equals(password)){
+                    result = resultSet.getInt(3);
                 }
             } catch (Exception e) {
                 throw e;

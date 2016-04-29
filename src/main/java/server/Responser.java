@@ -57,8 +57,15 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
 //                }
 //            }
 
+            int groupId=-1;
             for (ClientChannel clientChannel : Manager.clientChannels){
-                if(clientChannel.getChannel()!=incomingChannel){
+                if(clientChannel.getChannel()==incomingChannel){
+                    groupId = clientChannel.getGroupId();
+                    break;
+                }
+            }
+            for (ClientChannel clientChannel : Manager.clientChannels){
+                if(clientChannel.getGroupId()==groupId && clientChannel.getChannel()!=incomingChannel){
                     ACK toOthersACK = new ACK();
                     toOthersACK.setType(ACKType.OTHERSMESSAGE);
                     toOthersACK.setChatContent(message.getChatContent());
