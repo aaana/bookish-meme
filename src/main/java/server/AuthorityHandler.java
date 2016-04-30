@@ -20,10 +20,15 @@ public class AuthorityHandler extends ChannelInboundMessageHandlerAdapter<Messag
             String account = loginContent.getAccount();
             String password = loginContent.getPassword();
             LoginServer loginServer = new LoginServer();
-            boolean success = loginServer.login(account,password);
+            int success = loginServer.login(account,password);
 //            login fails
-            if(!success) {
+            if(success==-1) {
                 message.setMessageStatus(MessageStatus.LOGINFAIL);
+            }
+            // login success
+            else{
+                loginContent.setGroupId(success);
+                message.setLoginContent(loginContent);
             }
         }
         //其他情况下不作处理直接流到下一个channel
