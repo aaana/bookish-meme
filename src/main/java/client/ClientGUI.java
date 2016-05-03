@@ -36,6 +36,8 @@ public class ClientGUI extends Application {
 
     private ChatClient client;
 
+    final String prePath = "file:" + System.getProperty("user.dir") + "/src/gui";
+
     //标志为,代表当前为哪个窗口. 0为登录, 1为聊天框
     private int flag = 0;
 
@@ -95,7 +97,7 @@ public class ClientGUI extends Application {
 
         //文件路径prefix
 
-        final String prePath = "file:" + System.getProperty("user.dir") + "/src/gui";
+
 
         this.client = new ChatClient();
 
@@ -105,15 +107,26 @@ public class ClientGUI extends Application {
         userTextField.setId("username");
         userTextField.setLayoutX(35);
         userTextField.setLayoutY(180);
-        userTextField.setPrefSize(180,30);
+        userTextField.setPrefSize(180, 30);
         root.getChildren().add(userTextField);
 
         pwBox = new PasswordField();
         pwBox.setId("pwd");
         pwBox.setLayoutX(35);
         pwBox.setLayoutY(220);
-        pwBox.setPrefSize(180,30);
+        pwBox.setPrefSize(180, 30);
         root.getChildren().add(pwBox);
+
+        pwBox.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+
+            @Override
+            public void handle(KeyEvent event) {
+                KeyCode code =event.getCode();
+                if(code == KeyCode.ENTER) {
+                    doLogin();
+                }
+            }
+        });
 
         line1 = new Line(40,210,215,210);
         line1.setStroke(Color.valueOf("#d3d6d7"));
@@ -208,7 +221,7 @@ public class ClientGUI extends Application {
         //消息界面
         final TextArea msg = new TextArea();
         msg.setId("msg");
-        msg.setPrefSize(650,120);
+        msg.setPrefSize(650, 120);
         msg.setLayoutX(0);
         msg.setLayoutY(430);
 
@@ -284,28 +297,11 @@ public class ClientGUI extends Application {
 
             @Override
             public void handle(ActionEvent event) {
-                //        加载icon
-                load = new ImageView(new Image(prePath + "/load.gif"));
-                load.setLayoutY(200);
-                load.setLayoutX(110);
-                root.getChildren().add(load);
-                root.getChildren().remove(line1);
-                root.getChildren().remove(line2);
-                root.getChildren().remove(userTextField);
-                root.getChildren().remove(pwBox);
-                root.getChildren().remove(loginBtn);
-                // 等待相应界面
-                System.out.println("loginTask2");
-                String username = userTextField.getText();
-                String pwd      = pwBox.getText();
-                try {
-                    client.Login(username, pwd);
-                    client.setAccount(username);
-                } catch (InterruptedException e) {
-                    System.out.println(e.getMessage());
-                }
+                doLogin();
             }
         });
+
+
 
         //注册窗口关闭事件
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -317,6 +313,29 @@ public class ClientGUI extends Application {
                 }
             }
         });
+    }
+
+    private void doLogin(){
+        //        加载icon
+        load = new ImageView(new Image(prePath + "/load.gif"));
+        load.setLayoutY(200);
+        load.setLayoutX(110);
+        root.getChildren().add(load);
+        root.getChildren().remove(line1);
+        root.getChildren().remove(line2);
+        root.getChildren().remove(userTextField);
+        root.getChildren().remove(pwBox);
+        root.getChildren().remove(loginBtn);
+        // 等待相应界面
+        System.out.println("loginTask2");
+        String username = userTextField.getText();
+        String pwd      = pwBox.getText();
+        try {
+            client.Login(username, pwd);
+            client.setAccount(username);
+        } catch (InterruptedException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Subscribe
