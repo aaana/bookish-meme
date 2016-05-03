@@ -18,15 +18,9 @@ public class ChannelManagerHandler extends ChannelInboundMessageHandlerAdapter<M
     public void messageReceived(ChannelHandlerContext channelHandlerContext, Message message) throws Exception {
         if( message.getType() == MessageType.AUTHORITY && message.getMessageStatus() == MessageStatus.NEEDHANDLED){
 
-           /* Channel incoming  = channelHandlerContext.channel();
-            for ( Channel channel : Manager.channels){
-                channel.write("[SERVER] - " + incoming.remoteAddress() + "has joined\n");
-            }*/
-//            Manager.channels.add(channelHandlerContext.channel());
-
             Channel channel = channelHandlerContext.channel();
-            String account = message.getLoginContent().getAccount();
-            ClientChannel clientChannel = new ClientChannel(channel,account);
+            int groupId = message.getLoginContent().getGroupId();
+            ClientChannel clientChannel = new ClientChannel(channel,groupId);
             Manager.clientChannels.add(clientChannel);
         }
         channelHandlerContext.nextInboundMessageBuffer().add(message);
@@ -35,11 +29,6 @@ public class ChannelManagerHandler extends ChannelInboundMessageHandlerAdapter<M
 
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
-        /*Channel incoming = ctx.channel();
-        for ( Channel channel : Manager.channels){
-            channel.write("[SERVER] - " + incoming.remoteAddress() + "has left\n");
-        }*/
-//        Manager.channels.remove(ctx.channel());
         Channel channel = ctx.channel();
         for (ClientChannel clientChannel : Manager.clientChannels){
 
