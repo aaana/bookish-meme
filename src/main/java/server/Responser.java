@@ -47,16 +47,6 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
         if (messageType == MessageType.CHATTING && messageStatus == MessageStatus.NEEDHANDLED )
         {
 
-//            for (Channel channel : Manager.channels){
-//                if ( channel != incomingChannel){
-//                    ACK toOthersACK = new ACK();
-//                    toOthersACK.setType(ACKType.OTHERSMESSAGE);
-//                    toOthersACK.setChatContent(message.getChatContent());
-//                    String otherACKJson = gson.toJson(toOthersACK);
-//                    channel.write(otherACKJson + "\n");
-//                }
-//            }
-
             int groupId=-1;
             for (ClientChannel clientChannel : Manager.clientChannels){
                 if(clientChannel.getChannel()==incomingChannel){
@@ -79,7 +69,6 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
 
 
         if(messageType == MessageType.CHATTING && messageStatus == MessageStatus.OVERRANGE){
-//            Manager.channels.remove(incomingChannel);
             for (ClientChannel clientChannel : Manager.clientChannels){
 
                 if(clientChannel.getChannel()==incomingChannel){
