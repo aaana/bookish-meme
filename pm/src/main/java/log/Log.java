@@ -281,9 +281,6 @@ public class Log {
         return true;
     }
 
-
-
-
     public static void resetCompress()
     {
         recordFileName.clear();

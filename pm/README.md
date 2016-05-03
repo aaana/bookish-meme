@@ -63,8 +63,6 @@ Log.compress("destFilePath")
 log.setPMDir("..\\hello\\how\\");(windows)
 log.setPMDir("../hello/how/");(unix)
 ```
-
-
 定时完成压缩任务
 ```java
 Log.setCompressPath("message_records")
@@ -73,3 +71,16 @@ Log.startCompressSchedule()
 //可以随时结束压缩计划
 Log.endCompressSchedule()
 ```
+请务必自己每天设置一次路径，否则无法使用每周归档的功能。
+#New Features in 1.0.3
+每周对聊天记录和性能日志进行归档
+
+```java
+//设置目标压缩文件路径
+Log.setReCompressPath("total.zip")
+//开始压缩任务
+Log.startReCompressSchedule();
+//停止压缩任务
+Log.stopReCompressSchedule();
+```
+请务必每周自己设置一次目标文件路径，否则会因为重名而失败。
