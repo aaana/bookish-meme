@@ -10,9 +10,9 @@ import static org.junit.Assert.*;
  */
 public class LoginServerTest {
     private LoginServer loginServer;
-    private  String[] userName={"100",    "101'",  "",       "wefjniknvienvdj';knehgiur43gbjkddafefs"};
-    private String[] password={ "123456", "123456",  "123456", ""};
-    private boolean[] expectedResult={true,false,false,false};
+    private  String[] userName={"100", "101'", "","wefjj';knehgiur43gbjkddafefs","200"};
+    private String[] password={ "123456", "123456",  "123456", "","123456"};
+    private int[] expectedResult={1,-1,-1,-1,2};
     @Before
     public void setUp() throws Exception {
         loginServer = new LoginServer();
@@ -20,7 +20,7 @@ public class LoginServerTest {
 
     @Test
     public void testLogin() throws Exception {
-        for(int i=0;i<4;i++)
+        for(int i=0;i<5;i++)
             assertEquals(expectedResult[i],loginServer.login(userName[i],password[i]));
     }
 }
