@@ -24,6 +24,7 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="bookish-meme" />
+        <module name="cipher" />
         <module name="cm" />
         <module name="license-handler" />
         <module name="pm" />
@@ -32,9 +33,12 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="bookish-meme" target="1.6" />
-      <module name="cm" target="1.8" />
-      <module name="license-handler" target="1.8" />
+      <module name="bookish-meme" target="1.5" />
+      <module name="cipher" target="1.5" />
+      <module name="cm" target="1.5" />
+      <module name="license-handler" target="1.5" />
+      <module name="pm" target="1.5" />
+      <module name="tzlicense" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -13,6 +13,7 @@
         <option value="$PROJECT_DIR$/tzlicense/pom.xml" />
         <option value="$PROJECT_DIR$/pm/pom.xml" />
         <option value="$PROJECT_DIR$/license-handler/pom.xml" />
+        <option value="$PROJECT_DIR$/cipher/pom.xml" />
       </list>
     </option>
   </component>
