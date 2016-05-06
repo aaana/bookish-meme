@@ -1,5 +1,12 @@
 package compressor;
 
+import net.lingala.zip4j.core.ZipFile;
+import net.lingala.zip4j.exception.ZipException;
+import net.lingala.zip4j.model.ZipParameters;
+import net.lingala.zip4j.util.Zip4jConstants;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -13,13 +20,19 @@ public class CompressTask {
     private String destination;
     private int status;
     private Timer timer;
-    private int delay;
-    private int interval;
+    private int delay = 0;
+    private int interval = 60 * 60;
+    private ZipFile destinationZipFile;
+    private ZipParameters parameters;
 
 
     public CompressTask(String destination, String source) {
         this.destination = destination;
         this.source = source;
+        parameters = new ZipParameters();
+        parameters.setCompressionMethod(Zip4jConstants.COMP_DEFLATE);
+        parameters.setCompressionLevel(Zip4jConstants.DEFLATE_LEVEL_NORMAL);
+        timer = new Timer();
     }
 
     public String getDestination() {
@@ -57,6 +70,14 @@ public class CompressTask {
     }
 
     public void compress(){
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        String suffix =  df.format(new Date());
+        try {
+            destinationZipFile = new ZipFile(destination + suffix + ".zip");
+            destinationZipFile.addFolder(source, parameters);
+        } catch (ZipException e) {
+            e.printStackTrace();
+        }
 
     }
 
