@@ -26,6 +26,7 @@
         <module name="bookish-meme" />
         <module name="cipher" />
         <module name="cm" />
+        <module name="compress" />
         <module name="license-handler" />
         <module name="pm" />
         <module name="ratelimerHandler" />
