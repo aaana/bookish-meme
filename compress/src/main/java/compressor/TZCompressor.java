@@ -27,8 +27,9 @@ public class TZCompressor {
         }
     }
 
-    public void addTask(CompressTask compressTask, String taskName){
+    public TZCompressor addTask(CompressTask compressTask, String taskName){
         tasks.put(taskName, compressTask);
+        return this;
     }
 
     public void startTask(String taskName){
@@ -39,11 +40,8 @@ public class TZCompressor {
         ((CompressTask)tasks.get(taskName)).stop();
     }
 
-    private ZipParameters parameters;
-
     public TZCompressor(){
-        parameters.setCompressionMethod(Zip4jConstants.COMP_DEFLATE);
-        parameters.setCompressionLevel(Zip4jConstants.DEFLATE_LEVEL_NORMAL);
+        tasks = new HashMap<String, CompressTask>();
     }
 
     public static void main(String[] args) throws IOException, ZipException {
