@@ -14,6 +14,7 @@
         <option value="$PROJECT_DIR$/pm/pom.xml" />
         <option value="$PROJECT_DIR$/license-handler/pom.xml" />
         <option value="$PROJECT_DIR$/cipher/pom.xml" />
+        <option value="$PROJECT_DIR$/compress/pom.xml" />
       </list>
     </option>
   </component>
