@@ -84,3 +84,20 @@ Log.startReCompressSchedule();
 Log.stopReCompressSchedule();
 ```
 请务必每周自己设置一次目标文件路径，否则会因为重名而失败。
+
+#New Features in 1.0.4
+写文件并对单个文件和总文件的大小进行限制。
+
+首先，在congfig目录下创建config.json文件，对输出目录，单个文件大小和文件夹大小进行配置。
+```json
+{
+  "outputFolder":"log/",
+  "singleFileSize":100,//kB
+  "totalFileSize":1024 //MB
+}
+```
+然后使用以下方法写文件内容，文件将在你配置的目录下自动生成。当单个文件大小超过限制时将自动生成新文件，当文件夹大小超过限制时，将在控制台提示你清理文件。
+```java
+Log.writeFile("content")
+```
+特别提示：本功能依赖于本组的cm构件。

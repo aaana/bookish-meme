@@ -1,5 +1,8 @@
 package log;
 
+import conf.Config;
+import exception.FileNotExistException;
+
 import javax.xml.crypto.dsig.keyinfo.KeyValue;
 import java.io.*;
 import java.text.SimpleDateFormat;
@@ -23,6 +26,7 @@ public class Log {
     private static Timer reCompressTimer=new Timer();
     public static String compressPath = "out.zip";
     private static String reCompressPath="total.zip";
+    private static ArrayList<String> historyFilenames= new ArrayList<String>();
 
     public void setParam(String key, Object x) {
         sParam.put(key, x);
@@ -110,7 +114,85 @@ public class Log {
         }
 
     }
+    public static void writeFile(String content) throws Exception {
+        Config config = new Config();
+        config.readFile("config/config.json");
+        String folder=config.getString("outputFolder");
+        int singleFileSize=config.getInt("singleFileSize");
+        int totalFileSize=config.getInt("totalFileSize");
 
+        File foldername=new File(folder);
+        if(folderSize(foldername)/(1024*1024)>totalFileSize)
+        {
+            System.out.println("您的文件夹大小超过限制，请及时清理！");
+            return;
+        }
+
+
+        if (historyFilenames.size()==0) {
+            Date now = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");//可以方便地修改日期格式
+            String snow = dateFormat.format(now);
+
+            String newFile=folder+snow+".txt";
+            if(createFile(newFile)) {
+
+                historyFilenames.add(newFile);
+                FileWriter pw = new FileWriter(newFile, true);
+                pw.write(content + "\n");
+                pw.close();
+
+            }
+
+        }else{
+            String fileName=historyFilenames.get(historyFilenames.size()-1);
+            File file=new File(fileName);
+            int writeBytes=content.getBytes().length;
+
+            if((file.length()+writeBytes)/1024>singleFileSize)
+            {
+                Date now = new Date();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+                String snow = dateFormat.format(now);
+
+                String newFile=folder+snow+".txt";
+                if(createFile(newFile)) {
+
+                    historyFilenames.add(newFile);
+                    FileWriter pw = new FileWriter(newFile, true);
+                    pw.write(content + "\n");
+                    pw.close();
+
+                }
+            }
+            else{
+                FileWriter pw = new FileWriter(file, true);
+                pw.write(content + "\n");
+                pw.close();
+            }
+
+        }
+
+    }
+    public static long folderSize(File directory){
+        long length = 0;
+        if(directory.exists())
+        {
+            File [] files=directory.listFiles();
+            if(files!=null) {
+                for (File file : files) {
+                    if (file.isFile())
+                        length += file.length();
+                    else if(file.isDirectory())
+                        length += folderSize(file);
+
+                }
+            }
+        }
+
+        return length;
+
+    }
     public void run() {
 
         timer = new Timer();

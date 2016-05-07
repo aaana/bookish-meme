@@ -3,6 +3,8 @@ package log;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
+
 import static org.junit.Assert.*;
 
 public class LogTest {
@@ -46,7 +48,7 @@ public class LogTest {
         Log.recordFileName.add("rsd/hhd.log");
         Log.compress("zip/record.zip");
     }*/
-    @Test
+  /*  @Test
     public void testReCompress() throws Exception{
         Log.writeFile("record","haha");
         Log.writeFile("record","nihao");
@@ -63,6 +65,16 @@ public class LogTest {
         Log.resetCompress();
 
         Log.reCompress("total/total.zip");
+
+    }*/
+    @Test
+    public void testNewWriteFile() throws Exception {
+
+        for(int i=0;i<4095;i++)
+        {
+            Log.writeFile("a");
+        }
+
 
     }
 

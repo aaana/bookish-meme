@@ -1,0 +1,5 @@
+{
+  "outputFolder":"log/",
+  "singleFileSize":100,//kB
+  "totalFileSize":1024 //MB
+}
