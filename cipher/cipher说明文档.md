@@ -1,4 +1,4 @@
-# CM
+# CIPHER
 
 ## Introduction
 
@@ -21,7 +21,7 @@
 ## Usage
 有两种使用方法
 - 第一种：
-    - 初始化,确定秘钥
+    - 初始化,确定密钥
     ```java
     FileEncryptAndDecrypt fileEncryptAndDecrypt = new FileEncryptAndDecrypt("keyString");
     ```
