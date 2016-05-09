@@ -1,4 +1,4 @@
-# CM
+# CIPHER
 
 ## Introduction
 
@@ -21,15 +21,15 @@
 ## Usage
 有两种使用方法
 - 第一种：
-    - 初始化,确定秘钥
+    - 初始化,确定密钥
     ```java
     FileEncryptAndDecrypt fileEncryptAndDecrypt = new FileEncryptAndDecrypt("keyString");
     ```
-    -加密
+    - 加密
     ```java
     fileEncryptAndDecrypt.encrypt("./messageRecords/100.log","./messageRecords/100_加密.log");
     ```
-    -解密
+    - 解密
     ```java
     fileEncryptAndDecrypt.decrypt("./messageRecords/100_加密.log","./messageRecords/100_解密.log");
     ```
@@ -42,11 +42,11 @@
     ```java
     Key key = fileEncryptAndDecrypt.generateKey("abc");
     ```
-    -用密匙变量加密
+    - 用密匙变量加密
     ```java
     fileEncryptAndDecrypt.encrypt("./messageRecords/100.log","./messageRecords/100_加密.log",key);
     ```
-    -用密匙变量解密
+    - 用密匙变量解密
     ```java
     fileEncryptAndDecrypt.decrypt("./messageRecords/100_加密.log","./messageRecords/100_解密.log",key);
     ```
