@@ -5,7 +5,7 @@
 - CM <https://github.com/bookish-component/CM>
 - LICENSE <https://github.com/bookish-component/License>
 - DATABASE <https://github.com/bookish-component/SQLHelper>
-- [CIPHER](https://github.com/bookish-component/CIPHER)
+- CIPHER <https://github.com/bookish-component/CIPHER>
 
 > PM构件有更新，完成以下功能扩展
 > - 提供`writeFile(String filename,String content)`方法，实现向文件中写入收到的消息功能
