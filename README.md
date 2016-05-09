@@ -5,6 +5,7 @@
 - CM <https://github.com/bookish-component/CM>
 - LICENSE <https://github.com/bookish-component/License>
 - DATABASE <https://github.com/bookish-component/SQLHelper>
+- [CIPHER](https://github.com/bookish-component/CIPHER)
 
 > PM构件有更新，完成以下功能扩展
 > - 提供`writeFile(String filename,String content)`方法，实现向文件中写入收到的消息功能
@@ -12,7 +13,7 @@
 
 
 ## 文档
-- [程序文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/程序文档/程序文档.md)
+- [程序文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/项目文档/项目文档.md)
 - [项目管理文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/项目管理文档/项目管理文档.md)
 - [项目测试文档](https://github.com/tztztztztz/bookish-meme/tree/master/doc/测试文档/测试文档.md)
 - [复用文档](https://github.com/tztztztztz/bookish-meme/blob/master/doc/复用文档/复用文档.md)
@@ -26,6 +27,8 @@
   - [CM](https://github.com/tztztztztz/bookish-meme/tree/master/cm)
   - [PM](https://github.com/tztztztztz/bookish-meme/tree/master/pm)
   - [DataBase](https://github.com/bookish-component/SQLHelper)
+  - [CIPHER](https://github.com/bookish-component/CIPHER)
+  - [COMPRESS](https://github.com/tztztztztz/bookish-meme/tree/master/compress)
 
 
 ## 小组成员
