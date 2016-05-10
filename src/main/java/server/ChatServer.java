@@ -1,5 +1,7 @@
 package server;
 
+import compressor.CompressTask;
+import compressor.TZCompressor;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.EventLoopGroup;
@@ -40,6 +42,21 @@ public class ChatServer{
                 .addRecorder(LoggerHandler.receivedMessageNumber)
                 .addRecorder(LoggerHandler.validLoginNumber)
                 .start(1, TimeUnit.MINUTES);
+
+        TZCompressor tzCompressor = new TZCompressor();
+        CompressTask PMTask = new CompressTask("archive/archive-all","pm-log/");
+        PMTask.setInterval(1000*60*60*24);
+        PMTask.setDelay(1000*60);
+        CompressTask messageTask = new CompressTask("archive/archive-all", "messageRecords/");
+        messageTask.setInterval(1000 * 60 * 60 * 24);
+        messageTask.setDelay(1000 * 60);
+        CompressTask allTask = new CompressTask("archive/archive", "archive/archive-all");
+        allTask.setInterval(1000*60*60*24*7);
+        allTask.setDelay(1000*60);
+        tzCompressor.addTask(PMTask,"PM")
+                .addTask(messageTask,"MSG")
+                .addTask(allTask,"all");
+        tzCompressor.startAllTask();
     }
 
     public void run() throws InterruptedException{

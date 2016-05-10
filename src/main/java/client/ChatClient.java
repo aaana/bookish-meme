@@ -94,11 +94,17 @@ public class ChatClient {
 
         TZCompressor tzCompressor = new TZCompressor();
         CompressTask PMTask = new CompressTask("archive/archive-all","pm-log/");
-        CompressTask MessageTask = new CompressTask("archive/archive-all", "messageRecords/");
+        PMTask.setInterval(1000*60*60*24);
+        PMTask.setDelay(1000*60);
+        CompressTask messageTask = new CompressTask("archive/archive-all", "messageRecords/");
+        messageTask.setInterval(1000 * 60 * 60 * 24);
+        messageTask.setDelay(1000 * 60);
         CompressTask allTask = new CompressTask("archive/archive", "archive/archive-all");
+        allTask.setInterval(1000*60*60*24*7);
+        allTask.setDelay(1000*60);
         tzCompressor.addTask(PMTask,"PM")
-                    .addTask(MessageTask,"MSG")
-                    .addTask(allTask,"all");
+                .addTask(messageTask, "MSG")
+                .addTask(allTask, "all");
         tzCompressor.startAllTask();
 
     }
