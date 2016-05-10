@@ -6,6 +6,8 @@ package client;
 import Util.Conf;
 import Util.ConfigReader;
 import com.google.gson.Gson;
+import compressor.CompressTask;
+import compressor.TZCompressor;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -89,6 +91,16 @@ public class ChatClient {
                 .addRecorder(ClientLoggerHandler.receiveMsgNumber)
                 .addRecorder(ClientLoggerHandler.sendMsgNumber)
                 .start(1, TimeUnit.MINUTES);
+
+        TZCompressor tzCompressor = new TZCompressor();
+        CompressTask PMTask = new CompressTask("archive/archive-all","pm-log/");
+        CompressTask MessageTask = new CompressTask("archive/archive-all", "messageRecords/");
+        CompressTask allTask = new CompressTask("archive/archive", "archive/archive-all");
+        tzCompressor.addTask(PMTask,"PM")
+                    .addTask(MessageTask,"MSG")
+                    .addTask(allTask,"all");
+        tzCompressor.startAllTask();
+
     }
 
     private Channel connectServer() throws InterruptedException{
