@@ -12,8 +12,6 @@ public class CompressTaskTest {
     public void t(){
         CompressTask compressTask = new CompressTask("archive/hh", "logs/");
         compressTask.start();
-        Scanner scanner = new Scanner(System.in);
-        scanner.next();
     }
 
 }

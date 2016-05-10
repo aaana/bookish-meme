@@ -14,8 +14,6 @@ public class TZCompressorTest {
         tzCompressor.addTask(new CompressTask("archive/qq","logs"),"qq")
                     .addTask(new CompressTask("archive/oo", "logs"),"oo");
         tzCompressor.startAllTask();
-        Scanner scanner = new Scanner(System.in);
-        scanner.next();
     }
 
 }
