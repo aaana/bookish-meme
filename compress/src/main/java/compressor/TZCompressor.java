@@ -13,6 +13,7 @@ import java.util.*;
 /**
  * Created by tanjingru on 5/5/16.
  */
+
 public class TZCompressor {
 
     private HashMap<String, CompressTask> tasks;
@@ -26,6 +27,17 @@ public class TZCompressor {
             }
         }
     }
+
+    public void stopAllTask(){
+        Set<Map.Entry<String, CompressTask>> tasksSet = tasks.entrySet();
+        for(Map.Entry<String, CompressTask> task : tasksSet){
+            CompressTask ct = task.getValue();
+            if(ct.getStatus() == 1){
+                ct.stop();
+            }
+        }
+    }
+
 
     public TZCompressor addTask(CompressTask compressTask, String taskName){
         tasks.put(taskName, compressTask);

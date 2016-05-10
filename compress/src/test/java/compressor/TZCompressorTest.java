@@ -16,7 +16,6 @@ public class TZCompressorTest {
         tzCompressor.startAllTask();
         Scanner scanner = new Scanner(System.in);
         scanner.next();
-
     }
 
 }

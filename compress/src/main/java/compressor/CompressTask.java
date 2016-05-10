@@ -22,6 +22,23 @@ public class CompressTask {
     private Timer timer;
     private int delay = 0;
     private int interval = 60 * 60;
+
+    public int getDelay() {
+        return delay;
+    }
+
+    public void setDelay(int delay) {
+        this.delay = delay;
+    }
+
+    public int getInterval() {
+        return interval;
+    }
+
+    public void setInterval(int interval) {
+        this.interval = interval;
+    }
+
     private ZipFile destinationZipFile;
     private ZipParameters parameters;
 
