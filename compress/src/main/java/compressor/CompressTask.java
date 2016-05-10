@@ -49,6 +49,9 @@ public class CompressTask {
         parameters = new ZipParameters();
         parameters.setCompressionMethod(Zip4jConstants.COMP_DEFLATE);
         parameters.setCompressionLevel(Zip4jConstants.DEFLATE_LEVEL_NORMAL);
+        parameters.setEncryptionMethod(Zip4jConstants.ENC_METHOD_AES);
+        parameters.setAesKeyStrength(Zip4jConstants.AES_STRENGTH_256);
+        parameters.setPassword("123");
         timer = new Timer();
     }
 

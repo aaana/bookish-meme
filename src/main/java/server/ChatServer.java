@@ -45,14 +45,14 @@ public class ChatServer{
 
         TZCompressor tzCompressor = new TZCompressor();
         CompressTask PMTask = new CompressTask("archive/archive-all","pm-log/");
-        PMTask.setInterval(1000*60*60*24);
-        PMTask.setDelay(1000*60);
+        PMTask.setInterval(1000 * 60 * 60 * 24);
+        PMTask.setDelay(1000*60*2);
         CompressTask messageTask = new CompressTask("archive/archive-all", "messageRecords/");
         messageTask.setInterval(1000 * 60 * 60 * 24);
-        messageTask.setDelay(1000 * 60);
+        messageTask.setDelay(1000 * 60 * 2);
         CompressTask allTask = new CompressTask("archive/archive", "archive/archive-all");
         allTask.setInterval(1000*60*60*24*7);
-        allTask.setDelay(1000*60);
+        allTask.setDelay(1000* 60 * 2 );
         tzCompressor.addTask(PMTask,"PM")
                 .addTask(messageTask,"MSG")
                 .addTask(allTask,"all");
