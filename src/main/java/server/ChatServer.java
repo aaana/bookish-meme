@@ -23,12 +23,6 @@ public class ChatServer{
     public static void main(String[] args) throws InterruptedException{
 
         PropertyConfigurator.configure("config/log4j-server.property");
-
-        // 开始定时任务
-//        Timer timer = new Timer();
-//        timer.schedule(new LoggerTask(), 60 * 1000,  60 * 1000);
-
-        //打开服务器
         new ChatServer(8080).run();
 
     }
@@ -36,10 +30,9 @@ public class ChatServer{
     private final int port;
     public ChatServer(int port){
         this.port = port;
-        LogReporter realtimeReporter = new RollingFileReporter("present/server-log-%d{yyyy-MM-dd_HH-mm}.log");
-        LogReporter archiveReporter = new RollingFileReporter("archive/server-log-%d{yyyy-MM-dd}.zip");
+        LogReporter realtimeReporter = new RollingFileReporter("pmlog/server-log-%d{yyyy-MM-dd_HH-mm}.log");
 
-        PerformanceMonitor monitor = new PerformanceMonitor(realtimeReporter, archiveReporter);
+        PerformanceMonitor monitor = new PerformanceMonitor(realtimeReporter);
         monitor
                 .addRecorder(LoggerHandler.forwardMessageNumber)
                 .addRecorder(LoggerHandler.ignoredMessageNumber)
