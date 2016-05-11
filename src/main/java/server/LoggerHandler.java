@@ -57,10 +57,14 @@ public class LoggerHandler extends ChannelInboundMessageHandlerAdapter<Message> 
             Date now = new Date();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//可以方便地修改日期格式
             String snow = dateFormat.format(now);
-            Log.writeFile("./messageRecords/server.log","["+ snow+ "]" + " "+message.getChatContent().getAccount()+": "+message.getChatContent().toString());
+            Log.writeFile("./messageRecords/server.log", "[" + snow + "]" + " " + message.getChatContent().getAccount() + ": " + message.getChatContent().toString());
 
-            if (messageStatus == MessageStatus.NEEDHANDLED) forwardMessageNumber.record();
-            else ignoredMessageNumber.record();
+            if (messageStatus == MessageStatus.NEEDHANDLED) {
+                forwardMessageNumber.record();
+                //记录到数据库中
+
+
+            } else ignoredMessageNumber.record();
 
         }
 

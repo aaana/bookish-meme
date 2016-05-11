@@ -1,5 +1,6 @@
 package server;
 
+import channel.Manager;
 import compressor.CompressTask;
 import compressor.TZCompressor;
 import io.netty.bootstrap.ServerBootstrap;
@@ -13,6 +14,8 @@ import octoteam.tahiti.performance.reporter.LogReporter;
 import octoteam.tahiti.performance.reporter.RollingFileReporter;
 import org.apache.log4j.PropertyConfigurator;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.concurrent.TimeUnit;
 
@@ -57,6 +60,40 @@ public class ChatServer{
                 .addTask(messageTask,"MSG")
                 .addTask(allTask,"all");
         tzCompressor.startAllTask();
+//
+//        if(!Manager.groupClientsMissingNum.containsKey(groupId)){
+//
+//            Map<String,Integer> missingIndex = new HashMap<String, Integer>(){
+//                {
+//                    put(accountId,-1);
+//                }
+//
+//            };
+//            Manager.groupClientsMissingIndex.put(groupId,missingIndex);
+//        }else{
+//            Manager.groupClientsMissingIndex.get(groupId).put(accountId,-1);
+//        }
+
+        Manager.groupClientsMissingNum.put(1,new HashMap<String, Integer>(){
+            {
+                put("100",0);
+                put("101",0);
+            }
+        });
+
+        Manager.groupClientsMissingNum.put(2,new HashMap<String, Integer>(){
+            {
+                put("200",0);
+                put("201",0);
+                put("202",0);
+            }
+        });
+
+        Manager.groupClientsMissingNum.put(3,new HashMap<String, Integer>(){
+            {
+                put("300",0);
+            }
+        });
     }
 
     public void run() throws InterruptedException{

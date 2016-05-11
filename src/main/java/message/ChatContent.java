@@ -4,12 +4,17 @@ package message;
 import com.google.gson.internal.StringMap;
 
 import java.lang.reflect.Field;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 
 public class ChatContent {
 
+    private int groupId;
+
     private String account;
+
+    private String sendDate;
 
     public String getAccount() {
         return account;
@@ -33,6 +38,22 @@ public class ChatContent {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getSendDate() {
+        return sendDate;
+    }
+
+    public void setSendDate(String sendDate) {
+        this.sendDate = sendDate;
+    }
+
+    public int getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 
     public ChatContent(String message) {

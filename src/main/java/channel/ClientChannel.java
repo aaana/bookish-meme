@@ -9,6 +9,7 @@ public class ClientChannel {
 
     private Channel channel;
     private int groupId;
+    private String account;
 
     public ClientChannel(Channel channel, int groupId) {
         this.channel = channel;
@@ -29,5 +30,13 @@ public class ClientChannel {
 
     public void setGroupId(int groupId) {
         this.groupId = groupId;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
     }
 }

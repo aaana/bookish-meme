@@ -2,6 +2,7 @@ package message;
 
 import protocol.ACKType;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -12,6 +13,7 @@ public class ACK {
     ACKType type;
     ChatContent chatContent;
     LoginContent loginContent;
+    List<ChatContent> missingChatContents;
 
     public ACK(ACKType type) {
         this.type = type;
@@ -47,5 +49,13 @@ public class ACK {
 
     public void setType(ACKType type) {
         this.type = type;
+    }
+
+    public List<ChatContent> getMissingChatContents() {
+        return missingChatContents;
+    }
+
+    public void setMissingChatContents(List<ChatContent> missingChatContents) {
+        this.missingChatContents = missingChatContents;
     }
 }

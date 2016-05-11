@@ -28,7 +28,7 @@ public class ChatClientHandler extends ChannelInboundMessageHandlerAdapter<ACK> 
             PublicEvent.eventBus.post(new LoginFailEvent());
 
         if (ackType == ACKType.LOGINSUCCESS)
-            PublicEvent.eventBus.post(new LoginSuccessEvent());
+            PublicEvent.eventBus.post(new LoginSuccessEvent(s.getMissingChatContents()));
 
         if (ackType == ACKType.OTHERSMESSAGE)
             PublicEvent.eventBus.post(new ReceiveMessageEvent(s.getChatContent()));

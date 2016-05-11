@@ -29,6 +29,9 @@ import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import org.apache.log4j.PropertyConfigurator;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import java.util.Timer;
 import java.util.concurrent.TimeUnit;
 
@@ -241,10 +244,14 @@ public class ClientGUI extends Application {
 //                            String pre  = "   ";
 //                            for (int i=0; i<prefix; i++) pre += "      ";
 //                            System.out.println(f);
-                            msgShow.appendText("   我:" + msg.getText() + "\n\n");
+                            Date now = new Date();
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//可以方便地修改日期格式
+                            String snow = dateFormat.format(now);
+                            msgShow.appendText(snow+"   我:" + msg.getText() + "\n\n");
                             System.out.println(msg.getText());
                             ChatContent chatContent = new ChatContent(msg.getText());
                             chatContent.setAccount(client.getAccount());
+                            chatContent.setSendDate(snow);
                             client.sendMessage(chatContent);
                             msg.setText("");
                         }
@@ -342,19 +349,32 @@ public class ClientGUI extends Application {
     public void LoginSuccess(LoginSuccessEvent loginSuccessEvent){
         flag = 1;
         System.out.println("success final");
-        Platform.runLater(new Runnable(){
-            @Override public void run() {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
                 updateScene(sceneChat);
             }
         });
+
+        List<ChatContent> chatContents = loginSuccessEvent.getChatContents();
+//        msgShow.appendText("   游客:" + chatContent.getMessage() + "\n\n");
+        if(chatContents.size()!=0){
+            for(ChatContent chatContent : chatContents){
+                msgShow.appendText("   " + chatContent.getAccount() + ": " + chatContent.getMessage() + "\n\n");
+            }
+        }
+
+
+
     }
 
     @Subscribe
-    public void LoginFail(LoginFailEvent loginFailEvent){
+    public void LoginFail(LoginFailEvent loginFailEvent) {
         client.closeConnection();
         System.out.println("wrong account");
-        Platform.runLater(new Runnable(){
-            @Override public void run() {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
                 backLogin();
                 final Alert alert = new Alert(Alert.AlertType.INFORMATION); // 實體化Alert對話框物件，並直接在建構子設定對話框的訊息類型
                 alert.setTitle("出错提示"); //設定對話框視窗的標題列文字
@@ -387,7 +407,7 @@ public class ClientGUI extends Application {
     public void receiveOtherMessage(ReceiveMessageEvent event){
         ChatContent chatContent = event.getChatContent();
 //        msgShow.appendText("   游客:" + chatContent.getMessage() + "\n\n");
-        msgShow.appendText("   "+chatContent.getAccount() + ": "+ chatContent.getMessage() + "\n\n");
+        msgShow.appendText(chatContent.getSendDate()+"   "+chatContent.getAccount() + ": "+ chatContent.getMessage() + "\n\n");
     }
 
     @Subscribe

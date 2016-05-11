@@ -9,6 +9,9 @@ import message.Message;
 import message.MessageStatus;
 import protocol.MessageType;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by tanjingru on 3/20/16.
  */
@@ -20,8 +23,12 @@ public class ChannelManagerHandler extends ChannelInboundMessageHandlerAdapter<M
 
             Channel channel = channelHandlerContext.channel();
             int groupId = message.getLoginContent().getGroupId();
+            String account = message.getLoginContent().getAccount();
             ClientChannel clientChannel = new ClientChannel(channel,groupId);
+            clientChannel.setAccount(account);
             Manager.clientChannels.add(clientChannel);
+
+
         }
         channelHandlerContext.nextInboundMessageBuffer().add(message);
         channelHandlerContext.fireInboundBufferUpdated();

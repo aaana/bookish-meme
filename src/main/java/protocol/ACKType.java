@@ -18,4 +18,5 @@ public enum ACKType {
 
     OTHERSMESSAGE; // 收到的别人的消息
 
+
 }
