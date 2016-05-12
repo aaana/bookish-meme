@@ -12,22 +12,24 @@ public class ChatContent {
 
     private int groupId;
 
-    private String account;
+    private String sender;
 
     private String sendDate;
 
-    public String getAccount() {
-        return account;
-    }
 
-    public void setAccount(String account) {
-        this.account = account;
-    }
 
-    public ChatContent(String account, String message) {
+    public ChatContent(String sender, String message) {
 
-        this.account = account;
+        this.sender = sender;
         this.message = message;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
     private String message;

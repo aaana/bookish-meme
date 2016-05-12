@@ -13,10 +13,7 @@ import message.MessageStatus;
 import protocol.ACKType;
 import protocol.MessageType;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by tanjingru on 3/21/16.
@@ -51,7 +48,7 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
             String account = message.getLoginContent().getAccount();
             int missingNum = Manager.groupClientsMissingNum.get(groupId).get(account);
             List<ChatContent> messages = new ArrayList<ChatContent>();
-            //从数据库中取
+            //从数据库中取！！unfinished
             while (missingNum>0){
 
                 messages.add(new ChatContent("aaa"));
@@ -62,6 +59,21 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
                     Manager.groupClientsMissingNum.get(groupId).put(account, 0);
                 }
             }
+
+            //找该组所有成员未接受消息的最大个数
+
+            Iterator iterator =  Manager.groupClientsMissingNum.get(groupId).entrySet().iterator();
+            int maxValue = 0;
+            while(iterator.hasNext()){
+                Map.Entry<String,Integer> entry = (Map.Entry)(iterator.next());
+                int value = entry.getValue();
+                if(value > maxValue){
+                    maxValue = value;
+                }
+            }
+
+            //删除数据库中该组前(该组所有消息－maxValue)个消息!!!! unfinished
+
 
 
             System.out.println(Manager.groupClientsMissingNum);
@@ -84,6 +96,7 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
             }
 
             Set<String> onlineClientsInSameGroup = new HashSet<String>();
+            //转发给同组在线的其他成员
             for (ClientChannel clientChannel : Manager.clientChannels){
                 if(clientChannel.getGroupId()==groupId && clientChannel.getChannel()!=incomingChannel){
                     onlineClientsInSameGroup.add(clientChannel.getAccount());
@@ -95,14 +108,18 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
                 }
             }
 
-            onlineClientsInSameGroup.add(message.getChatContent().getAccount());
+            //该组所有在线clients的account,包括发送方
+            onlineClientsInSameGroup.add(message.getChatContent().getSender());
 
             Set<String> clientKeysSet = (Manager.groupClientsMissingNum.get(groupId)).keySet();
 
+            //该组所有clients的account
             List<String> clientKeys = new ArrayList<String>();
             clientKeys.addAll(clientKeysSet);
             for(String clientKey : clientKeys){
                 System.out.println(clientKey);
+
+                //该组不在线成员遗漏消息数+1
                 if(!onlineClientsInSameGroup.contains(clientKey)){
                     int num = Manager.groupClientsMissingNum.get(groupId).get(clientKey);
                     Manager.groupClientsMissingNum.get(groupId).remove(clientKey);
