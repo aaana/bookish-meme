@@ -15,6 +15,7 @@ public class ChatContent {
     private String account;
 
     private String sendDate;
+    private String message;
 
     public String getAccount() {
         return account;
@@ -24,13 +25,18 @@ public class ChatContent {
         this.account = account;
     }
 
+
     public ChatContent(String account, String message) {
 
         this.account = account;
         this.message = message;
     }
-
-    private String message;
+    public ChatContent(int gid,String account,String sendDate,String message) {
+        this.groupId = gid;
+        this.sendDate = sendDate;
+        this.account = account;
+        this.message = message;
+    }
 
     public String getMessage() {
         return message;
