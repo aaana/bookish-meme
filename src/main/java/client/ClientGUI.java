@@ -250,7 +250,7 @@ public class ClientGUI extends Application {
                             msgShow.appendText(snow+"   我:" + msg.getText() + "\n\n");
                             System.out.println(msg.getText());
                             ChatContent chatContent = new ChatContent(msg.getText());
-                            chatContent.setAccount(client.getAccount());
+                            chatContent.setSender(client.getAccount());
                             chatContent.setSendDate(snow);
                             client.sendMessage(chatContent);
                             msg.setText("");
@@ -360,7 +360,7 @@ public class ClientGUI extends Application {
 //        msgShow.appendText("   游客:" + chatContent.getMessage() + "\n\n");
         if(chatContents.size()!=0){
             for(ChatContent chatContent : chatContents){
-                msgShow.appendText("   " + chatContent.getAccount() + ": " + chatContent.getMessage() + "\n\n");
+                msgShow.appendText("   " + chatContent.getSender() + ": " + chatContent.getMessage() + "\n\n");
             }
         }
 
@@ -407,7 +407,7 @@ public class ClientGUI extends Application {
     public void receiveOtherMessage(ReceiveMessageEvent event){
         ChatContent chatContent = event.getChatContent();
 //        msgShow.appendText("   游客:" + chatContent.getMessage() + "\n\n");
-        msgShow.appendText(chatContent.getSendDate()+"   "+chatContent.getAccount() + ": "+ chatContent.getMessage() + "\n\n");
+        msgShow.appendText(chatContent.getSendDate()+"   "+chatContent.getSender() + ": "+ chatContent.getMessage() + "\n\n");
     }
 
     @Subscribe

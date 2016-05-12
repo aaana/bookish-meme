@@ -74,6 +74,8 @@ public class ChatServer{
 //            Manager.groupClientsMissingIndex.get(groupId).put(accountId,-1);
 //        }
 
+        //从数据库中得到client的信息！！！unfinished！！！
+
         Manager.groupClientsMissingNum.put(1,new HashMap<String, Integer>(){
             {
                 put("100",0);
