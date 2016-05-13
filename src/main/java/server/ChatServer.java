@@ -75,27 +75,12 @@ public class ChatServer{
 //        }
 
         //从数据库中得到client的信息！！！unfinished！！！
-
-        Manager.groupClientsMissingNum.put(1,new HashMap<String, Integer>(){
-            {
-                put("100",0);
-                put("101",0);
-            }
-        });
-
-        Manager.groupClientsMissingNum.put(2,new HashMap<String, Integer>(){
-            {
-                put("200",0);
-                put("201",0);
-                put("202",0);
-            }
-        });
-
-        Manager.groupClientsMissingNum.put(3,new HashMap<String, Integer>(){
-            {
-                put("300",0);
-            }
-        });
+        DBOperate dbOperate = new DBOperate();
+        try {
+            dbOperate.getGidAndUid();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void run() throws InterruptedException{

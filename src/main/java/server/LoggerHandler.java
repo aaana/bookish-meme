@@ -61,7 +61,10 @@ public class LoggerHandler extends ChannelInboundMessageHandlerAdapter<Message> 
 
             if (messageStatus == MessageStatus.NEEDHANDLED) {
                 forwardMessageNumber.record();
-                //将消息记录到数据库中！！！unfinished！！！
+                //将消息记录到数据库中
+
+                DBOperate dbOperate = new DBOperate();
+                dbOperate.insert(message.getChatContent());
 
 
             } else ignoredMessageNumber.record();

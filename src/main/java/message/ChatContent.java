@@ -11,30 +11,27 @@ import java.util.Map;
 public class ChatContent {
 
     private int groupId;
-
-    private String account;
-
+    private String sender;
     private String sendDate;
     private String message;
 
-    public String getAccount() {
-        return account;
+    public String getSender() {
+        return sender;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
+    public ChatContent(String sender, String message) {
 
-    public ChatContent(String account, String message) {
-
-        this.account = account;
+        this.sender = sender;
         this.message = message;
     }
-    public ChatContent(int gid,String account,String sendDate,String message) {
+    public ChatContent(int gid,String sender,String sendDate,String message) {
         this.groupId = gid;
         this.sendDate = sendDate;
-        this.account = account;
+        this.sender = sender;
         this.message = message;
     }
 

@@ -49,15 +49,21 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
             int missingNum = Manager.groupClientsMissingNum.get(groupId).get(account);
             List<ChatContent> messages = new ArrayList<ChatContent>();
             //从数据库中取！！unfinished
-            while (missingNum>0){
+            DBOperate dbOperate = new DBOperate();
+            if (missingNum>0){
+                List<ChatContent> temp;
+                temp = dbOperate.getALLMessageByGid(groupId);
+                messages = temp.subList(temp.size()-missingNum,temp.size());
+                Manager.groupClientsMissingNum.get(groupId).remove(account);
+                Manager.groupClientsMissingNum.get(groupId).put(account, 0);
 
-                messages.add(new ChatContent("aaa"));
-                missingNum--;
-                if(missingNum==0){
-
-                    Manager.groupClientsMissingNum.get(groupId).remove(account);
-                    Manager.groupClientsMissingNum.get(groupId).put(account, 0);
-                }
+//                messages.add(new ChatContent("aaa"));
+//                missingNum--;
+//                if(missingNum==0){
+//
+//                    Manager.groupClientsMissingNum.get(groupId).remove(account);
+//                    Manager.groupClientsMissingNum.get(groupId).put(account, 0);
+//                }
             }
 
             //找该组所有成员未接受消息的最大个数
@@ -73,7 +79,7 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
             }
 
             //删除数据库中该组前(该组所有消息－maxValue)个消息!!!! unfinished
-
+            dbOperate.delete(groupId,maxValue);
 
 
             System.out.println(Manager.groupClientsMissingNum);
