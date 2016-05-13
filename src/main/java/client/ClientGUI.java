@@ -247,11 +247,12 @@ public class ClientGUI extends Application {
                             Date now = new Date();
                             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//可以方便地修改日期格式
                             String snow = dateFormat.format(now);
-                            msgShow.appendText(snow+"   我:" + msg.getText() + "\n\n");
+                            msgShow.appendText(snow+"\n"+"我:" + msg.getText() + "\n\n");
                             System.out.println(msg.getText());
                             ChatContent chatContent = new ChatContent(msg.getText());
                             chatContent.setSender(client.getAccount());
                             chatContent.setSendDate(snow);
+                            chatContent.setGroupId(client.getGroupId());
                             client.sendMessage(chatContent);
                             msg.setText("");
                         }
@@ -357,10 +358,11 @@ public class ClientGUI extends Application {
         });
 
         List<ChatContent> chatContents = loginSuccessEvent.getChatContents();
+        client.setGroupId(loginSuccessEvent.getGroupId());
 //        msgShow.appendText("   游客:" + chatContent.getMessage() + "\n\n");
         if(chatContents.size()!=0){
             for(ChatContent chatContent : chatContents){
-                msgShow.appendText("   " + chatContent.getSender() + ": " + chatContent.getMessage() + "\n\n");
+                msgShow.appendText(chatContent.getSendDate()+"\n" + chatContent.getSender() + ": " + chatContent.getMessage() + "\n\n");
             }
         }
 

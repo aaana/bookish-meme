@@ -45,6 +45,7 @@ public class ChatClient {
     private final String host;
     private final int port;
     private String account;
+    private int groupId;
     private Channel connectedChannel;
     private EventLoopGroup eventGroup = null;
 
@@ -54,6 +55,15 @@ public class ChatClient {
 
     public void setAccount(String account) {
         this.account = account;
+    }
+
+
+    public int getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 
     public ChatClient() {

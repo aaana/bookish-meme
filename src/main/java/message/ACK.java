@@ -14,6 +14,7 @@ public class ACK {
     ChatContent chatContent;
     LoginContent loginContent;
     List<ChatContent> missingChatContents;
+    int groupId;
 
     public ACK(ACKType type) {
         this.type = type;
@@ -57,5 +58,13 @@ public class ACK {
 
     public void setMissingChatContents(List<ChatContent> missingChatContents) {
         this.missingChatContents = missingChatContents;
+    }
+
+    public int getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 }

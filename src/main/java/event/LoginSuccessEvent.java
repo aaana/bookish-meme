@@ -9,12 +9,14 @@ import java.util.List;
  */
 public class LoginSuccessEvent {
 
-    List<ChatContent> chatContents;
+    private List<ChatContent> chatContents;
+    private int groupId;
     public LoginSuccessEvent() {
     }
 
-    public LoginSuccessEvent(List<ChatContent> chatContents) {
+    public LoginSuccessEvent(List<ChatContent> chatContents,int groupId) {
         this.chatContents = chatContents;
+        this.groupId = groupId;
     }
 
     public List<ChatContent> getChatContents() {
@@ -23,5 +25,13 @@ public class LoginSuccessEvent {
 
     public void setChatContents(List<ChatContent> chatContents) {
         this.chatContents = chatContents;
+    }
+
+    public int getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 }

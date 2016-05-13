@@ -84,6 +84,7 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
 
             System.out.println(Manager.groupClientsMissingNum);
             ack.setMissingChatContents(messages);
+            ack.setGroupId(groupId);
 
 
         }
