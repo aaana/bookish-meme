@@ -11,10 +11,14 @@ public class LoginSuccessEvent {
 
     private List<ChatContent> chatContents;
     private int groupId;
+
+    private List<String> onlineAccounts;
     public LoginSuccessEvent() {
     }
 
-    public LoginSuccessEvent(List<ChatContent> chatContents,int groupId) {
+    public LoginSuccessEvent(List<ChatContent> chatContents,int groupId,List<String> onlineAccounts)
+    {
+        this.onlineAccounts=onlineAccounts;
         this.chatContents = chatContents;
         this.groupId = groupId;
     }
@@ -34,4 +38,13 @@ public class LoginSuccessEvent {
     public void setGroupId(int groupId) {
         this.groupId = groupId;
     }
+
+    public List<String> getOnlineAccounts() {
+        return onlineAccounts;
+    }
+
+    public void setOnlineAccounts(List<String> onlineAccounts) {
+        this.onlineAccounts = onlineAccounts;
+    }
+
 }

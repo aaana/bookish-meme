@@ -1,11 +1,9 @@
 package client;
 
 import event.*;
-import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundMessageHandlerAdapter;
 import message.ACK;
-import message.ChatContent;
 import protocol.ACKType;
 
 /**
@@ -28,7 +26,7 @@ public class ChatClientHandler extends ChannelInboundMessageHandlerAdapter<ACK> 
             PublicEvent.eventBus.post(new LoginFailEvent());
 
         if (ackType == ACKType.LOGINSUCCESS)
-            PublicEvent.eventBus.post(new LoginSuccessEvent(s.getMissingChatContents(),s.getGroupId()));
+            PublicEvent.eventBus.post(new LoginSuccessEvent(s.getMissingChatContents(),s.getGroupId(),s.getAccounts()));
 
         if (ackType == ACKType.OTHERSMESSAGE)
             PublicEvent.eventBus.post(new ReceiveMessageEvent(s.getChatContent()));
@@ -39,6 +37,11 @@ public class ChatClientHandler extends ChannelInboundMessageHandlerAdapter<ACK> 
         if (ackType == ACKType.TOOFRENQUENT)
             PublicEvent.eventBus.post(new TooFrequentEvent());
 
+        if(ackType==ACKType.SOMEONEONLINE)
+            PublicEvent.eventBus.post(new SomeOneOnlineEvent(s.getAccounts().get(0)));
+
+        if(ackType==ACKType.SOMEONEOFFLINE)
+            PublicEvent.eventBus.post(new SomeOneOfflineEvent(s.getAccounts().get(0)));
     }
 
 }

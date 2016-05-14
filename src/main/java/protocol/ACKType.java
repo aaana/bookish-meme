@@ -16,7 +16,9 @@ public enum ACKType {
 
     SENDSUCCESS, // 发送成功
 
-    OTHERSMESSAGE; // 收到的别人的消息
+    OTHERSMESSAGE, // 收到的别人的消息
 
+    SOMEONEONLINE ,//同组成员上线
 
+    SOMEONEOFFLINE //同组成员下线
 }

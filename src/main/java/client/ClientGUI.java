@@ -30,6 +30,7 @@ import javafx.stage.Stage;
 import org.apache.log4j.PropertyConfigurator;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Timer;
@@ -358,6 +359,14 @@ public class ClientGUI extends Application {
         });
 
         List<ChatContent> chatContents = loginSuccessEvent.getChatContents();
+        List<String> onlineAccounts =loginSuccessEvent.getOnlineAccounts();
+        client.setOnlineAccounts((ArrayList<String>)onlineAccounts);
+
+        msgShow.appendText("在线账号:\n");
+        for(String account : onlineAccounts)
+        {
+            msgShow.appendText(account+" ");
+        }
         client.setGroupId(loginSuccessEvent.getGroupId());
 //        msgShow.appendText("   游客:" + chatContent.getMessage() + "\n\n");
         if(chatContents.size()!=0){
@@ -368,6 +377,21 @@ public class ClientGUI extends Application {
 
 
 
+    }
+    @Subscribe
+    public void SomeOneOnline(SomeOneOnlineEvent someOneOnlineEvent)
+    {
+        String account=someOneOnlineEvent.getAccount();
+        client.addOnlineAccount(account);
+        msgShow.appendText("您的好友: "+account+"已上线\n");
+    }
+
+    @Subscribe
+    public void SomeOneOffline(SomeOneOfflineEvent someOneOfflineEvent)
+    {
+        String account=someOneOfflineEvent.getAccount();
+        client.deleteOnlineAccount(account);
+        msgShow.appendText("您的好友: "+account+"已下线\n");
     }
 
     @Subscribe

@@ -1,1 +1,0 @@
-{thankyou=2, hello=1}

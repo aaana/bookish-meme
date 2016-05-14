@@ -45,6 +45,26 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
             ack.setLoginContent(message.getLoginContent());
 
             int groupId = message.getLoginContent().getGroupId();
+            List<String>sameGroupOnlineAccounts=new ArrayList<String>();
+
+
+            for(ClientChannel clientChannel:Manager.clientChannels)
+            {
+                if(clientChannel.getGroupId()==groupId&&clientChannel.getChannel()!=incomingChannel)
+                {
+                    sameGroupOnlineAccounts.add(clientChannel.getAccount());
+                    ACK a=new ACK();
+                    a.setType(ACKType.SOMEONEONLINE);
+                    ArrayList<String> account=new ArrayList<String>();
+                    account.add(message.getLoginContent().getAccount());
+                    a.setAccounts(account);
+                    String json=gson.toJson(a);
+                    clientChannel.getChannel().write(json+"\n");
+                }
+            }
+
+            ack.setAccounts(sameGroupOnlineAccounts);
+
             String account = message.getLoginContent().getAccount();
             int missingNum = Manager.groupClientsMissingNum.get(groupId).get(account);
             List<ChatContent> messages = new ArrayList<ChatContent>();

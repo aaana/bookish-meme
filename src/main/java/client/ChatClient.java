@@ -29,6 +29,7 @@ import server.LoggerHandler;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.concurrent.TimeUnit;
 
@@ -48,6 +49,21 @@ public class ChatClient {
     private int groupId;
     private Channel connectedChannel;
     private EventLoopGroup eventGroup = null;
+    private ArrayList<String> onlineAccounts;
+
+    public void setOnlineAccounts(ArrayList<String> accounts)
+    {
+        onlineAccounts=accounts;
+    }
+    public void addOnlineAccount(String account)
+    {
+        onlineAccounts.add(account);
+    }
+    public void deleteOnlineAccount(String account)
+    {
+        onlineAccounts.remove(account);
+    }
+
 
     public String getAccount() {
         return account;
