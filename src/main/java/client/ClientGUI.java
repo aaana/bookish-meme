@@ -64,6 +64,7 @@ public class ClientGUI extends Application {
 
     //登录Pane
     private Pane root;
+    private Pane chat;
 
     //loading Icon
     private ImageView load;
@@ -168,20 +169,20 @@ public class ClientGUI extends Application {
         primaryStage.show();
 
         /*聊天界面*/
-        Pane chat = new Pane();
+        chat = new Pane();
         chat.setId("chat");
 
         //顶部信息
         Label chatName = new Label("公共聊天室");
 
         chatName.setId("chatName");
-        chatName.setLayoutX(20);
+        chatName.setLayoutX(170);
         chatName.setLayoutY(20);
         chat.getChildren().add(chatName);
 
         //顶部
         ImageView topView = new ImageView((prePath + "/top.png"));
-        topView.setLayoutX(450);
+        topView.setLayoutX(600);
         topView.setLayoutY(15);
         topView.setFitHeight(40);
         topView.setFitWidth(180);
@@ -190,7 +191,7 @@ public class ClientGUI extends Application {
         //消息显示界面
         msgShow.setId("msgShow");
         msgShow.setPrefSize(650,310);
-        msgShow.setLayoutX(0);
+        msgShow.setLayoutX(150);
         msgShow.setLayoutY(70);
         msgShow.setEditable(false);
         msgShow.setText("");
@@ -226,7 +227,7 @@ public class ClientGUI extends Application {
         final TextArea msg = new TextArea();
         msg.setId("msg");
         msg.setPrefSize(650, 120);
-        msg.setLayoutX(0);
+        msg.setLayoutX(150);
         msg.setLayoutY(430);
 
         msg.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
@@ -269,22 +270,25 @@ public class ClientGUI extends Application {
 
         //消息ICON
         ImageView msgView = new ImageView((prePath + "/msg.png"));
-        msgView.setLayoutX(0);
+        msgView.setLayoutX(150);
         msgView.setLayoutY(400);
         msgView.setFitHeight(30);
         msgView.setFitWidth(200);
         chat.getChildren().add(msgView);
 
         //辅助线
-        Line line3 = new Line(0,70,650,70);
+        Line line3 = new Line(150,70,800,70);
         line3.setStroke(Color.valueOf("#d3d6d7"));
         chat.getChildren().add(line3);
-        Line line4 = new Line(0,400,650,400);
+        Line line4 = new Line(150,400,800,400);
         line4.setStroke(Color.valueOf("#d3d6d7"));
         chat.getChildren().add(line4);
+        Line line5 = new Line(150,0,150,550);
+        line5.setStroke(Color.valueOf("#d3d6d7"));
+        chat.getChildren().add(line5);
 
         //面板
-        Scene chatScane = new Scene(chat, 650, 550);
+        Scene chatScane = new Scene(chat, 800, 550);
         chatScane.getStylesheets().add(prePath + "/Login.css");
         sceneChat = chatScane;
 //        primaryStage.setScene(sceneChat);
@@ -347,6 +351,32 @@ public class ClientGUI extends Application {
         }
     }
 
+    private void writeUser(List<String> users) {
+
+        int num = 0;
+
+        for(String user : users) {
+            //在线用户信息
+            Image userImage = new Image(prePath + "/user.png");
+            ImageView userView = new ImageView(userImage);
+            userView.setLayoutX(15);
+            userView.setLayoutY(20 + 80 * num);
+            userView.setFitHeight(50);
+            userView.setFitWidth(50);
+            Circle userClip = new Circle(25, 25, 25);
+            userView.setClip(userClip);
+            chat.getChildren().add(userView);
+            //用户名字
+            Label userName = new Label(user);
+            userName.setId("userName");
+            userName.setLayoutX(70);
+            userName.setLayoutY(25 + 80 * num);
+            chat.getChildren().add(userName);
+            num += 1;
+        }
+
+    }
+
     @Subscribe
     public void LoginSuccess(LoginSuccessEvent loginSuccessEvent){
         flag = 1;
@@ -361,8 +391,14 @@ public class ClientGUI extends Application {
         List<ChatContent> chatContents = loginSuccessEvent.getChatContents();
         List<String> onlineAccounts =loginSuccessEvent.getOnlineAccounts();
         client.setOnlineAccounts((ArrayList<String>)onlineAccounts);
-
+        final List<String> users = onlineAccounts;
         msgShow.appendText("在线账号:\n");
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                writeUser(users);
+            }
+        });
         for(String account : onlineAccounts)
         {
             msgShow.appendText(account+" ");
@@ -383,6 +419,14 @@ public class ClientGUI extends Application {
     {
         String account=someOneOnlineEvent.getAccount();
         client.addOnlineAccount(account);
+        List<String> onlineAccounts = client.getOnlineAccounts();
+        final List<String> users = onlineAccounts;
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                writeUser(users);
+            }
+        });
         msgShow.appendText("您的好友: "+account+"已上线\n");
     }
 
@@ -392,6 +436,14 @@ public class ClientGUI extends Application {
         String account=someOneOfflineEvent.getAccount();
         client.deleteOnlineAccount(account);
         msgShow.appendText("您的好友: "+account+"已下线\n");
+        List<String> offlineAccounts = client.getOnlineAccounts();
+        final List<String> users = offlineAccounts;
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                writeUser(users);
+            }
+        });
     }
 
     @Subscribe
