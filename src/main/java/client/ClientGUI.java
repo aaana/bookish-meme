@@ -331,6 +331,14 @@ public class ClientGUI extends Application {
         });
     }
 
+    private void showClientName(){
+        Label clientName = new Label("Welcome,Dear "+client.getAccount());
+
+        clientName.setId("clientName");
+        clientName.setLayoutX(170);
+        clientName.setLayoutY(45);
+        chat.getChildren().add(clientName);
+    }
     private void doLogin(){
         //        加载icon
         load = new ImageView(new Image(prePath + "/load.gif"));
@@ -405,6 +413,7 @@ public class ClientGUI extends Application {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
+                showClientName();
                 updateScene(sceneChat);
             }
         });
@@ -424,6 +433,7 @@ public class ClientGUI extends Application {
         {
             msgShow.appendText(account+" ");
         }
+        msgShow.appendText("\n");
         client.setGroupId(loginSuccessEvent.getGroupId());
 //        msgShow.appendText("   游客:" + chatContent.getMessage() + "\n\n");
         if(chatContents.size()!=0){
@@ -506,7 +516,7 @@ public class ClientGUI extends Application {
     public void receiveOtherMessage(ReceiveMessageEvent event){
         ChatContent chatContent = event.getChatContent();
 //        msgShow.appendText("   游客:" + chatContent.getMessage() + "\n\n");
-        msgShow.appendText(chatContent.getSendDate()+"   "+chatContent.getSender() + ": "+ chatContent.getMessage() + "\n\n");
+        msgShow.appendText(chatContent.getSendDate()+"\n"+chatContent.getSender() + ": "+ chatContent.getMessage() + "\n\n");
     }
 
     @Subscribe

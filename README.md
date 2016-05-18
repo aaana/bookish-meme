@@ -55,9 +55,12 @@
 <img src= "https://raw.githubusercontent.com/tztztztztz/bookish-meme/master/doc/img/login.png" height=300>
 
 - 聊天界面    
-     
-<img src= "https://raw.githubusercontent.com/tztztztztz/bookish-meme/master/doc/img/chatting.png" height=450>       
-<img src= "https://raw.githubusercontent.com/tztztztztz/bookish-meme/master/doc/img/chatpic.png" height=450>        
+
+用户200和201次序登陆并聊天：
+<img src= "https://raw.githubusercontent.com/tztztztztz/bookish-meme/master/doc/img/chatting.png" height=450>
+接着同组另一用户202登陆（次序接收所有遗漏消息）
+<img src= "https://raw.githubusercontent.com/tztztztztz/bookish-meme/master/doc/img/chatpic.png" height=450>
+用户202下线
 <img src= "https://raw.githubusercontent.com/tztztztztz/bookish-meme/master/doc/img/chatpic2.png" height=450>   
 
 - 登陆失败警告
