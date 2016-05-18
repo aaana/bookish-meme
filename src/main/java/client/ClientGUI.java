@@ -55,6 +55,9 @@ public class ClientGUI extends Application {
     private Scene sceneLogin;
     private Scene sceneChat;
 
+    //在线用户个数;
+    private int haveUser = 0;
+
     //登录界面辅助线
     private Line line1, line2;
 
@@ -355,7 +358,24 @@ public class ClientGUI extends Application {
 
         int num = 0;
 
+        int userNum = users.size();
+
+        System.out.println(userNum + " userNum! " + haveUser);
+
+        if (haveUser == 1) {
+              chat.getChildren().remove(2);
+              chat.getChildren().remove(1);
+//            for (int i = userNum * 2; i < 0; i--) {
+//                chat.getChildren().remove(i);
+//            }
+        }
+
+
+        userNum = 0;
+
         for(String user : users) {
+            haveUser = 1;
+            userNum += 1;
             //在线用户信息
             Image userImage = new Image(prePath + "/user.png");
             ImageView userView = new ImageView(userImage);
@@ -365,13 +385,13 @@ public class ClientGUI extends Application {
             userView.setFitWidth(50);
             Circle userClip = new Circle(25, 25, 25);
             userView.setClip(userClip);
-            chat.getChildren().add(userView);
+            chat.getChildren().add(1, userView);
             //用户名字
             Label userName = new Label(user);
             userName.setId("userName");
             userName.setLayoutX(70);
             userName.setLayoutY(25 + 80 * num);
-            chat.getChildren().add(userName);
+            chat.getChildren().add(2, userName);
             num += 1;
         }
 
