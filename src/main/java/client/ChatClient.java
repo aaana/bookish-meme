@@ -64,6 +64,10 @@ public class ChatClient {
         onlineAccounts.remove(account);
     }
 
+    public ArrayList<String> getOnlineAccounts() {
+        return onlineAccounts;
+    }
+
 
     public String getAccount() {
         return account;
