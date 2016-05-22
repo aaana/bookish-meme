@@ -15,5 +15,6 @@ public class LoggerTask extends TimerTask {
         Logger.getLogger(ChatServer.class).info("ignoredMessageNumber is " + LoggerHandler.ignoredMessageNumber);
         Logger.getLogger(ChatServer.class).info("receivedMessageNumber is " + LoggerHandler.receivedMessageNumber);
         Logger.getLogger(ChatServer.class).info("forwardMessageNumber is " + LoggerHandler.forwardMessageNumber);
+
     }
 }

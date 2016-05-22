@@ -114,13 +114,45 @@ public class Log {
         }
 
     }
-    public static void writeFile(String content) throws Exception {
+    public static void debug(String content)
+    {
+        System.out.println(content);
+    }
+    public static void info(String content) throws Exception {
+        writeFile(content,LogLevel.INFO);
+    }
+
+    public static void warn(String content) throws Exception {
+        writeFile(content,LogLevel.WARN);
+    }
+    public static void error(String content) throws Exception {
+        writeFile(content,LogLevel.ERROR);
+    }
+
+    public static void fatal(String content) throws Exception {
+        writeFile(content,LogLevel.FATAL);
+    }
+    public static void writeFile(String content,LogLevel level) throws Exception {
+
         Config config = new Config();
         config.readFile("config/config.json");
-        String folder=config.getString("outputFolder");
+        switch (level) {
+            case INFO:
+                config=config.getConf("INFO");
+                break;
+            case WARN:
+                config=config.getConf("WARN");
+                break;
+            case ERROR:
+                config=config.getConf("ERROR");
+                break;
+            case FATAL:
+                config=config.getConf("FATAL");
+                break;
+        }
+        String folder= config.getString("outputFolder");
         int singleFileSize=config.getInt("singleFileSize");
         int totalFileSize=config.getInt("totalFileSize");
-
         File foldername=new File(folder);
         if(folderSize(foldername)/(1024*1024)>totalFileSize)
         {
@@ -220,6 +252,7 @@ public class Log {
 
 
     public static boolean compress(String destFileName) throws Exception {
+
         File file = new File(destFileName);
         if (file.exists()) {
             System.out.println("创建文件" + destFileName + "失败，目标文件已存在！");
