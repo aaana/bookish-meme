@@ -1,5 +1,6 @@
 package server;
 
+import auth_server.LoginServer;
 import org.junit.Before;
 import org.junit.Test;
 

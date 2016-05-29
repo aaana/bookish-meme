@@ -15,7 +15,7 @@ public class ChatClientHandler extends ChannelInboundMessageHandlerAdapter<ACK> 
     @Override
     public void messageReceived(ChannelHandlerContext channelHandlerContext, ACK s) throws Exception {
 
-        System.out.print(s.getType());
+        System.out.println(s.getType());
 
         ACKType ackType = s.getType();
 

@@ -1,4 +1,4 @@
-package server;
+package auth_server;
 
 import java.sql.*;
 

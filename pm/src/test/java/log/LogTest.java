@@ -70,10 +70,6 @@ public class LogTest {
     @Test
     public void testNewWriteFile() throws Exception {
 
-        for(int i=0;i<4095;i++)
-        {
-            Log.writeFile("a");
-        }
 
 
     }

@@ -3,13 +3,17 @@ package message;
 import protocol.ACKType;
 import protocol.MessageType;
 
+import java.io.Serializable;
+
 /**
  * Created by tanjingru on 3/20/16.
  */
 
 
 
-public class Message {
+public class Message implements Serializable{
+
+    private static final long serialVersionUID = 1L;
 
     private MessageStatus messageStatus;
     // 0 => login 1 => chatting

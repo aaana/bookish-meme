@@ -3,12 +3,15 @@ package message;
 
 import com.google.gson.internal.StringMap;
 
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 
-public class ChatContent {
+public class ChatContent implements Serializable{
+
+    private static final long serialVersionUID = 1L;
 
     private int groupId;
     private String sender;
