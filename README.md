@@ -49,6 +49,9 @@
 - **Jdk >= 1.8.0_45**
 - maven
 
+## 项目架构
+![architecture](https://raw.githubusercontent.com/tztztztztz/bookish-meme/master/doc/architecture.png)
+
 ## UI设计
 - 登陆界面 
      
