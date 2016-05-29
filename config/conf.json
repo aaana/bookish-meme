@@ -4,6 +4,22 @@
     "port":8080,
     "maxMsgNumber":100,
     "maxMsgNumberPerSec":5
+  },
+
+  "auth_server":{
+    "host":"localhost",
+    "port":2015
+  },
+
+  "store_server":{
+    "host":"localhost",
+    "port":2016
+  },
+
+  "db_server":{
+    "host":"localhost",
+    "port":2017
   }
+
 
 }

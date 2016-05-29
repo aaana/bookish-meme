@@ -13,6 +13,7 @@ import octoteam.tahiti.performance.PerformanceMonitor;
 import octoteam.tahiti.performance.reporter.LogReporter;
 import octoteam.tahiti.performance.reporter.RollingFileReporter;
 import org.apache.log4j.PropertyConfigurator;
+import provider.ServiceProvider;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -75,9 +76,25 @@ public class ChatServer{
 //        }
 
         //从数据库中得到client的信息！！！unfinished！！！
-        DBOperate dbOperate = new DBOperate();
+//        DBOperate dbOperate = new DBOperate();
         try {
-            dbOperate.getGidAndUid();
+//            dbOperate.getGidAndUid();
+            Map<String,Integer> uidAndGids = ServiceProvider.getDbServer().getGidAndUid();
+            for (String accountId:uidAndGids.keySet()){
+                int groupId = uidAndGids.get(accountId);
+                if(!Manager.groupClientsMissingNum.containsKey(groupId)){
+
+                    Map<String,Integer> missingIndex = new HashMap<String, Integer>(){
+                        {
+                            put(accountId,0);
+                        }
+
+                    };
+                    Manager.groupClientsMissingNum.put(groupId,missingIndex);
+                }else{
+                    Manager.groupClientsMissingNum.get(groupId).put(accountId,0);
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

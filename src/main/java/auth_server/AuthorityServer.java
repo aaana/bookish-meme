@@ -23,6 +23,6 @@ public interface AuthorityServer extends Remote {
         AuthorityServer ci = (AuthorityServer)(UnicastRemoteObject.exportObject(c, 0));
         Registry reg = LocateRegistry.createRegistry(2015);
         reg.rebind("authorityServer", ci);
-        System.out.println("in service");
+        System.out.println("authority server in service");
     }
 }
