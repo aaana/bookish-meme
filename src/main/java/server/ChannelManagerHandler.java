@@ -56,14 +56,13 @@ public class ChannelManagerHandler extends ChannelInboundMessageHandlerAdapter<M
             }
 
         }
-       /* for (ClientChannel clientChannel : Manager.clientChannels){
-
-            if(clientChannel.getChannel()==channel){
-                Manager.clientChannels.remove(clientChannel);
-                groupid=clientChannel.getGroupId();
-                account=clientChannel.getAccount();
-            }
-        }*/
+//        for (ClientChannel clientChannel : Manager.clientChannels){
+//
+//                groupid=clientChannel.getGroupId();
+//                account=clientChannel.getAccount();
+//                System.out.println("Now!"+account);
+//
+//        }
 
         for (ClientChannel clientChannel : Manager.clientChannels){
 
