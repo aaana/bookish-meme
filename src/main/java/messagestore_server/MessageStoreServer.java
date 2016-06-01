@@ -1,6 +1,8 @@
 package messagestore_server;
 
 import auth_server.AuthorityServerImpl;
+import compressor.CompressTask;
+import compressor.TZCompressor;
 import message.Message;
 
 import java.rmi.Remote;
@@ -21,6 +23,12 @@ public interface MessageStoreServer extends Remote{
         MessageStoreServer msi = (MessageStoreServer)(UnicastRemoteObject.exportObject(ms, 0));
         Registry reg = LocateRegistry.createRegistry(2016);
         reg.rebind("messageStoreServer", msi);
+        CompressTask messageTask = new CompressTask("archive/archive-all", "messageRecords/");
+        messageTask.setInterval(1000 * 60 * 60 * 24);
+        messageTask.setDelay(1000 * 60 * 2);
+        TZCompressor tzCompressor = new TZCompressor();
+        tzCompressor.addTask(messageTask, "MSG");
+        tzCompressor.startAllTask();
         System.out.println("message store server in service");
     }
 }
