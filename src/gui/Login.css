@@ -15,6 +15,12 @@
     -fx-border-width: 10px;
 }
 
+#register, #reg, #confirm{
+    -fx-background-color: #1a9fce;
+    -fx-text-fill: #ffffff;
+}
+
+
 #chat {
     -fx-background-color: #fbfbfb;
 }
@@ -32,6 +38,18 @@
 #userName {
     -fx-font-family: sans-serif;
     -fx-font-size: 30px;
+}
+
+#groupInfo{
+    -fx-text-fill: #1a9fce;
+    -fx-font-size: 20px;
+
+}
+
+#choiceBox{
+    -fx-border-radius: 2;
+    -fx-skin: inherit;
+    -fx-border-color: #1a9fce;
 }
 
 #username, #pwd {

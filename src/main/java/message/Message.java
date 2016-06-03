@@ -24,6 +24,32 @@ public class Message implements Serializable{
 
     private ChatContent chatContent;
 
+    private GroupContent groupContent;
+
+    private RegisterContent registerContent;
+
+    public RegisterContent getRegisterContent() {
+        return registerContent;
+    }
+
+    public Message(MessageType type, MessageStatus messageStatus, RegisterContent registerContent) {
+        this.type = type;
+        this.messageStatus = messageStatus;
+        this.registerContent = registerContent;
+    }
+
+    public void setRegisterContent(RegisterContent registerContent) {
+        this.registerContent = registerContent;
+    }
+
+    public GroupContent getGroupContent() {
+        return groupContent;
+    }
+
+    public void setGroupContent(GroupContent groupContent) {
+        this.groupContent = groupContent;
+    }
+
     public Message(MessageType type, MessageStatus messageStatus) {
         this.type = type;
         this.messageStatus = messageStatus;
@@ -36,6 +62,18 @@ public class Message implements Serializable{
     }
 
     public Message(ChatContent chatContent, MessageStatus messageStatus, MessageType type) {
+        this.chatContent = chatContent;
+        this.messageStatus = messageStatus;
+        this.type = type;
+    }
+
+    public Message(MessageType type, MessageStatus messageStatus, GroupContent groupContent) {
+        this.type = type;
+        this.messageStatus = messageStatus;
+        this.groupContent = groupContent;
+    }
+
+    public Message(GroupContent groupContent, MessageStatus messageStatus, MessageType type) {
         this.chatContent = chatContent;
         this.messageStatus = messageStatus;
         this.type = type;

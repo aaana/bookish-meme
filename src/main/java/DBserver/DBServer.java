@@ -19,7 +19,7 @@ public interface DBServer extends Remote{
     int delete(int gid,int number) throws Exception;
     int insert(ChatContent chatContent) throws Exception;
     Map<String,Integer> getGidAndUid() throws Exception;
-    int getGidByAcc(int account) throws Exception;
+    int getGidByAcc(String account) throws Exception;
 
     public static void main(String[] args) throws Exception{
         DBServerImpl db = new DBServerImpl();

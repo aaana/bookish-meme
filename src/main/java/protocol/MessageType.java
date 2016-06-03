@@ -8,7 +8,11 @@ public enum MessageType {
 
     AUTHORITY, // 登陆类型的消息
 
-    CHATTING;  // 聊天类型的消息
+    CHATTING,  // 聊天类型的消息
+
+    ADDINGGROUP,
+
+    REGISTER
 
 }
 

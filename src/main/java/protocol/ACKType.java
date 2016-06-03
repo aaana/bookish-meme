@@ -20,5 +20,15 @@ public enum ACKType {
 
     SOMEONEONLINE ,//同组成员上线
 
-    SOMEONEOFFLINE //同组成员下线
+    SOMEONEOFFLINE, //同组成员下线
+
+    ADDSUCCESS,
+
+    SOMEONEADDGROUP,
+
+    REGISTERSUCCESS,
+
+    REGISTERFAIL,
+
+    ACCOUNTEXIST
 }

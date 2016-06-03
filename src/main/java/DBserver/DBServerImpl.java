@@ -147,7 +147,7 @@ public class DBServerImpl implements DBServer {
     }
 
     @Override
-    public int getGidByAcc(int account) throws Exception {
+    public int getGidByAcc(String account) throws Exception {
 
         System.out.println("in getGidByAcc");
         Connection connection = threadLocal.get();
@@ -160,7 +160,7 @@ public class DBServerImpl implements DBServer {
                 threadLocal.set(connection);
                 String sql="SELECT groupId from user where name = ?";
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.setInt(1,account);
+                preparedStatement.setString(1,account);
                 ResultSet resultSet = preparedStatement.executeQuery();
 
                 if(resultSet.next()) return resultSet.getInt(1);

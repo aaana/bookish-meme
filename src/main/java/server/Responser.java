@@ -181,6 +181,55 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
             ack.setType(ACKType.TOOFRENQUENT);
         }
 
+        if(messageType==MessageType.ADDINGGROUP){
+            ack.setType(ACKType.ADDSUCCESS);
+            int groupId = message.getGroupContent().getGroupId();
+            List<String>sameGroupOnlineAccounts=new ArrayList<String>();
+
+
+            for(ClientChannel clientChannel:Manager.clientChannels)
+            {
+                if(clientChannel.getGroupId()==groupId&&clientChannel.getChannel()!=incomingChannel)
+                {
+                    sameGroupOnlineAccounts.add(clientChannel.getAccount());
+                    ACK a=new ACK();
+                    a.setType(ACKType.SOMEONEADDGROUP);
+                    ArrayList<String> account=new ArrayList<String>();
+                    account.add(message.getGroupContent().getAccount());
+                    a.setAccounts(account);
+                    String json=gson.toJson(a);
+                    clientChannel.getChannel().write(json+"\n");
+                }
+
+                if(clientChannel.getChannel() == incomingChannel){
+                    clientChannel.setGroupId(groupId);
+                }
+            }
+
+            ack.setAccounts(sameGroupOnlineAccounts);
+            ack.setGroupId(groupId);
+        }
+
+        if(messageType==MessageType.REGISTER && messageStatus==MessageStatus.ACCOUNTEXSIT){
+            ack.setType(ACKType.ACCOUNTEXIST);
+        }
+
+        if(messageType==MessageType.REGISTER&&messageStatus==MessageStatus.REGISTERFAIL){
+            ack.setType(ACKType.REGISTERFAIL);
+        }
+
+        if(messageType==MessageType.REGISTER&&messageStatus==MessageStatus.NEEDHANDLED){
+            String account = message.getRegisterContent().getAccount();
+            ack.setType(ACKType.REGISTERSUCCESS);
+            if(Manager.groupClientsMissingNum.containsKey(0))
+                Manager.groupClientsMissingNum.get(0).put(account,0);
+            else
+            {
+                HashMap<String,Integer> missingNum = new HashMap<String,Integer>();
+                missingNum.put(account,0);
+                Manager.groupClientsMissingNum.put(0,missingNum);
+            }
+        }
         String ackJson = gson.toJson(ack);
         incomingChannel.write(ackJson + "\n");
 

@@ -42,6 +42,19 @@ public class ChatClientHandler extends ChannelInboundMessageHandlerAdapter<ACK> 
 
         if(ackType==ACKType.SOMEONEOFFLINE)
             PublicEvent.eventBus.post(new SomeOneOfflineEvent(s.getAccounts().get(0)));
+
+        if(ackType==ACKType.ADDSUCCESS)
+            PublicEvent.eventBus.post(new AddGroupEvent(s.getAccounts(),s.getGroupId()));
+
+        if(ackType==ACKType.SOMEONEADDGROUP)
+            PublicEvent.eventBus.post(new SomeOneAddGroupEvent(s.getAccounts().get(0)));
+        if(ackType==ACKType.REGISTERSUCCESS)
+            PublicEvent.eventBus.post(new RegisterSuccessEvent());
+        if(ackType==ACKType.ACCOUNTEXIST)
+            PublicEvent.eventBus.post(new AccountExistEvent());
+        if(ackType==ACKType.REGISTERFAIL)
+            PublicEvent.eventBus.post(new RegisterFailEvent());
     }
+
 
 }

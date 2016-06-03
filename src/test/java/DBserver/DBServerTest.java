@@ -29,7 +29,7 @@ public class DBServerTest {
     @Test
     public void testGetGidByAcc() throws Exception {
 
-        assertEquals(dbServer.getGidByAcc(100),1);
+        assertEquals(dbServer.getGidByAcc("100"),1);
     }
 
     @Test

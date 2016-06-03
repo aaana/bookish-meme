@@ -24,4 +24,14 @@ public class LoginServerTest {
         for(int i=0;i<5;i++)
             assertEquals(expectedResult[i],loginServer.login(userName[i],password[i]));
     }
+
+    @Test
+    public void testRegister() throws Exception{
+        System.out.println(loginServer.register("102", "123456"));
+    }
+
+    @Test
+    public void testAddGroup() throws Exception{
+        loginServer.addGroup("100", 1);
+    }
 }

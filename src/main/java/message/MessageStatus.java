@@ -11,6 +11,10 @@ public enum MessageStatus {
     
     OVERRANGE,  // 发送超过最大数量
 
-    TOOFREQUENT; // 发送过于频繁
+    TOOFREQUENT, // 发送过于频繁
+
+    ACCOUNTEXSIT,
+
+    REGISTERFAIL
 
 }
