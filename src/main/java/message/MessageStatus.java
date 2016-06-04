@@ -15,6 +15,12 @@ public enum MessageStatus {
 
     ACCOUNTEXSIT,
 
-    REGISTERFAIL
+    REGISTERFAIL,
+
+    ALREADYINTHEGROUP,
+
+    GROUPALREADYEXIST,
+
+    ENTERGROUPFAIL
 
 }

@@ -18,16 +18,16 @@ public class AuthorityServerImpl implements AuthorityServer {
             String account = loginContent.getAccount();
             String password = loginContent.getPassword();
             LoginServer loginServer = new LoginServer();
-            int success = loginServer.login(account,password);
+            boolean success = loginServer.login(account,password);
 //            login fails
-            if(success==-1) {
+            if(!success) {
                 message.setMessageStatus(MessageStatus.LOGINFAIL);
             }
             // login success
-            else{
-                loginContent.setGroupId(success);
-                message.setLoginContent(loginContent);
-            }
+//            else{
+//                loginContent.setGroupId(success);
+//                message.setLoginContent(loginContent);
+//            }
         }
         return message;
     }

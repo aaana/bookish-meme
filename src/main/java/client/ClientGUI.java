@@ -1,10 +1,8 @@
 package client;
 
-import auth_server.LoginServer;
 import com.google.common.eventbus.Subscribe;
 import event.*;
 import javafx.collections.FXCollections;
-import javafx.concurrent.Service;
 import javafx.stage.WindowEvent;
 import message.ChatContent;
 
@@ -17,7 +15,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -38,7 +35,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Timer;
-import java.util.concurrent.TimeUnit;
 
 public class ClientGUI extends Application {
 
@@ -56,7 +52,7 @@ public class ClientGUI extends Application {
     private final TextField accountTextField = new TextField();
     private final PasswordField pwdBox = new PasswordField();
 
-    private ChoiceBox<Integer> choiceBox = new ChoiceBox<Integer>();
+    private ChoiceBox<String> choiceBox = new ChoiceBox<String>();
 
     //primayStage
     private static Stage pStage;
@@ -66,6 +62,7 @@ public class ClientGUI extends Application {
     private Scene sceneChat;
     private Scene sceneRegister;
     private Scene sceneAddGroup;
+    private Scene sceneChooseGroup;
 
     //在线用户个数;
     private int haveUser = 0;
@@ -82,6 +79,7 @@ public class ClientGUI extends Application {
     private Pane chat;
     private Pane register;
     private Pane addGroup;
+    private Pane chooseGroup;
 
     //loading Icon
     private ImageView load;
@@ -90,6 +88,8 @@ public class ClientGUI extends Application {
     private Button loginBtn;
 
     private Button registerBtn;
+
+    private ChoiceBox<String> joinedGroupChoiceBox;
 
     //保存stage的值
     private void setPrimaryStage(Stage pStage) {
@@ -107,6 +107,7 @@ public class ClientGUI extends Application {
         root.getChildren().add(userTextField);
         root.getChildren().add(pwBox);
         root.getChildren().add(loginBtn);
+        root.getChildren().add(registerBtn);
         pwBox.setText("");
     }
 
@@ -312,39 +313,75 @@ public class ClientGUI extends Application {
         sceneRegister = new Scene(register,250,300);
         sceneRegister.getStylesheets().add(prePath + "/Login.css");
 
-        /*添加组*/
-        addGroup = new Pane();
-        addGroup.setId("addGroup");
+        /*选择组*/
+        chooseGroup = new Pane();
+        chooseGroup.setId("chooseGroup");
 
-        Label groupInfo = new Label("请添加一个小组");
-        groupInfo.setId("groupInfo");
-        groupInfo.setLayoutX(20);
-        groupInfo.setLayoutY(50);
-        addGroup.getChildren().add(groupInfo);
-        choiceBox.setItems(FXCollections.observableArrayList(0, 1, 2, 3));
-        choiceBox.setValue(0);
-        choiceBox.setId("choiceBox");
-        choiceBox.setLayoutX(200);
-        choiceBox.setLayoutY(50);
-        addGroup.getChildren().add(choiceBox);
+        Label chooseInfo = new Label("请选择进入一个小组");
+        chooseInfo.setId("chooseInfo");
+        chooseInfo.setLayoutX(20);
+        chooseInfo.setLayoutY(50);
+        chooseGroup.getChildren().add(chooseInfo);
+        joinedGroupChoiceBox = new ChoiceBox<>();
+//        joinedGroupChoiceBox.setItems(FXCollections.observableArrayList("0", "1", "2", "3"));
+//        joinedGroupChoiceBox.setValue("0");
+        joinedGroupChoiceBox.setId("choiceBox");
+        joinedGroupChoiceBox.setLayoutX(210);
+        joinedGroupChoiceBox.setLayoutY(50);
+        chooseGroup.getChildren().add(joinedGroupChoiceBox);
 
-        Button confirmBtn = new Button("确认");
-        confirmBtn.setId("confirm");
-        confirmBtn.setLayoutX(250);
-        confirmBtn.setLayoutY(130);
-        confirmBtn.setOnAction(new EventHandler<ActionEvent>() {
+        Button enterBtn = new Button("进入");
+        enterBtn.setId("enter");
+        enterBtn.setLayoutX(240);
+        enterBtn.setLayoutY(125);
+
+        enterBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                int groupId = choiceBox.getValue();
-                GroupContent groupContent = new GroupContent(client.getAccount(),groupId);
-                client.sendAddingGroupMessage(groupContent);
-//                LoginServer loginServer
-//                updateScene(sceneChat);
+                String currentGroupId = joinedGroupChoiceBox.getValue();
+                GroupContent groupContent = new GroupContent(client.getAccount(), currentGroupId);
+                client.sendEnteringGroupMessage(groupContent);
             }
         });
-        addGroup.getChildren().add(confirmBtn);
-        sceneAddGroup = new Scene(addGroup,300,160);
-        sceneAddGroup.getStylesheets().add(prePath+"/login.css");
+        chooseGroup.getChildren().add(enterBtn);
+        sceneChooseGroup = new Scene(chooseGroup,300,160);
+        sceneChooseGroup.getStylesheets().add(prePath+"/login.css");
+
+
+        /*添加组*/
+//        addGroup = new Pane();
+//        addGroup.setId("addGroup");
+//
+//        Label groupInfo = new Label("加入小组");
+//        groupInfo.setId("groupInfo");
+//        groupInfo.setLayoutX(20);
+//        groupInfo.setLayoutY(50);
+//        addGroup.getChildren().add(groupInfo);
+//
+//        choiceBox.setItems(FXCollections.observableArrayList(ServiceProvider.getDbServer().getAllGroupIds()));
+//        choiceBox.setValue("public");
+//        choiceBox.setId("choiceBox");
+//        choiceBox.setLayoutX(200);
+//        choiceBox.setLayoutY(50);
+//        addGroup.getChildren().add(choiceBox);
+//
+//        Button confirmBtn = new Button("确认");
+//        confirmBtn.setId("confirm");
+//        confirmBtn.setLayoutX(250);
+//        confirmBtn.setLayoutY(130);
+//        confirmBtn.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//                String groupId = choiceBox.getValue();
+//                GroupContent groupContent = new GroupContent(client.getAccount(),groupId);
+//                client.sendAddingGroupMessage(groupContent);
+////                LoginServer loginServer
+////                updateScene(sceneChat);
+//            }
+//        });
+//        addGroup.getChildren().add(confirmBtn);
+//        sceneAddGroup = new Scene(addGroup,300,160);
+//        sceneAddGroup.getStylesheets().add(prePath+"/login.css");
         /*聊天界面*/
         chat = new Pane();
         chat.setId("chat");
@@ -358,7 +395,38 @@ public class ClientGUI extends Application {
         chat.getChildren().add(chatName);
 
         //
-        Button button = new Button("更换小组");
+        Button addButton = new Button("添加小组");
+        addButton.setId("addGroup");
+        addButton.setLayoutX(530);
+        addButton.setLayoutY(20);
+        addButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    ModalAddGroupDialog md = new ModalAddGroupDialog(primaryStage, client);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        chat.getChildren().add(addButton);
+
+        Button createButton = new Button("创建小组");
+        createButton.setId("addGroup");
+        createButton.setLayoutX(450);
+        createButton.setLayoutY(20);
+        createButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    ModalCreateGroupDialog md = new ModalCreateGroupDialog(primaryStage,client);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        chat.getChildren().add(createButton);
+
 
         //顶部
         ImageView topView = new ImageView((prePath + "/top.png"));
@@ -434,7 +502,7 @@ public class ClientGUI extends Application {
                             ChatContent chatContent = new ChatContent(msg.getText());
                             chatContent.setSender(client.getAccount());
                             chatContent.setSendDate(snow);
-                            chatContent.setGroupId(client.getGroupId());
+                            chatContent.setGroupId(client.getCurrentGroupId());
                             client.sendMessage(chatContent);
                             msg.setText("");
                         }
@@ -516,7 +584,7 @@ public class ClientGUI extends Application {
     }
 
     private void showClientName(){
-        Label clientName = new Label("Welcome,Dear "+client.getAccount()+"    groupId:"+client.getGroupId());
+        Label clientName = new Label("Welcome,Dear "+client.getAccount()+"    groupId:"+client.getCurrentGroupId());
 
         clientName.setId("clientName");
         clientName.setLayoutX(170);
@@ -540,6 +608,7 @@ public class ClientGUI extends Application {
         root.getChildren().remove(userTextField);
         root.getChildren().remove(pwBox);
         root.getChildren().remove(loginBtn);
+        root.getChildren().remove(registerBtn);
         // 等待相应界面
         System.out.println("loginTask2");
         String username = userTextField.getText();
@@ -547,7 +616,11 @@ public class ClientGUI extends Application {
         try {
             client.Login(username, pwd);
             client.setAccount(username);
-        } catch (InterruptedException e) {
+            List list = FXCollections.observableArrayList();
+            joinedGroupChoiceBox.setItems((FXCollections.observableArrayList(ServiceProvider.getDbServer().getGidByAcc(username))));
+            System.out.println((FXCollections.observableArrayList(ServiceProvider.getDbServer().getGidByAcc(username))));
+            joinedGroupChoiceBox.setValue("public");
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
@@ -633,181 +706,249 @@ public class ClientGUI extends Application {
         });
     }
 
-              @Subscribe
-              public void LoginSuccess(LoginSuccessEvent loginSuccessEvent) {
-                  flag = 1;
-                  System.out.println("success final");
-                  int gid = loginSuccessEvent.getGroupId();
-                  client.setGroupId(gid);
-                  Platform.runLater(new Runnable() {
-                      @Override
-                      public void run() {
-//                updateScene(sceneChat);
-                          try {
-                              if (gid == 0) {
-                                  updateScene(sceneAddGroup);
-                              } else {
-                                  updateScene(sceneChat);
-                                  showClientName();
+    @Subscribe
+    public void LoginSuccess(LoginSuccessEvent loginSuccessEvent) {
+        System.out.println("login succeed");
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    updateScene(sceneChooseGroup);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
-                                  List<ChatContent> chatContents = loginSuccessEvent.getChatContents();
-                                  List<String> onlineAccounts = loginSuccessEvent.getOnlineAccounts();
-                                  client.setOnlineAccounts((ArrayList<String>) onlineAccounts);
-                                  final List<String> users = onlineAccounts;
-                                  msgShow.appendText("在线账号:\n");
-                                  Platform.runLater(new Runnable() {
-                                      @Override
-                                      public void run() {
-                                          writeUser(users);
-                                      }
-                                  });
-                                  for (String account : onlineAccounts) {
-                                      msgShow.appendText(account + " ");
-                                  }
-                                  msgShow.appendText("\n");
-                                  client.setGroupId(loginSuccessEvent.getGroupId());
+    @Subscribe
+    public void enterGroup(EnterGroupEvent enterGroupEvent){
+
+        flag = 1;
+        System.out.println("success final");
+        String gid = enterGroupEvent.getGroupId();
+        client.setCurrentGroupId(gid);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    updateScene(sceneChat);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                showClientName();
+//
+                List<ChatContent> chatContents = enterGroupEvent.getChatContents();
+                List<String> onlineAccounts = enterGroupEvent.getOnlineAccounts();
+                client.setOnlineAccounts((ArrayList<String>) onlineAccounts);
+                final List<String> users = onlineAccounts;
+                msgShow.appendText("在线账号:\n");
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        writeUser(users);
+                    }
+                });
+                for (String account : onlineAccounts) {
+                    msgShow.appendText(account + " ");
+                }
+                msgShow.appendText("\n");
 //        msgShow.appendText("   游客:" + chatContent.getMessage() + "\n\n");
-                                  if (chatContents.size() != 0) {
-                                      for (ChatContent chatContent : chatContents) {
-                                          msgShow.appendText(chatContent.getSendDate() + "\n" + chatContent.getSender() + ": " + chatContent.getMessage() + "\n\n");
-                                      }
-                                  }
-                              }
+                if (chatContents.size() != 0) {
+                    for (ChatContent chatContent : chatContents) {
+                        msgShow.appendText(chatContent.getSendDate() + "\n" + chatContent.getSender() + ": " + chatContent.getMessage() + "\n\n");
+                    }
+                }
+            }
+        });
 
-                          } catch (Exception e) {
-                              e.printStackTrace();
-                          }
-                      }
-                  });
+    }
 
+    @Subscribe
+    public void enterGroupFail(EnterGroupFailEvent enterGroupFailEvent){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                Alert alert = new Alert(Alert.AlertType.ERROR,"进入小组失败");
+                alert.setContentText("已经进入该组了,不能重复进入！");
+                alert.showAndWait();
+                updateScene(sceneChooseGroup);
+            }
+        });
+    }
 
-              }
+    @Subscribe
+    public void SomeOneOnline(SomeOneOnlineEvent someOneOnlineEvent) {
+        String account = someOneOnlineEvent.getAccount();
+        client.addOnlineAccount(account);
+        List<String> onlineAccounts = client.getOnlineAccounts();
+        final List<String> users = onlineAccounts;
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                writeUser(users);
+            }
+        });
+        msgShow.appendText("您的好友: " + account + "已上线\n");
+    }
 
-              @Subscribe
-              public void SomeOneOnline(SomeOneOnlineEvent someOneOnlineEvent) {
-                  String account = someOneOnlineEvent.getAccount();
-                  client.addOnlineAccount(account);
-                  List<String> onlineAccounts = client.getOnlineAccounts();
-                  final List<String> users = onlineAccounts;
-                  Platform.runLater(new Runnable() {
-                      @Override
-                      public void run() {
-                          writeUser(users);
-                      }
-                  });
-                  msgShow.appendText("您的好友: " + account + "已上线\n");
-              }
+    @Subscribe
+    public void someOneAddGroup(SomeOneAddGroupEvent someOneAddGroupEvent) {
+        String account = someOneAddGroupEvent.getAccount();
+        msgShow.appendText("用户: " + account + "已加入该组\n");
+    }
 
-              @Subscribe
-              public void SomeOneOffline(SomeOneOfflineEvent someOneOfflineEvent) {
-                  String account = someOneOfflineEvent.getAccount();
-                  client.deleteOnlineAccount(account);
-                  msgShow.appendText("您的好友: " + account + "已下线\n");
-                  List<String> offlineAccounts = client.getOnlineAccounts();
-                  final List<String> users = offlineAccounts;
-                  Platform.runLater(new Runnable() {
-                      @Override
-                      public void run() {
-                          writeUser(users);
-                      }
-                  });
-              }
+    @Subscribe
+    public void SomeOneOffline(SomeOneOfflineEvent someOneOfflineEvent) {
+        String account = someOneOfflineEvent.getAccount();
+        client.deleteOnlineAccount(account);
+        msgShow.appendText("您的好友: " + account + "已下线\n");
+        List<String> offlineAccounts = client.getOnlineAccounts();
+        final List<String> users = offlineAccounts;
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                writeUser(users);
+            }
+        });
+    }
 
-              @Subscribe
-              public void LoginFail(LoginFailEvent loginFailEvent) {
+    @Subscribe
+    public void LoginFail(LoginFailEvent loginFailEvent) {
 //                  client.closeConnection();
-                  System.out.println("wrong account");
-                  Platform.runLater(new Runnable() {
-                      @Override
-                      public void run() {
-                          backLogin();
-                          final Alert alert = new Alert(Alert.AlertType.INFORMATION); // 實體化Alert對話框物件，並直接在建構子設定對話框的訊息類型
-                          alert.setTitle("出错提示"); //設定對話框視窗的標題列文字
-                          alert.setHeaderText("错误的账户信息"); //設定對話框視窗裡的標頭文字。若設為空字串，則表示無標頭
-                          alert.setContentText("您输入的密码不正确。"); //設定對話框的訊息文字
-                          alert.showAndWait(); //顯示對話框，並等待對話框被關閉時才繼續執行之後的程式
-                      }
-                  });
-              }
+        System.out.println("wrong account");
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                backLogin();
+                final Alert alert = new Alert(Alert.AlertType.INFORMATION); // 實體化Alert對話框物件，並直接在建構子設定對話框的訊息類型
+                alert.setTitle("出错提示"); //設定對話框視窗的標題列文字
+                alert.setHeaderText("错误的账户信息"); //設定對話框視窗裡的標頭文字。若設為空字串，則表示無標頭
+                alert.setContentText("您输入的密码不正确。"); //設定對話框的訊息文字
+                alert.showAndWait(); //顯示對話框，並等待對話框被關閉時才繼續執行之後的程式
+            }
+        });
+    }
 
-              @Subscribe
-              public void ReLogin(ReLoginEvent event) {
-                  System.out.println("ReLogin");
-                  Platform.runLater(new Runnable() {
-                      @Override
-                      public void run() {
-                          msgShow.setText("");
-                          client.closeConnection();
-                          updateScene(sceneLogin);
-                          backLogin();
-                          final Alert alert = new Alert(Alert.AlertType.INFORMATION); // 實體化Alert對話框物件，並直接在建構子設定對話框的訊息類型
-                          alert.setTitle("出错提示"); //設定對話框視窗的標題列文字
-                          alert.setHeaderText("请重新登录"); //設定對話框視窗裡的標頭文字。若設為空字串，則表示無標頭
-                          alert.setContentText("您发送的消息已经达到上限,请重新登录。"); //設定對話框的訊息文字
-                          alert.showAndWait(); //顯示對話框，並等待對話框被關閉時才繼續執行之後的程式
-                      }
-                  });
-              }
+    @Subscribe
+    public void ReLogin(ReLoginEvent event) {
+         System.out.println("ReLogin");
+         Platform.runLater(new Runnable() {
+             @Override
+             public void run() {
+                 msgShow.setText("");
+                 client.closeConnection();
+                 updateScene(sceneLogin);
+                 backLogin();
+                 final Alert alert = new Alert(Alert.AlertType.INFORMATION); // 實體化Alert對話框物件，並直接在建構子設定對話框的訊息類型
+                 alert.setTitle("出错提示"); //設定對話框視窗的標題列文字
+                 alert.setHeaderText("请重新登录"); //設定對話框視窗裡的標頭文字。若設為空字串，則表示無標頭
+                 alert.setContentText("您发送的消息已经达到上限,请重新登录。"); //設定對話框的訊息文字
+                 alert.showAndWait(); //顯示對話框，並等待對話框被關閉時才繼續執行之後的程式
+             }
+         });
+     }
 
-              @Subscribe
-              public void receiveOtherMessage(ReceiveMessageEvent event) {
-                  ChatContent chatContent = event.getChatContent();
-//        msgShow.appendText("   游客:" + chatContent.getMessage() + "\n\n");
-                  msgShow.appendText(chatContent.getSendDate() + "\n" + chatContent.getSender() + ": " + chatContent.getMessage() + "\n\n");
-              }
+    @Subscribe
+    public void receiveOtherMessage(ReceiveMessageEvent event) {
+        ChatContent chatContent = event.getChatContent();
+//       msgShow.appendText("   游客:" + chatContent.getMessage() + "\n\n");
+        msgShow.appendText(chatContent.getSendDate() + "\n" + chatContent.getSender() + ": " + chatContent.getMessage() + "\n\n");
+    }
 
-              @Subscribe
-              public void TooFrequant(TooFrequentEvent event) {
-                  Platform.runLater(new Runnable() {
-                      @Override
-                      public void run() {
-                          final Alert alert = new Alert(Alert.AlertType.INFORMATION); // 實體化Alert對話框物件，並直接在建構子設定對話框的訊息類型
-                          alert.setTitle("出错提示"); //設定對話框視窗的標題列文字
-                          alert.setHeaderText("请重新登录"); //設定對話框視窗裡的標頭文字。若設為空字串，則表示無標頭
-                          alert.setContentText("您发送的消息频率太高,请稍后再重新发送"); //設定對話框的訊息文字
-                          alert.showAndWait(); //顯示對話框，並等待對話框被關閉時才繼續執行之後的程式
-                      }
-                  });
-              }
+    @Subscribe
+    public void TooFrequant(TooFrequentEvent event) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                final Alert alert = new Alert(Alert.AlertType.INFORMATION); // 實體化Alert對話框物件，並直接在建構子設定對話框的訊息類型
+                alert.setTitle("出错提示"); //設定對話框視窗的標題列文字
+                alert.setHeaderText("请重新登录"); //設定對話框視窗裡的標頭文字。若設為空字串，則表示無標頭
+                alert.setContentText("您发送的消息频率太高,请稍后再重新发送"); //設定對話框的訊息文字
+                alert.showAndWait(); //顯示對話框，並等待對話框被關閉時才繼續執行之後的程式
+            }
+        });
+    }
 
-              @Subscribe
-              public void addGroupSuccess(AddGroupEvent event) {
-                  System.out.println("add group succeed");
-                  Platform.runLater(new Runnable() {
-                      @Override
-                      public void run() {
-                          client.setGroupId(event.getGroupId());
-                          System.out.println(event.getGroupId());
-                          showClientName();
-                          updateScene(sceneChat);
+    @Subscribe
+    public void createGroupSuccess(CreateGroupSuccessEvent createGroupSuccessEvent){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"创建成功！");
+                alert.showAndWait();
+            }
+        });
+    }
 
-                      }
-                  });
-                  List<String> onlineAccounts = event.getOnlineAccounts();
-                  client.setOnlineAccounts((ArrayList<String>) onlineAccounts);
-                  final List<String> users = onlineAccounts;
-                  msgShow.appendText("在线账号:\n");
-                  Platform.runLater(new Runnable() {
-                      @Override
-                      public void run() {
-                          writeUser(users);
-                      }
-                  });
-                  for (String account : onlineAccounts) {
-                      msgShow.appendText(account + " ");
-                  }
-                  msgShow.appendText("\n");
-                  client.setGroupId(event.getGroupId());
-              }
+    @Subscribe
+    public void groupAlreadyExist(GroupAlreadyExist groupAlreadyExist){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                Alert alert = new Alert(Alert.AlertType.ERROR,"创建失败");
+                alert.setContentText("该组已存在！");
+                alert.showAndWait();
+            }
+        });
+
+    }
+
+    @Subscribe
+    public void addGroupSuccess(AddGroupEvent event) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("add group succeed");
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "添加成功");
+                alert.showAndWait();
+            }
+        });
+//        Platform.runLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                System.out.println(event.getGroupId());
+//                showClientName();
+//                updateScene(sceneChat);
+//            }
+//        });
+//        List<String> onlineAccounts = event.getOnlineAccounts();
+//        client.setOnlineAccounts((ArrayList<String>) onlineAccounts);
+//        final List<String> users = onlineAccounts;
+//        msgShow.appendText("在线账号:\n");
+//        Platform.runLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                writeUser(users);
+//            }
+//        });
+//        for (String account : onlineAccounts) {
+//            msgShow.appendText(account + " ");
+//        }
+//        msgShow.appendText("\n");
+    }
 
 
-              public static void main(String[] args) throws Exception {
-                  PropertyConfigurator.configure("config/log4j-client.property");
-                  Timer timer = new Timer();
-                  timer.schedule(new ClientLoggerTask(), 60 * 1000, 60 * 1000);
-                  ConfigReader configReader = new ConfigReader();
-                  Conf conf = configReader.readConf("config/conf.json");
-                  launch(args);
-              }
+    @Subscribe
+    public void addGroupFail(AddGroupFailEvent addGroupFailEvent) throws Exception {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "加入失败！");
+                alert.setContentText("你已经在该组中了！");
+                alert.showAndWait();
+            }
+        });
+    }
 
-          }
+    public static void main(String[] args) throws Exception {
+        PropertyConfigurator.configure("config/log4j-client.property");
+        Timer timer = new Timer();
+        timer.schedule(new ClientLoggerTask(), 60 * 1000, 60 * 1000);
+        ConfigReader configReader = new ConfigReader();
+        Conf conf = configReader.readConf("config/conf.json");
+        launch(args);
+    }
+}

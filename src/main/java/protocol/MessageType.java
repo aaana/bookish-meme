@@ -12,7 +12,11 @@ public enum MessageType {
 
     ADDINGGROUP,
 
-    REGISTER
+    REGISTER,
+
+    ENTERGROUP,
+
+    CREATEGROUP
 
 }
 

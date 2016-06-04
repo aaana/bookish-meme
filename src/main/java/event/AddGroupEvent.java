@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class AddGroupEvent {
     private List<String> onlineAccounts;
-    private int groupId;
+    private String groupId;
 
     public AddGroupEvent(List<String> onlineAccounts) {
         this.onlineAccounts = onlineAccounts;
@@ -21,15 +21,15 @@ public class AddGroupEvent {
         this.onlineAccounts = onlineAccounts;
     }
 
-    public int getGroupId() {
+    public String getGroupId() {
         return groupId;
     }
 
-    public void setGroupId(int groupId) {
+    public void setGroupId(String groupId) {
         this.groupId = groupId;
     }
 
-    public AddGroupEvent(List<String> onlineAccounts, int groupId) {
+    public AddGroupEvent(List<String> onlineAccounts, String groupId) {
         this.onlineAccounts = onlineAccounts;
         this.groupId = groupId;
     }

@@ -1,6 +1,6 @@
 package server;
 
-import auth_server.LoginServer;
+import channel.ClientChannel;
 import channel.Manager;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundMessageHandlerAdapter;
@@ -10,21 +10,21 @@ import protocol.MessageType;
 import provider.ServiceProvider;
 
 /**
- * Created by huanganna on 16/6/3.
+ * Created by huanganna on 16/6/4.
  */
-public class AddGroupHandler extends ChannelInboundMessageHandlerAdapter<Message> {
+public class EnterGroupHandler extends ChannelInboundMessageHandlerAdapter<Message> {
 
     @Override
     public void messageReceived(ChannelHandlerContext channelHandlerContext, Message message) throws Exception {
-        if(message.getType()== MessageType.ADDINGGROUP){
-            String accountId = message.getGroupContent().getAccount();
+
+        if(message.getType()== MessageType.ENTERGROUP){
+            String account = message.getGroupContent().getAccount();
             String groupId = message.getGroupContent().getGroupId();
-            int result = ServiceProvider.getDbServer().addGroup(accountId,groupId);
-            if(result==-1){
-                message.setMessageStatus(MessageStatus.ALREADYINTHEGROUP);
-            }else{
-                Manager.groupClientsMissingNum.get(message.getGroupContent().getGroupId()).put(accountId, 0);
-                System.out.println("!!!!!!!!!!!!,,,,,,!!!!" + Manager.groupClientsMissingNum);
+            for (ClientChannel clientChannel:Manager.clientChannels){
+                if(clientChannel.getAccount().equals(account)&&clientChannel.getChannel()!=channelHandlerContext.channel()){
+                    if(clientChannel.getCurrentGroupId().equals(groupId))
+                        message.setMessageStatus(MessageStatus.ENTERGROUPFAIL);
+                }
             }
         }
         //其他情况下不作处理直接流到下一个channel

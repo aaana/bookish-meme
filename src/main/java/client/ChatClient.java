@@ -28,6 +28,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.concurrent.TimeUnit;
 
@@ -44,7 +45,8 @@ public class ChatClient {
     private final String host;
     private final int port;
     private String account;
-    private int groupId;
+//    private List<String> groupIds;
+    private String currentGroupId;
     private Channel connectedChannel;
     private EventLoopGroup eventGroup = null;
     private ArrayList<String> onlineAccounts;
@@ -76,16 +78,18 @@ public class ChatClient {
     }
 
 
-    public int getGroupId() {
-        return groupId;
+    public String getCurrentGroupId() {
+        return currentGroupId;
     }
 
-    public void setGroupId(int groupId) {
-        this.groupId = groupId;
+    public void setCurrentGroupId(String currentGroupId) {
+        this.currentGroupId = currentGroupId;
     }
+
 
     public ChatClient() throws InterruptedException {
 //        Config config = new Config();
+
         ConfigManager configManager = new ConfigManager(new JsonAdapter(),"./config/config.json");
         String host="localhost";
         int port=8080;
@@ -233,6 +237,25 @@ public class ChatClient {
         Message addingGroupMessage = new Message(MessageType.ADDINGGROUP,MessageStatus.NEEDHANDLED);
         addingGroupMessage.setGroupContent(groupContent);
         String jsonPayload=gson.toJson(addingGroupMessage);
+        //channel.write(message);
+        System.out.println("msg: " + groupContent.getAccount() + "\t" + groupContent.getGroupId() + "\n");
+        connectedChannel.write(jsonPayload + "\n\r");
+    }
+
+    public void sendCreatingGroupMessage(GroupContent groupContent){
+        Gson gson=new Gson();
+        Message creeatingGroupMessage = new Message(MessageType.CREATEGROUP,MessageStatus.NEEDHANDLED);
+        creeatingGroupMessage.setGroupContent(groupContent);
+        String jsonPayload=gson.toJson(creeatingGroupMessage);
+        System.out.println("msg: " + groupContent.getAccount() + "\t" + groupContent.getGroupId() + "\n");
+        connectedChannel.write(jsonPayload + "\n\r");
+    }
+
+    public void sendEnteringGroupMessage(GroupContent groupContent){
+        Gson gson=new Gson();
+        Message enteringGroupMessage = new Message(MessageType.ENTERGROUP,MessageStatus.NEEDHANDLED);
+        enteringGroupMessage.setGroupContent(groupContent);
+        String jsonPayload=gson.toJson(enteringGroupMessage);
         //channel.write(message);
         System.out.println("msg: " + groupContent.getAccount() + "\t" + groupContent.getGroupId() + "\n");
         connectedChannel.write(jsonPayload + "\n\r");

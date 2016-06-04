@@ -11,11 +11,10 @@ import message.Message;
 import message.MessageStatus;
 import protocol.ACKType;
 import protocol.MessageType;
+import provider.ServiceProvider;
+import sun.java2d.pipe.AAShapePipe;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by tanjingru on 3/20/16.
@@ -24,13 +23,15 @@ public class ChannelManagerHandler extends ChannelInboundMessageHandlerAdapter<M
 
     @Override
     public void messageReceived(ChannelHandlerContext channelHandlerContext, Message message) throws Exception {
-        if( message.getType() == MessageType.AUTHORITY && message.getMessageStatus() == MessageStatus.NEEDHANDLED){
+        if( message.getType() == MessageType.ENTERGROUP && message.getMessageStatus() == MessageStatus.NEEDHANDLED){
 
             Channel channel = channelHandlerContext.channel();
-            int groupId = message.getLoginContent().getGroupId();
-            String account = message.getLoginContent().getAccount();
-            ClientChannel clientChannel = new ClientChannel(channel,groupId);
-            clientChannel.setAccount(account);
+//            String groupId = message.getLoginContent().getGroupId();
+//            String account = message.getLoginContent().getAccount();
+            String account = message.getGroupContent().getAccount();
+            String currentGroupId = message.getGroupContent().getGroupId();
+            List<String> groupIds = ServiceProvider.getDbServer().getGidByAcc(account);
+            ClientChannel clientChannel = new ClientChannel(channel,groupIds,account,currentGroupId);
             Manager.clientChannels.add(clientChannel);
 
 
@@ -42,7 +43,8 @@ public class ChannelManagerHandler extends ChannelInboundMessageHandlerAdapter<M
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
         Channel channel = ctx.channel();
-        int groupid=-1;
+        List<String> groupids=new ArrayList<String>();
+        String currentGroupId=null;
         String account=null;
 
         for(Iterator<ClientChannel> it=Manager.clientChannels.iterator();it.hasNext();)
@@ -51,7 +53,8 @@ public class ChannelManagerHandler extends ChannelInboundMessageHandlerAdapter<M
             if(clientChannel.getChannel()==channel)
             {
                 it.remove();
-                groupid=clientChannel.getGroupId();
+                groupids=clientChannel.getGroupId();
+                currentGroupId = clientChannel.getCurrentGroupId();
                 account=clientChannel.getAccount();
             }
 
@@ -66,7 +69,7 @@ public class ChannelManagerHandler extends ChannelInboundMessageHandlerAdapter<M
 
         for (ClientChannel clientChannel : Manager.clientChannels){
 
-            if(clientChannel.getGroupId()==groupid){
+            if(clientChannel.getCurrentGroupId().equals(currentGroupId)){
                 ACK ack=new ACK();
                 ack.setType(ACKType.SOMEONEOFFLINE);
                 ArrayList<String> accounts=new ArrayList<String>();
@@ -76,7 +79,7 @@ public class ChannelManagerHandler extends ChannelInboundMessageHandlerAdapter<M
                 clientChannel.getChannel().write(json+"\n");
             }
         }
-        System.out.println(account + "下线！");
+        System.out.println(currentGroupId+": "+account + "下线！");
     }
 
 }

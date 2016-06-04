@@ -15,7 +15,7 @@
     -fx-border-width: 10px;
 }
 
-#register, #reg, #confirm{
+#register, #reg, #confirm,#enter,#addGroup{
     -fx-background-color: #1a9fce;
     -fx-text-fill: #ffffff;
 }
@@ -40,7 +40,7 @@
     -fx-font-size: 30px;
 }
 
-#groupInfo{
+#groupInfo,#chooseInfo{
     -fx-text-fill: #1a9fce;
     -fx-font-size: 20px;
 

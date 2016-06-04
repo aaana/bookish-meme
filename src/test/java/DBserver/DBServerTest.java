@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.*;
@@ -29,19 +30,30 @@ public class DBServerTest {
     @Test
     public void testGetGidByAcc() throws Exception {
 
-        assertEquals(dbServer.getGidByAcc("100"),1);
+        System.out.println(dbServer.getGidByAcc("101"));
     }
 
     @Test
     public void testGetGidAndAcc() throws Exception{
-        Map<String,Integer> uidAndGids = dbServer.getGidAndUid();
+        Map<String,List<String>> uidAndGids = dbServer.getGidAndUid();
         for(String accountId : uidAndGids.keySet()){
-            System.out.println("账号："+accountId+"\t"+"组号："+uidAndGids.get(accountId));
+            for(String groupId: uidAndGids.get(accountId))
+                System.out.println("账号："+accountId+"\t"+"组号："+groupId);
         }
     }
 
     @Test
     public void testgetALLMessageByGid() throws Exception{
-        dbServer.getALLMessageByGid(1);
+        dbServer.getALLMessageByGid("1");
+    }
+
+    @Test
+    public void testAddGroup() throws Exception{
+        System.out.println(dbServer.addGroup("100", "public"));
+    }
+
+    @Test
+    public void testIsintheGroup() throws Exception{
+        System.out.println(dbServer.isInTheGroup("100", "public"));
     }
 }

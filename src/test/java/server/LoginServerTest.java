@@ -30,8 +30,5 @@ public class LoginServerTest {
         System.out.println(loginServer.register("102", "123456"));
     }
 
-    @Test
-    public void testAddGroup() throws Exception{
-        loginServer.addGroup("100", 1);
-    }
+
 }
