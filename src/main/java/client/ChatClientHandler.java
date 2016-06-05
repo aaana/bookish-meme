@@ -25,8 +25,13 @@ public class ChatClientHandler extends ChannelInboundMessageHandlerAdapter<ACK> 
         if (ackType == ACKType.LOGINFAIL)
             PublicEvent.eventBus.post(new LoginFailEvent());
 
-        if (ackType == ACKType.LOGINSUCCESS)
-            PublicEvent.eventBus.post(new LoginSuccessEvent(s.getMissingChatContents(),s.getGroupId(),s.getAccounts()));
+        if (ackType == ACKType.LOGINSUCCESS){
+            //            PublicEvent.eventBus.post(new LoginSuccessEvent(s.getMissingChatContents(),s.getGroupId(),s.getAccounts()));
+            PublicEvent.eventBus.post(new LoginSuccessEvent());
+        }
+
+        if(ackType == ACKType.ENTERGROUP)
+            PublicEvent.eventBus.post(new EnterGroupEvent(s.getMissingChatContents(),s.getGroupId(),s.getAccounts()));
 
         if (ackType == ACKType.OTHERSMESSAGE)
             PublicEvent.eventBus.post(new ReceiveMessageEvent(s.getChatContent()));
@@ -42,6 +47,28 @@ public class ChatClientHandler extends ChannelInboundMessageHandlerAdapter<ACK> 
 
         if(ackType==ACKType.SOMEONEOFFLINE)
             PublicEvent.eventBus.post(new SomeOneOfflineEvent(s.getAccounts().get(0)));
+
+        if(ackType==ACKType.ADDSUCCESS)
+            PublicEvent.eventBus.post(new AddGroupEvent(s.getAccounts(),s.getGroupId()));
+
+        if(ackType==ACKType.SOMEONEADDGROUP)
+            PublicEvent.eventBus.post(new SomeOneAddGroupEvent(s.getAccounts().get(0)));
+        if(ackType==ACKType.REGISTERSUCCESS)
+            PublicEvent.eventBus.post(new RegisterSuccessEvent());
+        if(ackType==ACKType.ACCOUNTEXIST)
+            PublicEvent.eventBus.post(new AccountExistEvent());
+        if(ackType==ACKType.REGISTERFAIL)
+            PublicEvent.eventBus.post(new RegisterFailEvent());
+        if(ackType==ACKType.ADDFAIL)
+            PublicEvent.eventBus.post(new AddGroupFailEvent());
+        if(ackType==ACKType.CREATEGROUPSUCCESS)
+            PublicEvent.eventBus.post(new CreateGroupSuccessEvent());
+        if(ackType==ACKType.GROUPALREADYEXIST)
+            PublicEvent.eventBus.post(new GroupAlreadyExist());
+        if(ackType==ACKType.ENTERGROUPFAIL)
+            PublicEvent.eventBus.post(new EnterGroupFailEvent());
+
     }
+
 
 }

@@ -5,6 +5,7 @@ package client;
  */
 import Util.Conf;
 import Util.ConfigReader;
+import auth_server.LoginServer;
 import com.google.gson.Gson;
 import compressor.CompressTask;
 import compressor.TZCompressor;
@@ -12,10 +13,7 @@ import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import message.ChatContent;
-import message.LoginContent;
-import message.Message;
-import message.MessageStatus;
+import message.*;
 import octoteam.tahiti.config.ConfigManager;
 import octoteam.tahiti.config.loader.JsonAdapter;
 import octoteam.tahiti.performance.PerformanceMonitor;
@@ -30,6 +28,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.concurrent.TimeUnit;
 
@@ -46,7 +45,8 @@ public class ChatClient {
     private final String host;
     private final int port;
     private String account;
-    private int groupId;
+//    private List<String> groupIds;
+    private String currentGroupId;
     private Channel connectedChannel;
     private EventLoopGroup eventGroup = null;
     private ArrayList<String> onlineAccounts;
@@ -78,16 +78,18 @@ public class ChatClient {
     }
 
 
-    public int getGroupId() {
-        return groupId;
+    public String getCurrentGroupId() {
+        return currentGroupId;
     }
 
-    public void setGroupId(int groupId) {
-        this.groupId = groupId;
+    public void setCurrentGroupId(String currentGroupId) {
+        this.currentGroupId = currentGroupId;
     }
 
-    public ChatClient() {
+
+    public ChatClient() throws InterruptedException {
 //        Config config = new Config();
+
         ConfigManager configManager = new ConfigManager(new JsonAdapter(),"./config/config.json");
         String host="localhost";
         int port=8080;
@@ -131,11 +133,13 @@ public class ChatClient {
         messageTask.setDelay(1000 * 60);
         CompressTask allTask = new CompressTask("archive/archive", "archive/archive-all");
         allTask.setInterval(1000*60*60*24*7);
-        allTask.setDelay(1000*60);
+        allTask.setDelay(1000 * 60);
         tzCompressor.addTask(PMTask,"PM")
                 .addTask(messageTask, "MSG")
                 .addTask(allTask, "all");
         tzCompressor.startAllTask();
+        connectedChannel = connectServer();
+
 
     }
 
@@ -165,7 +169,7 @@ public class ChatClient {
 
     public void Login(String account, String password) throws InterruptedException{
 
-        connectedChannel = connectServer();
+//        connectedChannel = connectServer();
 
         LoginContent loginContent = new LoginContent(account, password);
         Message loginMessage = new Message(MessageType.AUTHORITY,MessageStatus.NEEDHANDLED);
@@ -195,6 +199,28 @@ public class ChatClient {
 ////        }
     }
 
+    public void register(String account, String password){
+        Gson gson=new Gson();
+        Message registerMessage = new Message(MessageType.REGISTER,MessageStatus.NEEDHANDLED);
+        registerMessage.setRegisterContent(new RegisterContent(account,password));
+        String jsonPayload=gson.toJson(registerMessage);
+        //channel.write(message);
+        System.out.println("register " + "\n");
+        connectedChannel.write(jsonPayload+"\n\r");
+        ClientLoggerHandler.sendMsgNumber.record();
+    }
+//
+//    public int register(String account, String password) throws Exception {
+//        if(account!=null&&password!=null){
+//            LoginServer loginServer = new LoginServer();
+//            return loginServer.register(account,password);
+//        }else{
+//            return 0;
+//        }
+//
+//
+//    }
+
     public void sendMessage(ChatContent chatContent) throws InterruptedException{
         Gson gson=new Gson();
         Message chattingMessage = new Message(MessageType.CHATTING,MessageStatus.NEEDHANDLED);
@@ -204,6 +230,35 @@ public class ChatClient {
         System.out.println("msg: " + chatContent.getMessage() + "\n");
         connectedChannel.write(jsonPayload+"\n\r");
         ClientLoggerHandler.sendMsgNumber.record();
+    }
+
+    public void sendAddingGroupMessage(GroupContent groupContent){
+        Gson gson=new Gson();
+        Message addingGroupMessage = new Message(MessageType.ADDINGGROUP,MessageStatus.NEEDHANDLED);
+        addingGroupMessage.setGroupContent(groupContent);
+        String jsonPayload=gson.toJson(addingGroupMessage);
+        //channel.write(message);
+        System.out.println("msg: " + groupContent.getAccount() + "\t" + groupContent.getGroupId() + "\n");
+        connectedChannel.write(jsonPayload + "\n\r");
+    }
+
+    public void sendCreatingGroupMessage(GroupContent groupContent){
+        Gson gson=new Gson();
+        Message creeatingGroupMessage = new Message(MessageType.CREATEGROUP,MessageStatus.NEEDHANDLED);
+        creeatingGroupMessage.setGroupContent(groupContent);
+        String jsonPayload=gson.toJson(creeatingGroupMessage);
+        System.out.println("msg: " + groupContent.getAccount() + "\t" + groupContent.getGroupId() + "\n");
+        connectedChannel.write(jsonPayload + "\n\r");
+    }
+
+    public void sendEnteringGroupMessage(GroupContent groupContent){
+        Gson gson=new Gson();
+        Message enteringGroupMessage = new Message(MessageType.ENTERGROUP,MessageStatus.NEEDHANDLED);
+        enteringGroupMessage.setGroupContent(groupContent);
+        String jsonPayload=gson.toJson(enteringGroupMessage);
+        //channel.write(message);
+        System.out.println("msg: " + groupContent.getAccount() + "\t" + groupContent.getGroupId() + "\n");
+        connectedChannel.write(jsonPayload + "\n\r");
     }
 
 }

@@ -2,18 +2,25 @@ package channel;
 
 import io.netty.channel.Channel;
 
+import java.util.List;
+
 /**
  * Created by huanganna on 16/4/27.
  */
 public class ClientChannel {
 
     private Channel channel;
-    private int groupId;
     private String account;
+    private String currentGroupId;
 
-    public ClientChannel(Channel channel, int groupId) {
+    public ClientChannel(Channel channel) {
         this.channel = channel;
-        this.groupId = groupId;
+    }
+
+    public ClientChannel(Channel channel,String account, String currentGroupId) {
+        this.channel = channel;
+        this.account = account;
+        this.currentGroupId = currentGroupId;
     }
 
     public Channel getChannel() {
@@ -24,19 +31,19 @@ public class ClientChannel {
         this.channel = channel;
     }
 
-    public int getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(int groupId) {
-        this.groupId = groupId;
-    }
-
     public String getAccount() {
         return account;
     }
 
     public void setAccount(String account) {
         this.account = account;
+    }
+
+    public String getCurrentGroupId() {
+        return currentGroupId;
+    }
+
+    public void setCurrentGroupId(String currentGroupId) {
+        this.currentGroupId = currentGroupId;
     }
 }

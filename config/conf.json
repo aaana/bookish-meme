@@ -6,6 +6,11 @@
     "maxMsgNumberPerSec":5
   },
 
+  "reg_server":{
+    "host":"localhost",
+    "port":2014
+  },
+
   "auth_server":{
     "host":"localhost",
     "port":2015

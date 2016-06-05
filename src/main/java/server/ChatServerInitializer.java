@@ -24,8 +24,12 @@ public class ChatServerInitializer extends ChannelInitializer<SocketChannel> {
                 .addLast("decoder", new StringDecoder())
                 .addLast("encoder", new StringEncoder())
                 .addLast("json_to_ob",new JsonToObjectHandler())
-                .addLast("authority",new AuthorityHandler())
+                .addLast("register",new RegisterHandler())
+                .addLast("authority", new AuthorityHandler())
+                .addLast("enterGroup",new EnterGroupHandler())
                 .addLast("channelManager", new ChannelManagerHandler())
+                .addLast("createGroup", new CreateGroupHandler())
+                .addLast("addGroup", new AddGroupHandler())
                 .addLast("Limiter", new LimiterHandler())
                 .addLast("log", new LoggerHandler())
                 .addLast("response", new Responser());

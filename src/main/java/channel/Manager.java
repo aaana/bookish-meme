@@ -19,6 +19,6 @@ public class Manager {
         key: groupId
         value: Map(key:AccountId, value: missingIndex)
      */
-    public static Map<Integer,Map<String,Integer>> groupClientsMissingNum = new HashMap<Integer, Map<String, Integer>>();
+    public static Map<String,Map<String,Integer>> groupClientsMissingNum = new HashMap<String, Map<String, Integer>>();
 }
 

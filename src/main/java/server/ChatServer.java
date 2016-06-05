@@ -16,6 +16,7 @@ import org.apache.log4j.PropertyConfigurator;
 import provider.ServiceProvider;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.concurrent.TimeUnit;
@@ -75,22 +76,26 @@ public class ChatServer{
 //        DBOperate dbOperate = new DBOperate();
         try {
 //            dbOperate.getGidAndUid();
-            Map<String,Integer> uidAndGids = ServiceProvider.getDbServer().getGidAndUid();
+            Map<String,List<String>> uidAndGids = ServiceProvider.getDbServer().getGidAndUid();
             for (String accountId:uidAndGids.keySet()){
-                int groupId = uidAndGids.get(accountId);
-                if(!Manager.groupClientsMissingNum.containsKey(groupId)){
+                List<String> groupIds = uidAndGids.get(accountId);
+                for(String groupId:groupIds){
+                    if(!Manager.groupClientsMissingNum.containsKey(groupId)){
 
-                    Map<String,Integer> missingIndex = new HashMap<String, Integer>(){
-                        {
-                            put(accountId,0);
-                        }
+                        Map<String,Integer> missingIndex = new HashMap<String, Integer>(){
+                            {
+                                put(accountId,0);
+                            }
 
-                    };
-                    Manager.groupClientsMissingNum.put(groupId,missingIndex);
-                }else{
-                    Manager.groupClientsMissingNum.get(groupId).put(accountId,0);
+                        };
+                        Manager.groupClientsMissingNum.put(groupId,missingIndex);
+                    }else{
+                        Manager.groupClientsMissingNum.get(groupId).put(accountId,0);
+                    }
                 }
+
             }
+            System.out.println(Manager.groupClientsMissingNum);
         } catch (Exception e) {
             e.printStackTrace();
         }

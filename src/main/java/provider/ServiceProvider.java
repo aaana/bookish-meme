@@ -5,6 +5,7 @@ import auth_server.AuthorityServer;
 import conf.Config;
 import exception.FileNotExistException;
 import messagestore_server.MessageStoreServer;
+import reg_server.RegisterServer;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -19,6 +20,7 @@ public class ServiceProvider {
     private static AuthorityServer authorityServer = null;
     private static MessageStoreServer messageStoreServer = null;
     private static DBServer dbServer = null;
+    private static RegisterServer registerServer = null;
 
 
     private static Config config = new Config();
@@ -51,4 +53,12 @@ public class ServiceProvider {
         return dbServer;
     }
 
+    public static synchronized RegisterServer getRegisterServer() throws Exception{
+        if(registerServer == null){
+            config.readFile("config/conf.json");
+            Registry reg = LocateRegistry.getRegistry(config.getConf("reg_server").getString("host"), config.getConf("reg_server").getInt("port"));
+            registerServer = (RegisterServer)(reg.lookup("registerServer"));
+        }
+        return registerServer;
+    }
 }

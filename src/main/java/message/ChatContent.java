@@ -13,7 +13,7 @@ public class ChatContent implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
-    private int groupId;
+    private String groupId;
     private String sender;
     private String sendDate;
     private String message;
@@ -31,10 +31,17 @@ public class ChatContent implements Serializable{
         this.sender = sender;
         this.message = message;
     }
-    public ChatContent(int gid,String sender,String sendDate,String message) {
+    public ChatContent(String gid,String sender,String sendDate,String message) {
         this.groupId = gid;
         this.sendDate = sendDate;
         this.sender = sender;
+        this.message = message;
+    }
+
+
+    public ChatContent(String sender, String sendDate, String message) {
+        this.sender = sender;
+        this.sendDate = sendDate;
         this.message = message;
     }
 
@@ -54,11 +61,11 @@ public class ChatContent implements Serializable{
         this.sendDate = sendDate;
     }
 
-    public int getGroupId() {
+    public String getGroupId() {
         return groupId;
     }
 
-    public void setGroupId(int groupId) {
+    public void setGroupId(String groupId) {
         this.groupId = groupId;
     }
 

@@ -15,11 +15,16 @@ import java.util.Map;
  */
 public interface DBServer extends Remote{
 
-    List<ChatContent> getALLMessageByGid(int gid) throws Exception;
-    int delete(int gid,int number) throws Exception;
+    List<ChatContent> getALLMessageByGid(String gid) throws Exception;
+    int delete(String gid,int number) throws Exception;
     int insert(ChatContent chatContent) throws Exception;
-    Map<String,Integer> getGidAndUid() throws Exception;
-    int getGidByAcc(int account) throws Exception;
+    Map<String,List<String>> getGidAndUid() throws Exception;
+    List<String> getGidByAcc(String account) throws Exception;
+    int addGroup(String name, String groupId) throws Exception;
+    public int groupNumIncreaseByOne(String groupId) throws Exception;
+    public List<String> getAllGroupIds() throws Exception;
+    int createGroup(String groupId) throws Exception;
+    public boolean isInTheGroup(String account, String groupId) throws Exception;
 
     public static void main(String[] args) throws Exception{
         DBServerImpl db = new DBServerImpl();

@@ -20,5 +20,25 @@ public enum ACKType {
 
     SOMEONEONLINE ,//同组成员上线
 
-    SOMEONEOFFLINE //同组成员下线
+    SOMEONEOFFLINE, //同组成员下线
+
+    ADDSUCCESS, //加组成功
+
+    ADDFAIL,    //加组失败
+
+    SOMEONEADDGROUP,    //有人加组
+
+    REGISTERSUCCESS,    //注册成功
+
+    REGISTERFAIL,   //注册失败
+
+    ACCOUNTEXIST, //创建小组失败
+
+    ENTERGROUP, //进入小组成功
+
+    CREATEGROUPSUCCESS, //创建小组成功
+
+    GROUPALREADYEXIST,  //创建小组失败
+
+    ENTERGROUPFAIL  //进入小组失败
 }

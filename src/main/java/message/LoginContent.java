@@ -15,7 +15,7 @@ public class LoginContent implements Serializable {
     private static final long serialVersionUID = 1L;
     private String account;
     private String password;
-    private int groupId;
+//    private String groupId;
 
     public String getAccount() {
         return account;
@@ -33,13 +33,13 @@ public class LoginContent implements Serializable {
         this.password = password;
     }
 
-    public int getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(int groupId) {
-        this.groupId = groupId;
-    }
+//    public String getGroupId() {
+//        return groupId;
+//    }
+//
+//    public void setGroupId(String groupId) {
+//        this.groupId = groupId;
+//    }
 
     public LoginContent(String account, String password) {
 
