@@ -72,6 +72,13 @@ public class ModalDeleteGroupDialog {
             }
         });
 
+        cancelBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                stage.hide();
+            }
+        });
+
 
 
         root.getChildren().add(groupInfo);
