@@ -427,6 +427,22 @@ public class ClientGUI extends Application {
         });
         chat.getChildren().add(createButton);
 
+        Button showButton = new Button("我的小组");
+        showButton.setId("addGroup");
+        showButton.setLayoutX(370);
+        showButton.setLayoutY(20);
+        showButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    ModalShowGroupDialog modalShowGroupDialog = new ModalShowGroupDialog(primaryStage,client.getAccount());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        chat.getChildren().add(showButton);
+
 
         //顶部
         ImageView topView = new ImageView((prePath + "/top.png"));
@@ -584,7 +600,7 @@ public class ClientGUI extends Application {
     }
 
     private void showClientName(){
-        Label clientName = new Label("Welcome,Dear "+client.getAccount()+"    groupId:"+client.getCurrentGroupId());
+        Label clientName = new Label("Welcome,"+client.getAccount()+"   group:"+client.getCurrentGroupId());
 
         clientName.setId("clientName");
         clientName.setLayoutX(170);
