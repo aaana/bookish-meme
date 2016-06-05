@@ -22,23 +22,23 @@ public enum ACKType {
 
     SOMEONEOFFLINE, //同组成员下线
 
-    ADDSUCCESS,
+    ADDSUCCESS, //加组成功
 
-    ADDFAIL,    //加租失败
+    ADDFAIL,    //加组失败
 
-    SOMEONEADDGROUP,
+    SOMEONEADDGROUP,    //有人加组
 
-    REGISTERSUCCESS,
+    REGISTERSUCCESS,    //注册成功
 
-    REGISTERFAIL,
+    REGISTERFAIL,   //注册失败
 
     ACCOUNTEXIST, //创建小组失败
 
-    ENTERGROUP,
+    ENTERGROUP, //进入小组成功
 
-    CREATEGROUPSUCCESS,
+    CREATEGROUPSUCCESS, //创建小组成功
 
-    GROUPALREADYEXIST,
+    GROUPALREADYEXIST,  //创建小组失败
 
-    ENTERGROUPFAIL
+    ENTERGROUPFAIL  //进入小组失败
 }

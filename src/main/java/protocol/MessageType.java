@@ -10,13 +10,13 @@ public enum MessageType {
 
     CHATTING,  // 聊天类型的消息
 
-    ADDINGGROUP,
+    ADDINGGROUP,    //加组消息
 
-    REGISTER,
+    REGISTER,       //注册消息
 
-    ENTERGROUP,
+    ENTERGROUP,     //进组消息
 
-    CREATEGROUP
+    CREATEGROUP     //创建小组
 
 }
 

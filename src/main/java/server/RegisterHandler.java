@@ -17,9 +17,7 @@ public class RegisterHandler extends ChannelInboundMessageHandlerAdapter<Message
     public void messageReceived(ChannelHandlerContext channelHandlerContext, Message message) throws Exception {
         if(message.getType()== MessageType.REGISTER){
             String account = message.getRegisterContent().getAccount();
-            String password = message.getRegisterContent().getPassword();
-            LoginServer loginServer = new LoginServer();
-            int result = loginServer.register(account,password);
+            int result = ServiceProvider.getRegisterServer().register(message);
             if(result==-1){
                 message.setMessageStatus(MessageStatus.ACCOUNTEXSIT);
             }else if(result==0){

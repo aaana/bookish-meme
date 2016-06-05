@@ -10,18 +10,15 @@ import java.util.List;
 public class ClientChannel {
 
     private Channel channel;
-    private List<String> groupId;
     private String account;
     private String currentGroupId;
 
-    public ClientChannel(Channel channel, List<String> groupId) {
+    public ClientChannel(Channel channel) {
         this.channel = channel;
-        this.groupId = groupId;
     }
 
-    public ClientChannel(Channel channel, List<String> groupId, String account, String currentGroupId) {
+    public ClientChannel(Channel channel,String account, String currentGroupId) {
         this.channel = channel;
-        this.groupId = groupId;
         this.account = account;
         this.currentGroupId = currentGroupId;
     }
@@ -32,14 +29,6 @@ public class ClientChannel {
 
     public void setChannel(Channel channel) {
         this.channel = channel;
-    }
-
-    public List<String> getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(List<String>  groupId) {
-        this.groupId = groupId;
     }
 
     public String getAccount() {

@@ -30,8 +30,7 @@ public class ChannelManagerHandler extends ChannelInboundMessageHandlerAdapter<M
 //            String account = message.getLoginContent().getAccount();
             String account = message.getGroupContent().getAccount();
             String currentGroupId = message.getGroupContent().getGroupId();
-            List<String> groupIds = ServiceProvider.getDbServer().getGidByAcc(account);
-            ClientChannel clientChannel = new ClientChannel(channel,groupIds,account,currentGroupId);
+            ClientChannel clientChannel = new ClientChannel(channel,account,currentGroupId);
             Manager.clientChannels.add(clientChannel);
 
 
@@ -43,7 +42,7 @@ public class ChannelManagerHandler extends ChannelInboundMessageHandlerAdapter<M
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
         Channel channel = ctx.channel();
-        List<String> groupids=new ArrayList<String>();
+//        List<String> groupids=new ArrayList<String>();
         String currentGroupId=null;
         String account=null;
 
@@ -53,7 +52,7 @@ public class ChannelManagerHandler extends ChannelInboundMessageHandlerAdapter<M
             if(clientChannel.getChannel()==channel)
             {
                 it.remove();
-                groupids=clientChannel.getGroupId();
+//                groupids=clientChannel.getGroupId();
                 currentGroupId = clientChannel.getCurrentGroupId();
                 account=clientChannel.getAccount();
             }

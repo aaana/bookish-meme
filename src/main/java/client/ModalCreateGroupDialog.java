@@ -76,6 +76,10 @@ public class ModalCreateGroupDialog {
 //                    } catch (Exception e) {
 //                        e.printStackTrace();
 //                    }
+                }else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR,"创建失败！");
+                    alert.setContentText("组名不能为空！");
+                    alert.showAndWait();
                 }
                 stage.hide();
             }

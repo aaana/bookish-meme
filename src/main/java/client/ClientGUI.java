@@ -653,8 +653,8 @@ public class ClientGUI extends Application {
             ImageView userView = new ImageView(userImage);
             userView.setLayoutX(15);
             userView.setLayoutY(20 + 80 * num);
-            userView.setFitHeight(50);
-            userView.setFitWidth(50);
+            userView.setFitHeight(45);
+            userView.setFitWidth(45);
             Circle userClip = new Circle(25, 25, 25);
             userView.setClip(userClip);
             chat.getChildren().add(userNum*2 - 1, userView);
@@ -662,7 +662,7 @@ public class ClientGUI extends Application {
             Label userName = new Label(user);
             userName.setId("userName");
             userName.setLayoutX(70);
-            userName.setLayoutY(25 + 80 * num);
+            userName.setLayoutY(30 + 80 * num);
             chat.getChildren().add(userNum * 2, userName);
             num += 1;
         }
@@ -839,7 +839,7 @@ public class ClientGUI extends Application {
              @Override
              public void run() {
                  msgShow.setText("");
-                 client.closeConnection();
+//                 client.closeConnection();
                  updateScene(sceneLogin);
                  backLogin();
                  final Alert alert = new Alert(Alert.AlertType.INFORMATION); // 實體化Alert對話框物件，並直接在建構子設定對話框的訊息類型
@@ -865,7 +865,7 @@ public class ClientGUI extends Application {
             public void run() {
                 final Alert alert = new Alert(Alert.AlertType.INFORMATION); // 實體化Alert對話框物件，並直接在建構子設定對話框的訊息類型
                 alert.setTitle("出错提示"); //設定對話框視窗的標題列文字
-                alert.setHeaderText("请重新登录"); //設定對話框視窗裡的標頭文字。若設為空字串，則表示無標頭
+                alert.setHeaderText("发送过快"); //設定對話框視窗裡的標頭文字。若設為空字串，則表示無標頭
                 alert.setContentText("您发送的消息频率太高,请稍后再重新发送"); //設定對話框的訊息文字
                 alert.showAndWait(); //顯示對話框，並等待對話框被關閉時才繼續執行之後的程式
             }

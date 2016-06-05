@@ -13,14 +13,14 @@ public enum MessageStatus {
 
     TOOFREQUENT, // 发送过于频繁
 
-    ACCOUNTEXSIT,
+    ACCOUNTEXSIT, //注册时账号已存在
 
-    REGISTERFAIL,
+    REGISTERFAIL,  //其它原因注册失败
 
-    ALREADYINTHEGROUP,
+    ALREADYINTHEGROUP,  //加入小组时已经在该小组中
 
-    GROUPALREADYEXIST,
+    GROUPALREADYEXIST,  //创建小组时小组已存在
 
-    ENTERGROUPFAIL
+    ENTERGROUPFAIL      //进入小组失败
 
 }

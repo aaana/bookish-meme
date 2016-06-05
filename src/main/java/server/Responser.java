@@ -130,10 +130,10 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
         {
 
             String groupId = message.getChatContent().getGroupId();
-            List<String> groupIds = null;
+//            List<String> groupIds = null;
             for (ClientChannel clientChannel : Manager.clientChannels){
                 if(clientChannel.getChannel()==incomingChannel){
-                    groupIds = clientChannel.getGroupId();
+//                    groupIds = clientChannel.getGroupId();
                     message.getChatContent().setGroupId(clientChannel.getCurrentGroupId());
                     break;
                 }
@@ -203,7 +203,7 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
 
             for(ClientChannel clientChannel:Manager.clientChannels)
             {
-                if(clientChannel.getGroupId().equals(groupId)&&clientChannel.getChannel()!=incomingChannel)
+                if(clientChannel.getCurrentGroupId().equals(groupId)&&clientChannel.getChannel()!=incomingChannel)
                 {
                     sameGroupOnlineAccounts.add(clientChannel.getAccount());
                     ACK a=new ACK();
@@ -215,9 +215,9 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
                     clientChannel.getChannel().write(json+"\n");
                 }
 
-                if(clientChannel.getChannel() == incomingChannel){
-                    clientChannel.getGroupId().add(groupId);
-                }
+//                if(clientChannel.getChannel() == incomingChannel){
+//                    clientChannel.getGroupId().add(groupId);
+//                }
             }
 
             ack.setAccounts(sameGroupOnlineAccounts);
