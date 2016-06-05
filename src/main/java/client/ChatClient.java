@@ -261,4 +261,15 @@ public class ChatClient {
         connectedChannel.write(jsonPayload + "\n\r");
     }
 
+    public void sendDeletingGroupMessage(GroupContent groupContent){
+        Gson gson=new Gson();
+        Message enteringGroupMessage = new Message(MessageType.DELETEGROUP,MessageStatus.NEEDHANDLED);
+        enteringGroupMessage.setGroupContent(groupContent);
+        String jsonPayload=gson.toJson(enteringGroupMessage);
+        //channel.write(message);
+        System.out.println("msg: " + groupContent.getAccount() + "\t" + groupContent.getGroupId() + "\n");
+        connectedChannel.write(jsonPayload + "\n\r");
+    }
+
+
 }

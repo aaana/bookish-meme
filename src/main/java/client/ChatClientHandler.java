@@ -67,6 +67,8 @@ public class ChatClientHandler extends ChannelInboundMessageHandlerAdapter<ACK> 
             PublicEvent.eventBus.post(new GroupAlreadyExist());
         if(ackType==ACKType.ENTERGROUPFAIL)
             PublicEvent.eventBus.post(new EnterGroupFailEvent());
+        if(ackType == ACKType.DELETEGROUPSUCCESS)
+            PublicEvent.eventBus.post(new DeleteGroupEvent(s.getGroupContent().getAccount(),s.getGroupContent().getGroupId()));
 
     }
 

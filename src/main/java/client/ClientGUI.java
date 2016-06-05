@@ -413,7 +413,7 @@ public class ClientGUI extends Application {
 
         Button createButton = new Button("创建小组");
         createButton.setId("addGroup");
-        createButton.setLayoutX(450);
+        createButton.setLayoutX(370);
         createButton.setLayoutY(20);
         createButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -429,7 +429,7 @@ public class ClientGUI extends Application {
 
         Button showButton = new Button("我的小组");
         showButton.setId("addGroup");
-        showButton.setLayoutX(370);
+        showButton.setLayoutX(290);
         showButton.setLayoutY(20);
         showButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -442,6 +442,22 @@ public class ClientGUI extends Application {
             }
         });
         chat.getChildren().add(showButton);
+
+        Button deleteButton = new Button("退出小组");
+        deleteButton.setId("addGroup");
+        deleteButton.setLayoutX(450);
+        deleteButton.setLayoutY(20);
+        deleteButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    ModalDeleteGroupDialog modalDeleteGroupDialog = new ModalDeleteGroupDialog(primaryStage,client);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        chat.getChildren().add(deleteButton);
 
 
         //顶部
@@ -957,6 +973,22 @@ public class ClientGUI extends Application {
                 alert.showAndWait();
             }
         });
+    }
+
+    @Subscribe
+    public void deleteGroupSuccess(DeleteGroupEvent event) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("delete group succeed");
+                String account = event.getAccount();
+                String groupId = event.getGroupId();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "删除退出");
+                alert.setContentText(account+"已成功退出"+groupId);
+                alert.showAndWait();
+            }
+        });
+
     }
 
     public static void main(String[] args) throws Exception {

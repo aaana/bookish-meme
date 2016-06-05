@@ -258,6 +258,10 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
         if(messageType==MessageType.ENTERGROUP&&messageStatus==MessageStatus.ENTERGROUPFAIL){
             ack.setType(ACKType.ENTERGROUPFAIL);
         }
+        if(messageType==MessageType.DELETEGROUP&&messageStatus == MessageStatus.NEEDHANDLED){
+            ack.setType(ACKType.DELETEGROUPSUCCESS);
+            ack.setGroupContent(message.getGroupContent());
+        }
         String ackJson = gson.toJson(ack);
         incomingChannel.write(ackJson + "\n");
 

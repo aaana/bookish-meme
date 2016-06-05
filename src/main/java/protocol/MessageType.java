@@ -16,7 +16,9 @@ public enum MessageType {
 
     ENTERGROUP,     //进组消息
 
-    CREATEGROUP     //创建小组
+    CREATEGROUP,     //创建小组
+
+    DELETEGROUP
 
 }
 

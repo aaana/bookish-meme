@@ -40,5 +40,7 @@ public enum ACKType {
 
     GROUPALREADYEXIST,  //创建小组失败
 
-    ENTERGROUPFAIL  //进入小组失败
+    ENTERGROUPFAIL,  //进入小组失败
+
+    DELETEGROUPSUCCESS
 }

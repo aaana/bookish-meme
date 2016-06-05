@@ -189,6 +189,38 @@ public class DBServerImpl implements DBServer {
         return result;
     }
 
+    public int groupNumDecreaseByOne(String groupId) throws Exception {
+        Connection connection = threadLocal.get();
+        int result = 0;
+        int num = 0;
+
+        if (connection == null || connection.isClosed()) {
+            try {
+                Class.forName("org.sqlite.JDBC");
+                connection = DriverManager.getConnection("jdbc:sqlite:test.db");
+
+                threadLocal.set(connection);
+
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT num FROM groupInfo WHERE groupId = ?");
+                preparedStatement.setString(1, groupId);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    num = resultSet.getInt(1);
+                    break;
+                }
+                preparedStatement = connection.prepareStatement("UPDATE groupInfo SET num = ? WHERE groupId = ?");
+                preparedStatement.setInt(1, num - 1);
+                preparedStatement.setString(2, groupId);
+                result = preparedStatement.executeUpdate();
+
+            } catch (Exception e) {
+                throw e;
+            }
+        }
+        connection.close();
+        return result;
+    }
+
     @Override
     //result==0 失败
     public int addGroup(String name, String groupId) throws Exception {
@@ -357,6 +389,32 @@ public class DBServerImpl implements DBServer {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public int deleteGroup(String account, String groupId) throws Exception {
+
+        int result = 0;
+        Connection connection = threadLocal.get();
+        if (connection == null || connection.isClosed()) {
+            try {
+                Class.forName("org.sqlite.JDBC");
+                connection = DriverManager.getConnection("jdbc:sqlite:test.db");
+
+                threadLocal.set(connection);
+                PreparedStatement preparedStatement = connection.prepareStatement("DELETE from user_group where name=? AND groupId = ?");
+                preparedStatement.setString(1, account);
+                preparedStatement.setString(2, groupId);
+                result = preparedStatement.executeUpdate();
+
+            } catch (Exception e) {
+                throw e;
+            }
+        }
+        connection.close();
+        int temp = groupNumDecreaseByOne(groupId);
+        result = result < temp ? result : temp;
+        return result;
     }
 
 }

@@ -30,6 +30,7 @@ public class ChatServerInitializer extends ChannelInitializer<SocketChannel> {
                 .addLast("channelManager", new ChannelManagerHandler())
                 .addLast("createGroup", new CreateGroupHandler())
                 .addLast("addGroup", new AddGroupHandler())
+                .addLast("deleteGroup",new DeleteGroupHandler())
                 .addLast("Limiter", new LimiterHandler())
                 .addLast("log", new LoggerHandler())
                 .addLast("response", new Responser());

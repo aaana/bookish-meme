@@ -13,6 +13,7 @@ public class ACK {
     ACKType type;
     ChatContent chatContent;
     LoginContent loginContent;
+    GroupContent groupContent;
     List<ChatContent> missingChatContents;
     List<String> accounts;
     String groupId;
@@ -27,6 +28,14 @@ public class ACK {
     }
 
     public ACK() {
+    }
+
+    public GroupContent getGroupContent() {
+        return groupContent;
+    }
+
+    public void setGroupContent(GroupContent groupContent) {
+        this.groupContent = groupContent;
     }
 
     public ChatContent getChatContent() {
