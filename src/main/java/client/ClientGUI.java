@@ -4,6 +4,7 @@ import com.google.common.eventbus.Subscribe;
 import event.*;
 import javafx.collections.FXCollections;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.WindowEvent;
 import message.ChatContent;
 
@@ -515,6 +516,17 @@ public class ClientGUI extends Application {
         listView.setLayoutY(0);
         listView.setPrefWidth(150);
         listView.setPrefHeight(550);
+        listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                String user = listView.getSelectionModel().getSelectedItem();
+                try {
+                    ModalUserInfoDialog modalUserInfoDialog = new ModalUserInfoDialog(primaryStage,user);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         chat.getChildren().add(listView);
 
         // 自动滚屏
@@ -701,8 +713,10 @@ public class ClientGUI extends Application {
 
     private void writeUser(List<String> users) {
 
-
-        listView.setItems(FXCollections.observableArrayList(users));
+        List<String> userList = new ArrayList<>();
+        userList.add(client.getAccount());
+        userList.addAll(users);
+        listView.setItems(FXCollections.observableArrayList(userList));
 //        int num = 0;
 //
 //        int userNum = users.size();

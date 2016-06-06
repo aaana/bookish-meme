@@ -417,4 +417,31 @@ public class DBServerImpl implements DBServer {
         return result;
     }
 
+    @Override
+    public List<String> searchByKeyWord(String keyWord) throws Exception{
+        System.out.println("in searchByKeyWord");
+        Connection connection = threadLocal.get();
+        List<String> result = new ArrayList<String>();
+
+        if (connection == null || connection.isClosed()) {
+            try {
+                Class.forName("org.sqlite.JDBC");
+                connection = DriverManager.getConnection("jdbc:sqlite:test.db");
+
+                threadLocal.set(connection);
+                String sql = "SELECT groupId from groupInfo where groupId LIKE ?";
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setString(1, "%"+keyWord+"%");
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                while (resultSet.next()) {
+                    result.add(resultSet.getString(1));
+                }
+            } catch (Exception e) {
+                throw e;
+            }
+        }
+        connection.close();
+        return result;
+    }
 }

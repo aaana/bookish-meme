@@ -56,4 +56,9 @@ public class DBServerTest {
     public void testIsintheGroup() throws Exception{
         System.out.println(dbServer.isInTheGroup("100", "public"));
     }
+
+    @Test
+    public void searchByKeyWord() throws Exception{
+        System.out.println(dbServer.searchByKeyWord("软件"));
+    }
 }

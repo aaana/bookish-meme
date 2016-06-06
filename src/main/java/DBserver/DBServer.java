@@ -26,6 +26,7 @@ public interface DBServer extends Remote{
     int createGroup(String groupId) throws Exception;
     public boolean isInTheGroup(String account, String groupId) throws Exception;
     public int deleteGroup(String account, String groupId) throws Exception;
+    public List<String> searchByKeyWord(String keyWord) throws Exception;
 
     public static void main(String[] args) throws Exception{
         DBServerImpl db = new DBServerImpl();
