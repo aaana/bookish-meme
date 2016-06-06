@@ -3,6 +3,7 @@ package client;
 import com.google.common.eventbus.Subscribe;
 import event.*;
 import javafx.collections.FXCollections;
+import javafx.scene.control.ListView;
 import javafx.stage.WindowEvent;
 import message.ChatContent;
 
@@ -30,6 +31,7 @@ import message.GroupContent;
 import org.apache.log4j.PropertyConfigurator;
 import provider.ServiceProvider;
 
+import javax.swing.text.html.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -68,7 +70,7 @@ public class ClientGUI extends Application {
     private int haveUser = 0;
 
     //登录界面辅助线
-    private Line line1, line2,line3,line4;
+    private Line line1, line2,line6,line7;
 
     //用户帐号和密码文本框
     private TextField userTextField;
@@ -90,6 +92,8 @@ public class ClientGUI extends Application {
     private Button registerBtn;
 
     private ChoiceBox<String> joinedGroupChoiceBox;
+
+    private ListView<String> listView;
 
     //保存stage的值
     private void setPrimaryStage(Stage pStage) {
@@ -246,12 +250,12 @@ public class ClientGUI extends Application {
         });
         register.getChildren().add(pwdBox);
 
-        line3 = new Line(40,110,215,110);
-        line3.setStroke(Color.valueOf("#d3d6d7"));
-        register.getChildren().add(line3);
-        line4 = new Line(40,150,215,150);
-        line4.setStroke(Color.valueOf("#d3d6d7"));
-        register.getChildren().add(line4);
+        line6 = new Line(40,110,215,110);
+        line6.setStroke(Color.valueOf("#d3d6d7"));
+        register.getChildren().add(line6);
+        line7 = new Line(40,150,215,150);
+        line7.setStroke(Color.valueOf("#d3d6d7"));
+        register.getChildren().add(line7);
 
         //返回登录
         ImageView backImg = new ImageView(prePath+"/back.png");
@@ -329,6 +333,35 @@ public class ClientGUI extends Application {
         joinedGroupChoiceBox.setLayoutX(210);
         joinedGroupChoiceBox.setLayoutY(50);
         chooseGroup.getChildren().add(joinedGroupChoiceBox);
+
+        Button modifyBtn = new Button("修改密码");
+        modifyBtn.setId("modify");
+        modifyBtn.setLayoutX(20);
+        modifyBtn.setLayoutY(125);
+        chooseGroup.getChildren().add(modifyBtn);
+
+        modifyBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+                try {
+                    ModalModifyPwdDialog modalModifyPwdDialog = new ModalModifyPwdDialog(primaryStage,client.getAccount());
+                    if(modalModifyPwdDialog.getResult()>0){
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setHeaderText("修改密码成功");
+                        alert.setContentText("请重新登录");
+                        alert.showAndWait();
+                        backLogin();
+                        updateScene(sceneLogin);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
 
         Button enterBtn = new Button("进入");
         enterBtn.setId("enter");
@@ -470,11 +503,19 @@ public class ClientGUI extends Application {
 
         //消息显示界面
         msgShow.setId("msgShow");
-        msgShow.setPrefSize(650,310);
+        msgShow.setPrefSize(650, 310);
         msgShow.setLayoutX(150);
         msgShow.setLayoutY(70);
         msgShow.setEditable(false);
         msgShow.setText("");
+
+        listView = new ListView<String>();
+        listView.setCellFactory(e -> new UserCell());
+        listView.setLayoutX(0);
+        listView.setLayoutY(0);
+        listView.setPrefWidth(150);
+        listView.setPrefHeight(550);
+        chat.getChildren().add(listView);
 
         // 自动滚屏
         msgShow.textProperty().addListener(new ChangeListener<Object>() {
@@ -657,47 +698,50 @@ public class ClientGUI extends Application {
         }
     }
 
+
     private void writeUser(List<String> users) {
 
-        int num = 0;
 
-        int userNum = users.size();
-
-        System.out.println(userNum + " userNum! " + haveUser);
-
-        if (haveUser > 0) {
-//              chat.getChildren().remove(2);
-//              chat.getChildren().remove(1);
-            for (int i = haveUser * 2; i > 0; i--) {
-                chat.getChildren().remove(i);
-            }
-        }
-
-
-        haveUser = userNum;
-
-        userNum = 0;
-
-        for(String user : users) {
-            userNum += 1;
-            //在线用户信息
-            Image userImage = new Image(prePath + "/user.png");
-            ImageView userView = new ImageView(userImage);
-            userView.setLayoutX(15);
-            userView.setLayoutY(20 + 80 * num);
-            userView.setFitHeight(45);
-            userView.setFitWidth(45);
-            Circle userClip = new Circle(25, 25, 25);
-            userView.setClip(userClip);
-            chat.getChildren().add(userNum*2 - 1, userView);
-            //用户名字
-            Label userName = new Label(user);
-            userName.setId("userName");
-            userName.setLayoutX(70);
-            userName.setLayoutY(30 + 80 * num);
-            chat.getChildren().add(userNum * 2, userName);
-            num += 1;
-        }
+        listView.setItems(FXCollections.observableArrayList(users));
+//        int num = 0;
+//
+//        int userNum = users.size();
+//
+//        System.out.println(userNum + " userNum! " + haveUser);
+//
+//        if (haveUser > 0) {
+////              chat.getChildren().remove(2);
+////              chat.getChildren().remove(1);
+//            for (int i = haveUser * 2; i > 0; i--) {
+//                chat.getChildren().remove(i);
+//            }
+//        }
+//
+//
+//        haveUser = userNum;
+//
+//        userNum = 0;
+//
+//        for(String user : users) {
+//            userNum += 1;
+//            //在线用户信息
+//            Image userImage = new Image(prePath + "/user.png");
+//            ImageView userView = new ImageView(userImage);
+//            userView.setLayoutX(15);
+//            userView.setLayoutY(20 + 80 * num);
+//            userView.setFitHeight(45);
+//            userView.setFitWidth(45);
+//            Circle userClip = new Circle(25, 25, 25);
+//            userView.setClip(userClip);
+//            chat.getChildren().add(userNum*2 - 1, userView);
+//            //用户名字
+//            Label userName = new Label(user);
+//            userName.setId("userName");
+//            userName.setLayoutX(70);
+//            userName.setLayoutY(30 + 80 * num);
+//            chat.getChildren().add(userNum * 2, userName);
+//            num += 1;
+//        }
 
     }
 
@@ -1000,3 +1044,5 @@ public class ClientGUI extends Application {
         launch(args);
     }
 }
+
+

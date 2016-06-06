@@ -15,7 +15,7 @@
     -fx-border-width: 10px;
 }
 
-#register, #reg, #confirm,#enter,#addGroup, #cancel{
+#register, #reg, #confirm,#enter,#addGroup, #cancel, #modify{
     -fx-background-color: #1a9fce;
     -fx-text-fill: #ffffff;
 }
