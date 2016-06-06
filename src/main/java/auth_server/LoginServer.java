@@ -92,5 +92,39 @@ public class LoginServer {
         return result;
     }
 
+    public int modifyPwd(String name, String password) throws Exception {
+        Connection connection = threadLocal.get();
+
+        if (!isExist(name)){
+            return -1;
+        }
+
+        int result = 0;
+
+        if (connection == null || connection.isClosed()) {
+            try {
+                Class.forName("org.sqlite.JDBC");
+                connection = DriverManager.getConnection("jdbc:sqlite:test.db");
+
+                threadLocal.set(connection);
+                String sql="UPDATE user set password = ? where name = ?";
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setString(1, password);
+                preparedStatement.setString(2,name);
+                result = preparedStatement.executeUpdate();
+//                sql = "insert into user_group VALUES(?,?)";
+//                preparedStatement = connection.prepareStatement(sql);
+//                preparedStatement.setString(1,name);
+//                preparedStatement.setString(2,"0");
+//                int temp = preparedStatement.executeUpdate();
+//                result = result<temp?result:temp;
+
+            } catch (Exception e) {
+                throw e;
+            }
+        }
+        connection.close();
+        return result;
+    }
 
 }
