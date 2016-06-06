@@ -46,7 +46,7 @@ public class ModalDeleteGroupDialog {
         groupList.remove(client.getCurrentGroupId());
 
         choiceBox.setItems(FXCollections.observableArrayList(groupList));
-        choiceBox.setValue("public");
+        choiceBox.setValue(groupList.get(0));
         choiceBox.setId("choiceBox");
         choiceBox.setLayoutX(200);
         choiceBox.setLayoutY(50);

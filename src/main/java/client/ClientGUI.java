@@ -877,6 +877,12 @@ public class ClientGUI extends Application {
     }
 
     @Subscribe
+    public void someOneEscapeGroup(SomeOneEscapeGroupEvent someOneEscapeGroupEvent) {
+        String account = someOneEscapeGroupEvent.getAccount();
+        msgShow.appendText("用户: " + account + "已退出该组\n");
+    }
+
+    @Subscribe
     public void SomeOneOffline(SomeOneOfflineEvent someOneOfflineEvent) {
         String account = someOneOfflineEvent.getAccount();
         client.deleteOnlineAccount(account);

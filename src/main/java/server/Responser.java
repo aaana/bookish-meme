@@ -198,14 +198,12 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
         if(messageType==MessageType.ADDINGGROUP&&messageStatus==MessageStatus.NEEDHANDLED){
             ack.setType(ACKType.ADDSUCCESS);
             String groupId = message.getGroupContent().getGroupId();
-            List<String>sameGroupOnlineAccounts=new ArrayList<String>();
 
 
             for(ClientChannel clientChannel:Manager.clientChannels)
             {
                 if(clientChannel.getCurrentGroupId().equals(groupId)&&clientChannel.getChannel()!=incomingChannel)
                 {
-                    sameGroupOnlineAccounts.add(clientChannel.getAccount());
                     ACK a=new ACK();
                     a.setType(ACKType.SOMEONEADDGROUP);
                     ArrayList<String> account=new ArrayList<String>();
@@ -220,7 +218,6 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
 //                }
             }
 
-            ack.setAccounts(sameGroupOnlineAccounts);
             ack.setGroupId(groupId);
         }
 
@@ -260,6 +257,27 @@ public class Responser extends ChannelInboundMessageHandlerAdapter<Message> {
         }
         if(messageType==MessageType.DELETEGROUP&&messageStatus == MessageStatus.NEEDHANDLED){
             ack.setType(ACKType.DELETEGROUPSUCCESS);
+            String groupId = message.getGroupContent().getGroupId();
+
+
+            for(ClientChannel clientChannel : Manager.clientChannels)
+            {
+                if(clientChannel.getCurrentGroupId().equals(groupId)&&clientChannel.getChannel()!=incomingChannel)
+                {
+                    ACK a=new ACK();
+                    a.setType(ACKType.SOMEONEESCAPEGROUP);
+                    ArrayList<String> account=new ArrayList<String>();
+                    account.add(message.getGroupContent().getAccount());
+                    a.setAccounts(account);
+                    String json=gson.toJson(a);
+                    clientChannel.getChannel().write(json+"\n");
+                }
+
+//                if(clientChannel.getChannel() == incomingChannel){
+//                    clientChannel.getGroupId().add(groupId);
+//                }
+            }
+
             ack.setGroupContent(message.getGroupContent());
         }
         String ackJson = gson.toJson(ack);
