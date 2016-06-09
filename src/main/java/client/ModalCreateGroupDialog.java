@@ -13,6 +13,9 @@ import javafx.stage.Stage;
 import message.GroupContent;
 import provider.ServiceProvider;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by huanganna on 16/6/4.
  */
@@ -58,6 +61,9 @@ public class ModalCreateGroupDialog {
 
                 String groupId = textField.getText();
                 if(groupId.length()!=0){
+                    Date now = new Date();
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//可以方便地修改日期格式
+                    String snow = dateFormat.format(now);
                     client.sendCreatingGroupMessage(new GroupContent(client.getAccount(),groupId));
 //                    try {
 //                        int result = ServiceProvider.getDbServer().createGroup(groupId);

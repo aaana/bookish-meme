@@ -430,8 +430,18 @@ public class DBServerImpl implements DBServer {
 
                 threadLocal.set(connection);
                 String sql = "SELECT groupId from groupInfo where groupId LIKE ?";
+                String[] keys = keyWord.split("");
+                String condition = "";
+                for(String key : keys){
+                    System.out.println(key);
+                    condition = condition + "%" + key;
+                }
+                condition = condition + "%";
+
+                System.out.println(condition);
+
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.setString(1, "%"+keyWord+"%");
+                preparedStatement.setString(1, condition);
                 ResultSet resultSet = preparedStatement.executeQuery();
 
                 while (resultSet.next()) {

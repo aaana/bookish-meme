@@ -521,7 +521,10 @@ public class ClientGUI extends Application {
             public void handle(MouseEvent event) {
                 String user = listView.getSelectionModel().getSelectedItem();
                 try {
-                    ModalUserInfoDialog modalUserInfoDialog = new ModalUserInfoDialog(primaryStage,user);
+
+                    if(user.length()!=0){
+                        ModalUserInfoDialog modalUserInfoDialog = new ModalUserInfoDialog(primaryStage,user);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
